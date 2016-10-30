@@ -1,0 +1,20 @@
+{
+  "name": "fantasy_football_app",
+  "version": "1.0.0",
+  "description": "Draft Auction Assistant",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Paul Katchmark",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.14.0",
+    "pg": "^6.1.0"
+  }
+}

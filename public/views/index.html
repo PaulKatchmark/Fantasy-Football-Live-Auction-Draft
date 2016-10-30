@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fantasy Football Auction Assistant</title>
+    <script src="../vendors/angular.min.js"></script>
+    <script src="../vendors/angular-route.min.js"></script>
+    <script src="../scripts/module.js"></script>
+    <script src="../scripts/config.js"></script>
+    <link rel="stylesheet" href="../vendors/bootstrap.min.css" media="screen" title="bootstrap">
+    <link rel="stylesheet" href="../styles/custom.css" />
+    <base  href="/" />
+  </head>
+  <body ng-app="auctionApp">
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+          <li role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">League Settings</a></li>
+          <li role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">Teams</a></li>
+          <button type="button" class="btn btn-default navbar-btn">Sign in</button>
+          <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Paul K</a></p>
+        </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane" id="/home"></div>
+        <div role="tabpanel" class="tab-pane" id="/teams"></div>
+        <div role="tabpanel" class="tab-pane" id="/settings"></div>
+      </div>
+      </div>
+    </nav>
+    <ng-view>
+    </ng-view>
+  </body>
+</html>
