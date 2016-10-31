@@ -1,8 +1,8 @@
 angular.module('auctionApp')
 app.config(function ($routeProvider, $locationProvider) {
-  $routeProvider.when('/', {
-            templateUrl: 'views/home.html',
-            // controller: 'HomeController as homeCtrl',
+  $routeProvider.when('/register', {
+            templateUrl: 'views/register.html',
+            controller: 'RegisterController as register'
           }).when('/home', {
             templateUrl: 'views/home.html',
             // controller: 'HomeController as homeCtrl',
@@ -12,6 +12,10 @@ app.config(function ($routeProvider, $locationProvider) {
           }).when('/teams' , {
             templateUrl: 'views/teams.html',
             // contoller: 'TeamsController as teamCtrl'
+          }).otherwise({
+            templateUrl: 'views/login.html',
+            controller: 'LoginController as login'
           });
+
   $locationProvider.html5Mode(true);
 });
