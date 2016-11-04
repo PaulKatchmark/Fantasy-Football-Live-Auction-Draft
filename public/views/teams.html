@@ -1,2 +1,17 @@
-<button type="button" class="btn btn-default">Sign Out</button>
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
+      <li role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
+      <li role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">Teams</a></li>
+      <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link" ng-repeat="username in login.users">{{username}}</a></p>
+    </ul>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane" id="/home"></div>
+    <div role="tabpanel" class="tab-pane" id="/teams"></div>
+    <div role="tabpanel" class="tab-pane" id="/settings"></div>
+  </div>
+  </div>
+</nav>
+<p><a href="/login" class="btn btn-default" >Sign Out</a></p>
 <h1>Teams</h1>

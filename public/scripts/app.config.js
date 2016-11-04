@@ -8,7 +8,7 @@ app.config(function ($routeProvider, $locationProvider) {
             // controller: 'HomeController as homeCtrl',
           }).when('/settings', {
             templateUrl: 'views/settings.html',
-            // controller: 'SettingsController as settCtrl',
+            controller: 'SettingsController as settings',
           }).when('/teams' , {
             templateUrl: 'views/teams.html',
             // contoller: 'TeamsController as teamCtrl'

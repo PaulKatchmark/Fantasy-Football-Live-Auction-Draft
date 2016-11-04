@@ -13,7 +13,7 @@ function RegisterController($http, $location) {
       username: ctrl.username,
       password: ctrl.password
     }).then(function(){
-      $location.path('/home');
+      $location.path('/login');
     }, function(error) {
       console.log('error registering', error);
     });

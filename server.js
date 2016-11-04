@@ -6,6 +6,7 @@ const register = require('./routes/register');
 const auth = require('./auth/setup');
 const passport = require('passport');
 const session = require('express-session');
+const auction = require('./routes/auction');
 
 
 auth.setup();

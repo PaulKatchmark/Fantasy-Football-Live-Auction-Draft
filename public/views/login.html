@@ -1,3 +1,19 @@
+
+<nav class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+      <!-- <li role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
+      <li role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
+      <li role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">Teams</a></li>
+      <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link" ng-repeat="username in login.users">{{username}}</a></p> -->
+    </ul>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane" id="/home"></div>
+    <div role="tabpanel" class="tab-pane" id="/teams"></div>
+    <div role="tabpanel" class="tab-pane" id="/settings"></div>
+  </div>
+  </div>
+</nav>
 <div class="col-md-6 col-md-offset-3">
     <h2>Login</h2>
     <form name="form" ng-submit="login.login()" role="form">
