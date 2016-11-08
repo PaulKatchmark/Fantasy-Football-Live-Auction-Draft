@@ -1,11 +1,11 @@
 <nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container">
+  <div class="container"  ng-controller="LoginController as login">
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
       <li role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
       <li role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">Teams</a></li>
-      <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link" ng-repeat="username in login.users">{{username}}</a></p>
-      <p><a href="/login" class="btn btn-default" >Sign Out</a></p>
+      <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link" ng-repeat="user in login.username"></a>Me{{user.login}}</p>
+      <p><a href="/login" class="btn btn-default navbar-right" >Sign Out</a></p>
     </ul>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane" id="/home"></div>
@@ -15,8 +15,10 @@
   </div>
 </nav>
 <!-- <p><a href="/login" class="btn btn-default" >Sign Out</a></p> -->
-<h1>Set Up</h1>
+
 <div>
+  <div ng-hide="settings.setLeague" ng-model-"settings.setLeague">
+    <h3>Let's start by setting up your league</h3>
   <form name="myForm">
     <label for="setUpLeague"> League Type: </label>
     <select name="setUpLeague" ng-model="settings.setUpLeague.model" ng-options="type.name for type in settings.setUpLeague.availableOptions">  </select><br />
@@ -24,23 +26,114 @@
     <select name="numTeams" ng-model="settings.newTeams" ng-options="num for num in settings.numTeams">  </select></br>
     <label for="auctionAmount"> Starting Auction Amount: </label>
     <select name="auctionAmount" ng-model="settings.setAmount" ng-options="amt for amt in settings.auctionAmount">  </select></br>
+    <button type="button" ng-click="settings.hideShow()" class="btn btn-default btn-primary">Submit</button>
   </form>
-  <h3>Let's build your roster</h3>
-  <form name="buildRoster">
+  </div>
+  <form name="buildRoster" ng-show="settings.teamSet">
+    <h3>Let's build your roster</h3>
     <label for="quarterBacks"> Quarterback(s): </label>
-    <select name="quarterBacks" ng-model="settings.setQB.model" ng-options="qb for qb in settings.quarterBacks">  </select><br />
+    <select name="quarterBacks" ng-model="settings.team.quarterBacks" ng-options="qb for qb in settings.quarterBacks">  </select><br />
+    <label for="runningBacks"> Running Backs: </label>
+    <select name="runningBacks" ng-model="settings.team.runningBacks" ng-options="rb for rb in settings.runningBacks">  </select><br />
+    <label for="wideReceivers"> Wide Receivers: </label>
+    <select name="wideReceivers" ng-model="settings.team.wideReceivers" ng-options="wr for wr in settings.wideReceivers">  </select><br />
+    <label for="tightEnds"> Tight End(s): </label>
+    <select name="tightEnds" ng-model="settings.team.tightEnds" ng-options="te for te in settings.tightEnds">  </select><br />
+    <label for="flexSpot"> Flex Position(s): </label>
+    <select name="flexSpot" ng-model="settings.team.flexSpot" ng-options="fp for fp in settings.flexSpot">  </select><br />
+    <label for="kicker"> Kicker: </label>
+    <select name="kicker" ng-model="settings.team.kicker" ng-options="k for k in settings.kicker">  </select><br />
+    <label for="defense"> Defense: </label>
+    <select name="defense" ng-model="settings.team.defense" ng-options="d for d in settings.defense">  </select><br />
+    <label for="benchSpots"> Bench Spots: </label>
+    <select name="benchSpots" ng-model="settings.team.benchSpots" ng-options="bs for bs in settings.benchSpots">  </select><br />
   </form>
   <hr>
   <tt>League Type = {{settings.setUpLeague.model.name}}  </tt><br/>
   <tt>Number of Teams = {{settings.newTeams}}</tt><br/>
   <tt>Number of Teams = {{settings.setAmount | currency}}</tt><br/>
+  <hr />
 
 </div>
 
-<div class="row">
+<div class="row" ng-show="teamSet">
     <form class="form-inline">
       <div class="form-group">
       </div>
-      <button type="submit" ng-click="settings.searchAndDisplayValues()" class="btn btn-default btn-primary">Submit</button>
+      <button type="button" ng-click="settings.createTeamSize()" class="btn btn-default btn-primary">Submit</button>
     </form>
   </div>
+
+<div class="col-xs-4" ng-show="settings.teamSet">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Bye</th>
+                <th>Auction Amount: {{settings.setAmount | currency}}</th>
+            </tr>
+        </thead>
+
+         <tbody>
+            <tr ng-repeat="model in settings.setTeams | limitTo: settings.team.quarterBacks">
+                <td>QB</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="model in settings.setTeams | limitTo: settings.team.runningBacks">
+                <td>RB</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="model in settings.setTeams | limitTo: settings.team.wideReceivers">
+                <td>WR</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="model in settings.setTeams | limitTo: settings.team.tightEnds">
+                <td>TE</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="model in settings.setTeams | limitTo: settings.team.flexSpot">
+                <td>Flex</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="model in settings.setTeams | limitTo: settings.team.kicker">
+                <td>K</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="model in settings.setTeams | limitTo: settings.team.defense">
+                <td>Defense</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="model in settings.setTeams | limitTo: settings.team.benchSpots">
+                <td>Bench</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+<tt>Total Players on Roster = {{settings.team.quarterBacks + settings.team.runningBacks + settings.team.wideReceivers + settings.team.tightEnds + settings.team.flexSpot + settings.team.kicker + settings.team.defense + settings.team.benchSpots}}</tt>
+</div>
