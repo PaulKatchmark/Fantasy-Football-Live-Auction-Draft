@@ -3,10 +3,14 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const login = require('./routes/login');
 const register = require('./routes/register');
+const ppr = require('./routes/ppr');
 const auth = require('./auth/setup');
 const passport = require('passport');
 const session = require('express-session');
 const auction = require('./routes/auction');
+// const assert = require('chai').assert;
+const FFNerd = require('fantasy-football-nerd');
+
 
 
 auth.setup();
@@ -34,8 +38,11 @@ app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use('/login', login);
 app.use('/register', register);
+app.use('/auction', auction);
+app.use('/ppr', ppr);
 
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'public/views/index.html'));

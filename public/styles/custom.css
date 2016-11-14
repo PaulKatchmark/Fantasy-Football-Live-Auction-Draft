@@ -14,3 +14,44 @@
 h1 {
   color: purple;
 }
+td {
+  font-size: 8px;
+  text-align: center;
+
+}
+th {
+  font-size: 11px;
+}
+#draftPlayer table {
+        width: 100%;
+    }
+
+#draftPlayer thead, #draftPlayer tbody, #draftPlayer tr, #draftPlayer td, #draftPlayer th { display: block; }
+
+#draftPlayer tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+#draftPlayer thead th {
+    height: 30px;
+
+    /*text-align: left;*/
+}
+
+#draftPlayer tbody {
+    height: 250px;
+    overflow-y: auto;
+}
+
+#draftPlayer thead {
+    /* fallback */
+}
+
+
+#draftPlayer tbody td, #draftPlayer thead th {
+    width: 19.2%;
+    float: left;
+}

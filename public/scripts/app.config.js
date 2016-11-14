@@ -5,7 +5,7 @@ app.config(function ($routeProvider, $locationProvider) {
             controller: 'RegisterController as register'
           }).when('/home', {
             templateUrl: 'views/home.html',
-            // controller: 'HomeController as homeCtrl',
+            controller: 'DraftController as draft',
           }).when('/settings', {
             templateUrl: 'views/settings.html',
             controller: 'SettingsController as settings',
