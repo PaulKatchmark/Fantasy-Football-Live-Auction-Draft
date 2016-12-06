@@ -7,6 +7,7 @@ password varchar(160) NOT NULL
 );
 
 CREATE TABLE PPR_2016 (
+id SERIAL PRIMARY KEY,
 displayName varchar(80) NOT NULL,
 team varchar(4) NOT NULL,
 pos varchar(4) NOT NULL,
@@ -19,6 +20,7 @@ teams_16 int NOT NULL
 );
 
 CREATE TABLE Standard_2016 (
+id SERIAL PRIMARY KEY,
 displayName varchar(80) NOT NULL,
 team varchar(4) NOT NULL,
 pos varchar(4) NOT NULL,

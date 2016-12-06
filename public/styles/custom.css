@@ -3,24 +3,51 @@
   padding: 450px;
   text-align: center;
 }*/
+
+/*html {
+  background-image: url("/assets/images/football.jpg");
+  background-size:  100% 270px;
+  background-repeat: no-repeat;
+  height: auto;
+  width: auto;
+  max-width: 100%;
+}*/
+html, body {
+  /*background-image: url("/assets/images/lhf1wvqdmci-daniel-ghio.jpg");
+  background-repeat: no-repeat;*/
+  /*background-size: 100% 400px;*/
+  /*position: absolute;
+  background-position: center;*/
+  background-color: #e4e4e4;
+}
+
+.nav-tabs>li>a {
+  color: white;
+}
+.nav-tabs>li>a:hover {
+  background: black;
+}
 .navbar-nav > li > a {
   padding-top:5px !important;
   padding-bottom:5px !important;
+}
+.navbar-inverse
+.navbar-text {
+    color: white;
 }
 .navbar {
   min-height:32px !important
   absolute;
 }
-h1 {
-  color: purple;
-}
 td {
-  font-size: 8px;
+  font-size: 10px;
   text-align: center;
+  height: 31px
 
 }
 th {
-  font-size: 11px;
+  font-size: 14px;
+  text-align: center;
 }
 #draftPlayer table {
         width: 100%;
@@ -29,20 +56,19 @@ th {
 #draftPlayer thead, #draftPlayer tbody, #draftPlayer tr, #draftPlayer td, #draftPlayer th { display: block; }
 
 #draftPlayer tr:after {
-    content: ' ';
-    display: block;
-    visibility: hidden;
-    clear: both;
+  content: ' ';
+  display: block;
+  visibility: hidden;
+  clear: both;
 }
 
 #draftPlayer thead th {
     height: 30px;
-
     /*text-align: left;*/
 }
 
 #draftPlayer tbody {
-    height: 250px;
+    height: 350px;
     overflow-y: auto;
 }
 
@@ -54,4 +80,37 @@ th {
 #draftPlayer tbody td, #draftPlayer thead th {
     width: 19.2%;
     float: left;
+}
+.pageHeader {
+  text-align: center;
+  /*font-family: 'Bungee Shade', cursive;*/
+  color: purple;
+  text-shadow:     0 1px 0 hsl(174,5%,80%),
+                     0 2px 0 hsl(174,5%,75%),
+                     0 3px 0 hsl(174,5%,70%),
+                     0 4px 0 hsl(174,5%,66%),
+                     0 5px 0 hsl(174,5%,64%),
+                     0 6px 0 hsl(174,5%,62%),
+                     0 7px 0 hsl(174,5%,61%),
+                     0 8px 0 hsl(174,5%,60%),
+
+                     0 0 5px rgba(0,0,0,.05),
+                    0 1px 3px rgba(0,0,0,.2),
+                    0 3px 5px rgba(0,0,0,.2),
+                   0 5px 10px rgba(0,0,0,.2),
+                  0 10px 10px rgba(0,0,0,.2),
+                  0 20px 20px rgba(0,0,0,.3);
+}
+
+h1 {
+  font-size: 60px;
+}
+h2 {
+  font-size: 40px;
+}
+.paddingTop {
+  padding-top: 40px;
+}
+.centerClass {
+  text-align: center;
 }

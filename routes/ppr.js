@@ -16,13 +16,13 @@ pool.connect(function(err, client, done) {
                 return;
             }
 
-            client.query('SELECT displayname, team, pos, byeweek, teams_8 FROM standard_2016', function(err, result) {
+            client.query('SELECT id, displayname, team, pos, byeweek, teams_8 FROM standard_2016', function(err, result) {
             if (err) {
                 console.log('Error querying the DB', err);
                 res.sendStatus(500);
                 return;
             }
-            
+
             console.log('Got rows from the DB:', result.rows);
             res.send(result.rows);
             });

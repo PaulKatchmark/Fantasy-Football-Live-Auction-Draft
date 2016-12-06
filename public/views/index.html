@@ -9,6 +9,7 @@
     <script src="../scripts/login.controller.js" charset="utf-8"></script>
     <script src="../scripts/register.controller.js" charset="utf-8"></script>
     <script src="../scripts/draft.controller.js" charset="utf-8"></script>
+    <script src="../scripts/league.controller.js" charset="utf-8"></script>
     <script src="../scripts/app.config.js"></script>
     <script src="../scripts/setup.controller.js"></script>
     <script src="../scripts/setup.service.js"></script>
@@ -19,24 +20,11 @@
     <link rel="stylesheet" href="../vendors/bootstrap.min.css" media="screen" title="bootstrap">
     <link rel="stylesheet" href="../vendors/font-awesome.min.css" title="font-awesome">
     <link rel="stylesheet" href="../styles/custom.css" />
+    <link rel="icon" href="../assets/images/favicon.ico">
     <base  href="/" />
   </head>
-  <body ng-app="auctionApp" ng-controller="LoginController as login">
-    <!-- <nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container">
-        <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
-          <li role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
-          <li role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">Teams</a></li>
-          <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link" ng-repeat="username in login.users">{{username}}</a></p>
-        </ul>
-      <div class="tab-content">
-        <div role="tabpanel" class="tab-pane" id="/home"></div>
-        <div role="tabpanel" class="tab-pane" id="/teams"></div>
-        <div role="tabpanel" class="tab-pane" id="/settings"></div>
-      </div>
-      </div>
-    </nav> -->
+  <body ng-app="auctionApp" ng-controller="SettingsController as settings">
+
     <ng-view>
     </ng-view>
   </body>

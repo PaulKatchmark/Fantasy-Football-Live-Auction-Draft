@@ -1,10 +1,11 @@
 <nav class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
-      <li role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
-      <li role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
-      <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link" ng-repeat="user in login.username">{{user}}</a></p>
+      <li ng-show="league.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
+      <li ng-show="league.draftTab" style="color: white;" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
+      <li ng-show="league.leagueTab" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
+      <li ng-show="league.signOut" role="presentation" class="btn btn-white navbar-right"><a href="/login">Sign Out</a></li>
+      <li ng-show="league.signedInAs" role="presentation" class="navbar-text text-white navbar-right">Signed in as: <span>PaulK</span></li>
     </ul>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane" id="/home"></div>
@@ -13,5 +14,41 @@
   </div>
   </div>
 </nav>
-<p><a href="/login" class="btn btn-default" >Sign Out</a></p>
-<h1>League</h1>
+<h1 class="pageHeader">Fantasy Football</h1>
+<h2 class="pageHeader">Live Auction Tracker</h2>
+<div class="paddingTop">
+<h3 class="centerClass">League</h3>
+</div>
+<div ng-repeat="totalTeams in league.data.totalTeams | limitTo: league.data.totalTeams track by $index">
+<div class="col-xs-4">
+    <table  class="table table-bordered" >
+        <thead> {{totalTeams.name}}
+            <tr style="background-color: #111111; color: #ffffff;">
+                <th>Position</th>
+                <th>Player</th>
+                <th>Team</th>
+                <th>Bye</th>
+                <th>{{totalTeams.auctionAmount | currency}}</th>
+            </tr>
+        </thead>
+
+         <tbody style="background-color: #ffffff;">
+            <tr ng-repeat="team in totalTeams.team">
+                <td ng-if="team.qb.pos === 'QB' ">QB</td>
+                <td ng-if="team.rb.pos === 'RB' ">RB</td>
+                <td ng-if="team.wr.pos === 'WR' ">WR</td>
+                <td ng-if="team.te.pos === 'TE' ">TE</td>
+                <td ng-if="team.fp.pos === 'FP' ">Flex</td>
+                <td ng-if="team.k.pos === 'K' ">K</td>
+                <td ng-if="team.def.pos === 'DEF' ">Def</td>
+                <td ng-if="team.bs.pos === 'BS' ">Bench</td>
+                <!-- <td>{{team.qb.pos || team.rb.pos || team.wr.pos || team.te.pos || team.fp.pos || team.k.pos || team.def.pos || team.bs.pos}}</td> -->
+                <td>{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
+                <td>{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
+                <td>{{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}</td>
+                <td>{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>

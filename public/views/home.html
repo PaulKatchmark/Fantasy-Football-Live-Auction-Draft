@@ -1,10 +1,11 @@
 <nav class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
-      <li role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
-      <li role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
-      <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link" ng-repeat="username in login.users">{{username}}</a></p>
+      <li ng-show="draft.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
+      <li ng-show="draft.draftTab" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
+      <li ng-show="draft.leagueTab" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
+      <li ng-show="draft.signOut" role="presentation" class="btn btn-black navbar-right"><a href="/login">Sign Out</a></li>
+      <li ng-show="draft.signedInAs" role="presentation" class="navbar-text navbar-right">Signed in as: <span>PaulK</span></li>
     </ul>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane" id="/home"></div>
@@ -13,21 +14,33 @@
   </div>
   </div>
 </nav>
-<p><a href="/login" class="btn btn-default" >Sign Out</a></p>
 
-
-<h1>Draft</h1>
-  <form>
+<h1 class="pageHeader">Fantasy Football</h1>
+<h2 class="pageHeader">Live Auction Tracker</h2>
+  <form class="paddingTop">
+    <h3 class="centerClass">Draft</h3>
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
 
-        <input type="text" class="form-control" placeholder="Search for players" ng-model="draft.searchForPlayer">
+        <input type="text" class="form-control" placeholder="Search for players" ng-model="draft.searchForPlayer"></input>
 
       </div>
+      <div ng-show="draft.playerSelected" ng-model-"draft.playerSelected">
+      <h4 class="selected">{{draft.selectedP.displayname}}
+        <br /> {{draft.selectedP.pos}} for {{draft.selectedP.team}}
+        <br /> estimated value: {{draft.selectedP.teams_8 | currency}}</h4>
+        <label for="teamWon"> Team that won the bid: </label>
+        <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams">  </select><br />
+        <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label>
+        <form name="form">
+        <input type="number" step="1" min="1" ng-model="draft.data.amountPaid" required />
+        <button type="button" ng-disabled="form.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
+        </form>
+        </div>
     </div>
   </form>
-<div style="height: 200px; overflow: auto;" class="col-xs-6" id="draftPlayer">
+<div class="col-xs-6" id="draftPlayer">
 <TABLE class="table table-straight">
     <THEAD style="postion: absolute;">
        <TR>
@@ -45,84 +58,35 @@
     <TBODY>
        <TR ng-repeat="player in draft.data.players | orderBy: draft.data.sortType:draft.data.sortReverse | filter: draft.searchForPlayer" adapter="adapter">
 
-         <TD class="filterable-cell">{{player.displayname}}</TD>
+         <TD class="filterable-cell" ng-click="draft.selectPlayer(player)">{{player.displayname}}</TD>
          <TD class="filterable-cell">{{player.pos}}</TD>
          <TD class="filterable-cell">{{player.team}}</TD>
          <TD class="filterable-cell">{{player.byeweek}}</TD>
-         <TD class="filterable-cell">{{player.teams_8}}</TD>
+         <TD class="filterable-cell">{{player.teams_8 | currency}}</TD>
        </TR>
     </TBODY>
 </TABLE>
 </div>
 <!-- <ANY ui-scroll-viewport></ANY> -->
 <div class="col-xs-4" >
-    <table class="table table-striped table-bordered">
-        <thead> Your Team Name Here
-            <tr>
+    <table class="table table-bordered">
+        <thead> {{draft.data.totalTeams[0].name}}
+            <tr style="background-color: #111111; color: #ffffff;">
                 <th>Position</th>
                 <th>Player</th>
                 <th>Team</th>
                 <th>Bye</th>
-                <th>{{draft.data.league.auctionAmount | currency}}</th>
+                <th>{{draft.data.totalTeams[0].auctionAmount | currency}}</th>
             </tr>
         </thead>
 
-         <tbody>
-            <tr ng-repeat="model in draft.numberArray | limitTo: draft.data.team.quarterBacks"> <!--SOMETHING AFTER THIS TO FILTER!!! -->
-                <td>QB</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr ng-repeat="model in draft.numberArray | limitTo: draft.data.team.runningBacks">
-                <td>RB</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr ng-repeat="model in draft.numberArray | limitTo: draft.data.team.wideReceivers">
-                <td>WR</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr ng-repeat="model in draft.numberArray | limitTo: draft.data.team.tightEnds">
-                <td>TE</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr ng-repeat="model in draft.numberArray | limitTo: draft.data.team.flexSpot">
-                <td>Flex</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr ng-repeat="model in draft.numberArray | limitTo: draft.data.team.kicker">
-                <td>K</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr ng-repeat="model in draft.numberArray | limitTo: draft.data.team.defense">
-                <td>Defense</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr ng-repeat="model in draft.numberArray | limitTo: draft.data.team.benchSpots">
-                <td>Bench</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+         <tbody style="background-color: #ffffff;">
+            <tr ng-repeat="team in draft.data.totalTeams[0].team"> <!--SOMETHING AFTER THIS TO FILTER!!! -->
+              <td>{{team.qb.pos || team.rb.pos || team.wr.pos || team.te.pos || team.fp.pos || team.k.pos || team.def.pos || team.bs.pos}}</td>
+              <td>{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
+              <td>{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
+              <td>{{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}</td>
+              <td>{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency}}</td>
             </tr>
         </tbody>
     </table>

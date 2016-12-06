@@ -2,8 +2,19 @@ angular.module('auctionApp')
 .controller('RegisterController', RegisterController);
 
 function RegisterController($http, $location) {
-  console.log('RegisterController loaded');
+  // console.log('RegisterController loaded');
   var ctrl = this;
+  var navBarRegister= function() {
+    ctrl.signedInAs = false;
+    ctrl.signOut = false;
+    ctrl.leagueTab = false;
+    ctrl.draftTab = false;
+    ctrl.settingsTab = false;
+  }
+
+  navBarRegister();
+  console.log('signedInAs ', ctrl.signedInAs);
+
 
   ctrl.register = function() {
     console.log('registering new user');

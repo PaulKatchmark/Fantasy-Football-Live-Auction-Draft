@@ -11,7 +11,7 @@ app.config(function ($routeProvider, $locationProvider) {
             controller: 'SettingsController as settings',
           }).when('/teams' , {
             templateUrl: 'views/teams.html',
-            // contoller: 'TeamsController as teamCtrl'
+            controller: 'LeagueController as league',
           }).otherwise({
             templateUrl: 'views/login.html',
             controller: 'LoginController as login'
