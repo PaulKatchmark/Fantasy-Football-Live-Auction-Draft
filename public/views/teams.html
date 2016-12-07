@@ -38,10 +38,10 @@
                 <td ng-if="team.rb.pos === 'RB' ">RB</td>
                 <td ng-if="team.wr.pos === 'WR' ">WR</td>
                 <td ng-if="team.te.pos === 'TE' ">TE</td>
-                <td ng-if="team.fp.pos === 'FP' ">Flex</td>
+                <td ng-if="team.fp.pos === 'FP' || team.fp.pos === 'WR' || team.fp.pos === 'RB' || team.fp.pos === 'TE' ">Flex</td>
                 <td ng-if="team.k.pos === 'K' ">K</td>
                 <td ng-if="team.def.pos === 'DEF' ">Def</td>
-                <td ng-if="team.bs.pos === 'BS' ">Bench</td>
+                <td ng-if="team.bs.pos === 'BS' || team.bs.pos === 'QB' || team.bs.pos === 'RB' || team.bs.pos === 'WR' || team.bs.pos === 'TE' || team.bs.pos === 'K' || team.bs.pos === 'DEF' ">Bench</td>
                 <!-- <td>{{team.qb.pos || team.rb.pos || team.wr.pos || team.te.pos || team.fp.pos || team.k.pos || team.def.pos || team.bs.pos}}</td> -->
                 <td>{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
                 <td>{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
