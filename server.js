@@ -8,7 +8,7 @@ const standard = require('./routes/standard');
 const auth = require('./auth/setup');
 const passport = require('passport');
 const session = require('express-session');
-const auction = require('./routes/auction');
+// const auction = require('./routes/auction');
 // const assert = require('chai').assert;
 const FFNerd = require('fantasy-football-nerd');
 
@@ -42,7 +42,7 @@ app.use(passport.session());
 
 app.use('/login', login);
 app.use('/register', register);
-app.use('/auction', auction);
+// app.use('/auction', auction);
 app.use('/ppr', ppr);
 app.use('/standard', standard)
 
