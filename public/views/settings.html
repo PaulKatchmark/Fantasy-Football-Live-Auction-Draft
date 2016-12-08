@@ -55,7 +55,7 @@
     <hr>
     <tt>League Type = {{settings.setUpLeague.model.name}}  </tt><br/>
     <tt>Number of Teams = {{settings.league.numTeams}}</tt><br/>
-    <tt>Auction Amount = {{settings.league.auctionAmount | currency}}</tt><br/>
+    <tt>Auction Amount = {{settings.league.auctionAmount | currency:"$":0}}</tt><br/>
   </form>
   </div>
 </div>
@@ -68,7 +68,7 @@
                 <th>Player</th>
                 <th>Team</th>
                 <th>Bye</th>
-                <th>{{settings.league.auctionAmount | currency}}</th>
+                <th>{{settings.league.auctionAmount | currency:"$":0}}</th>
             </tr>
         </thead>
 

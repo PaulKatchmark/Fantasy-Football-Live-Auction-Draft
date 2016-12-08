@@ -28,7 +28,7 @@
                 <th>Player</th>
                 <th>Team</th>
                 <th>Bye</th>
-                <th>{{totalTeams.auctionAmount | currency}}</th>
+                <th>{{totalTeams.auctionAmount | currency:"$":0}}</th>
             </tr>
         </thead>
 
@@ -46,7 +46,7 @@
                 <td>{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
                 <td>{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
                 <td>{{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}</td>
-                <td>{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency}}</td>
+                <td>{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency:"$":0}}</td>
             </tr>
         </tbody>
     </table>

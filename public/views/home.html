@@ -29,7 +29,7 @@
       <div ng-show="draft.playerSelected" ng-model-"draft.playerSelected">
       <h4 class="selected">{{draft.selectedP.displayname}}
         <br /> {{draft.selectedP.pos}} for {{draft.selectedP.team}}
-        <br /> estimated value: {{draft.selectedP.teams_8 | currency}}{{draft.selectedP.teams_10 | currency}}{{draft.selectedP.teams_12 | currency}}{{draft.selectedP.teams_14 | currency}}{{draft.selectedP.teams_16 | currency}}</h4>
+        <br /> estimated value: {{draft.selectedP.teams_8 | currency:"$":0}}{{draft.selectedP.teams_10 | currency:"$":0}}{{draft.selectedP.teams_12 | currency:"$":0}}{{draft.selectedP.teams_14 | currency:"$":0}}{{draft.selectedP.teams_16 | currency:"$":0}}</h4>
         <label for="teamWon"> Team that won the bid: </label>
         <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams">  </select><br />
         <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label>
@@ -62,7 +62,7 @@
          <TD class="filterable-cell">{{player.pos}}</TD>
          <TD class="filterable-cell">{{player.team}}</TD>
          <TD class="filterable-cell">{{player.byeweek}}</TD>
-         <TD class="filterable-cell">{{player.teams_8 | currency}}{{player.teams_10 | currency}}{{player.teams_12 | currency}}{{player.teams_14 | currency}}{{player.teams_16 | currency}}</TD>
+         <TD class="filterable-cell">{{player.teams_8 | currency:"$":0}}{{player.teams_10 | currency:"$":0}}{{player.teams_12 | currency:"$":0}}{{player.teams_14 | currency:"$":0}}{{player.teams_16 | currency:"$":0}}</TD>
        </TR>
     </TBODY>
 </TABLE>
@@ -76,7 +76,7 @@
                 <th>Player</th>
                 <th>Team</th>
                 <th>Bye</th>
-                <th>{{draft.data.totalTeams[0].auctionAmount | currency}}</th>
+                <th>{{draft.data.totalTeams[0].auctionAmount | currency:"$":0}}</th>
             </tr>
         </thead>
 
@@ -86,7 +86,7 @@
               <td>{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
               <td>{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
               <td>{{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}</td>
-              <td>{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency}}</td>
+              <td>{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency:"$":0}}</td>
             </tr>
         </tbody>
     </table>
