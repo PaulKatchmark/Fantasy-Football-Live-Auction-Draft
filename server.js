@@ -4,6 +4,7 @@ const path = require('path');
 const login = require('./routes/login');
 const register = require('./routes/register');
 const ppr = require('./routes/ppr');
+const standard = require('./routes/standard');
 const auth = require('./auth/setup');
 const passport = require('passport');
 const session = require('express-session');
@@ -43,6 +44,7 @@ app.use('/login', login);
 app.use('/register', register);
 app.use('/auction', auction);
 app.use('/ppr', ppr);
+app.use('/standard', standard)
 
 app.get('/', function(req, res){
   res.sendFile(path.join(__dirname, 'public/views/index.html'));

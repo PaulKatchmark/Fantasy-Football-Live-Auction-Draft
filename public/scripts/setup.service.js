@@ -2,6 +2,7 @@ angular.module('auctionApp')
 .service('SetupService',['$http', function($http){
   var data = {};
   var vm = this;
+  var teamCol;
   data.setUpLeague;
   data.league = {};
   data.team = [];
@@ -20,9 +21,12 @@ angular.module('auctionApp')
   data.teamArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
 
 //add search and sort options to full player list
-data.sortType = 'teams_8';
+data.sortType = teamCol;
 data.sortReverse = true;
 data.searchPlayer = '';
+
+
+
 
  //create a team for each person in league
 function allTeams (){
@@ -32,6 +36,7 @@ function allTeams (){
         createTeams.teamId = i;
         createTeams.name = "team " + (i+1);
         createTeams.auctionAmount = data.league.auctionAmount;
+        console.log('inside service.js ', data.league.auctionAmount);
         createTeams.team = clone(data.team);
         // console.log('createTeams ', createTeams);
         data.totalTeams.push(createTeams);
@@ -46,14 +51,56 @@ function allTeams (){
   function returnInt (element) {
     return parseInt(element, 10);
   }
-    //function to get full players list from DB
+    //function to get full players list from DB with values for PPR League
   function getPPR(){
-    $http.get('/ppr').then(function(response) {
-      console.log('response ', response.data);
+    teamCol = 'teams_' + data.league.numTeams;
+    $http.get('/ppr/'+teamCol).then(function(response) {
+      data.sortType = teamCol;
+      data.sortReverse = true;
+
+      for (i = 0; i < response.data.length; i++) {
+        if (data.league.auctionAmount === 100) {
+          response.data[i][teamCol] *= .5;
+        } if (data.league.auctionAmount === 150) {
+          response.data[i][teamCol] *= .75;
+        } if (data.league.auctionAmount === 250) {
+          response.data[i][teamCol] *= 1.25;
+        } if (data.league.auctionAmount === 300) {
+          response.data[i][teamCol] *= 1.50;
+        } if (data.league.auctionAmount === 350) {
+          response.data[i][teamCol] *= 1.75;
+        }   if (data.league.auctionAmount === 400) {
+          response.data[i][teamCol] *= 2.00;
+        }
+      }
       return data.players = response.data;
     });
   }
 
+  function getStandard() {
+    teamCol = 'teams_' + data.league.numTeams;
+    $http.get('/standard/'+teamCol).then(function(response) {
+      data.sortType = teamCol;
+      data.sortReverse = true;
+
+      for (i = 0; i < response.data.length; i++) {
+        if (data.league.auctionAmount === 100) {
+          response.data[i][teamCol] *= .5;
+        } if (data.league.auctionAmount === 150) {
+          response.data[i][teamCol] *= .75;
+        } if (data.league.auctionAmount === 250) {
+          response.data[i][teamCol] *= 1.25;
+        } if (data.league.auctionAmount === 300) {
+          response.data[i][teamCol] *= 1.50;
+        } if (data.league.auctionAmount === 350) {
+          response.data[i][teamCol] *= 1.75;
+        }   if (data.league.auctionAmount === 400) {
+          response.data[i][teamCol] *= 2.00;
+        }
+      }
+      return data.players = response.data;
+    });
+  }
   //function used to locate player index in the master list of players, takes a player and uses their id
   function locatePlayer(player){
     var id= player.id;
@@ -160,9 +207,7 @@ function allTeams (){
               }
           });
           console.log('all the teams ', data.totalTeams);
-
       }
-        // data.players.splice(y, 1);
   };
 
   function translatePostions(){
@@ -272,18 +317,24 @@ function allTeams (){
     };
     data.team.shift(); //THIS NEEDS TO BE THERE BUT DUE TO SETTINGS HTML CHANGES, Need to look at why objects aren't being created.
   }
+
+
   function setTeamInfo() {
-    getPPR();
-  // console.log('service setUpLeague ', data.setUpLeague);
-  // console.log('service league ', data.league);
-  // console.log('service team quarterBacks ', data.team.quarterBacks);
-  // console.log('Service TEST ', data.league.numTeams);
-    data.leagueTeams = data.league.numTeams;
-    // console.log('Service LeagueTeams ', data.leagueTeams);
-    // console.log('data.teamArray ', data.teamArray);
-    translatePostions();
-    allTeams();
+      console.log('setUpLeague ', data.setUpLeague);
+      console.log('Number of teams in league ', data.league.numTeams);
+      if (data.setUpLeague === 1) {
+          getPPR();
+      }
+      if (data.setUpLeague === 0) {
+          getStandard();
+      } else {
+          console.log('error getting players from DB');
+      }
+      data.leagueTeams = data.league.numTeams;
+      translatePostions();
+      allTeams();
   };
+
   function clone(obj) {
       var copy;
       // Handle the 3 simple types, and null or undefined
@@ -318,6 +369,7 @@ return {
   setTeamInfo: setTeamInfo,
   getPPR: getPPR,
   locatePlayer: locatePlayer,
-  playerToTeam: playerToTeam
+  playerToTeam: playerToTeam,
+  getStandard: getStandard
 }
 }]);

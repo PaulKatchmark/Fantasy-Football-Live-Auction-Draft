@@ -7,7 +7,7 @@ var config = {
 
 var pool = new pg.Pool(config);
 
-router.get('/', function(req, res) {
+router.get('/:teamCol', function(req, res) {
 pool.connect(function(err, client, done) {
         try {
             if (err) {
@@ -16,7 +16,7 @@ pool.connect(function(err, client, done) {
                 return;
             }
 
-            client.query('SELECT id, displayname, team, pos, byeweek, teams_8 FROM standard_2016', function(err, result) {
+            client.query('SELECT id, displayname, team, pos, byeweek, ' + req.params.teamCol + ' FROM ppr_2016', function(err, result) {
             if (err) {
                 console.log('Error querying the DB', err);
                 res.sendStatus(500);

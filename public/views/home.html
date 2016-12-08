@@ -29,7 +29,7 @@
       <div ng-show="draft.playerSelected" ng-model-"draft.playerSelected">
       <h4 class="selected">{{draft.selectedP.displayname}}
         <br /> {{draft.selectedP.pos}} for {{draft.selectedP.team}}
-        <br /> estimated value: {{draft.selectedP.teams_8 | currency}}</h4>
+        <br /> estimated value: {{draft.selectedP.teams_8 | currency}}{{draft.selectedP.teams_10 | currency}}{{draft.selectedP.teams_12 | currency}}{{draft.selectedP.teams_14 | currency}}{{draft.selectedP.teams_16 | currency}}</h4>
         <label for="teamWon"> Team that won the bid: </label>
         <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams">  </select><br />
         <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label>
@@ -52,7 +52,7 @@
          <TH class=""> <a href="#" ng-click="draft.data.sortType = 'pos'; draft.data.sortReverse = !draft.data.sortReverse">Position<span ng-show="draft.data.sortType == 'pos'" class="fa fa-caret-down"></span></a></TH>
          <TH class=""> <a href="#" ng-click="draft.data.sortType = 'team'; draft.data.sortReverse = !draft.data.sortReverse">Team<span ng-show="draft.data.sortType == 'team'" class="fa fa-caret-down"></span></a></TH>
          <TH class=""> <a href="#" ng-click="draft.data.sortType = 'byeweek'; draft.data.sortReverse = !draft.data.sortReverse">Bye<span ng-show="draft.data.sortType == 'byeweek'" class="fa fa-caret-down"></span></a></TH>
-         <TH class=""> <a href="#" ng-click="draft.data.sortType = 'teams_8'; draft.data.sortReverse = !draft.data.sortReverse">Value<span ng-show="draft.data.sortType == 'teams_8'" class="fa fa-caret-down"></span></a></TH>
+         <TH class=""> <a href="#" ng-click="draft.data.sortType = 'teams_8' || 'teams_10' || 'teams_12' || 'teams_14' || 'teams_16'; draft.data.sortReverse = !draft.data.sortReverse">Value<span ng-show="draft.data.sortType == 'teams_8' || 'teams_10' || 'teams_12' || 'teams_14' || 'teams_16'" class="fa fa-caret-down"></span></a></TH>
        </TR>
     </THEAD>
     <TBODY>
@@ -62,7 +62,7 @@
          <TD class="filterable-cell">{{player.pos}}</TD>
          <TD class="filterable-cell">{{player.team}}</TD>
          <TD class="filterable-cell">{{player.byeweek}}</TD>
-         <TD class="filterable-cell">{{player.teams_8 | currency}}</TD>
+         <TD class="filterable-cell">{{player.teams_8 | currency}}{{player.teams_10 | currency}}{{player.teams_12 | currency}}{{player.teams_14 | currency}}{{player.teams_16 | currency}}</TD>
        </TR>
     </TBODY>
 </TABLE>
