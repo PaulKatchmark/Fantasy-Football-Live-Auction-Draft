@@ -1,11 +1,7 @@
 var router = require('express').Router();
 var pg = require('pg');
+var pool = require('../db/connection')
 
-var config = {
-    database: 'rho',
-};
-
-var pool = new pg.Pool(config);
 
 router.get('/:teamCol', function(req, res) {
 pool.connect(function(err, client, done) {
