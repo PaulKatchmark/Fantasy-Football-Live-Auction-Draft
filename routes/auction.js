@@ -1,14 +1,17 @@
-var router = require('express').Router();
-var pg = require('pg');
-// var assert = require('chai').assert;
-var FFNerd = require('fantasy-football-nerd');
-require('dotenv').config();
-var ff = new FFNerd({ api_key: process.env.keyId });
-var players;
+// DO NOT NEED UNTIL NEXT SEASON, USING DB FOR ALL REQUESTS
 
-var config = {
-  database: 'rho',
-};
+
+// var router = require('express').Router();
+// var pg = require('pg');
+// // var assert = require('chai').assert;
+// var FFNerd = require('fantasy-football-nerd');
+// require('dotenv').config();
+// var ff = new FFNerd({ api_key: process.env.keyId });
+// var players;
+//
+// var config = {
+//   database: 'rho',
+// };
 // function getPlayers() {
 
   // ff.auction(1, function(auction) {
