@@ -1,7 +1,8 @@
 angular.module('auctionApp')
- .controller('DraftController', ['$location', 'SetupService', function ($location, SetupService) {
+ .controller('DraftController', ['SetupService', function (SetupService) {
   //  console.log('DraftController loaded');
    var vm = this;
+   vm.firstname;
    vm.data = SetupService.data;
    vm.playerSelected = false;
    vm.selectedP;
@@ -9,6 +10,12 @@ angular.module('auctionApp')
    vm.elementPos;
    vm.array;
 
+
+   vm.firstname = SetupService.data.firstname;
+
+  vm.logout = function() {
+    SetupService.logout();
+   };
 
    var navBarDraft= function() {
      vm.signedInAs = true;

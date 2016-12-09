@@ -1,9 +1,11 @@
 angular.module('auctionApp')
-.service('SetupService',['$http', function($http){
+.service('SetupService',['$http', '$location', function($http, $location){
   var data = {};
   var vm = this;
   var teamCol;
   data.setUpLeague;
+  data.username;
+  data.firstname;
   data.league = {};
   data.team = [];
   data.auctionAmount = [];
@@ -101,6 +103,28 @@ function allTeams (){
       return data.players = response.data;
     });
   }
+
+  function getUserFirstName() {
+    var username = data.username;
+    $http.get('/login/'+username).then(function(response) {
+      data.firstname = response.data[0].firstname;
+      console.log('firstname ', data.firstname);
+    });
+  }
+
+  function logout() {
+    $http.get('/logout')
+    .then(function(){
+      data.firstname = "";
+      $location.path('/');
+      window.location.reload(true);
+    }, function(error) {
+      console.log('error logging out', error);
+    });
+  };
+
+
+
   //function used to locate player index in the master list of players, takes a player and uses their id
   function locatePlayer(player){
     var id= player.id;
@@ -370,6 +394,8 @@ return {
   getPPR: getPPR,
   locatePlayer: locatePlayer,
   playerToTeam: playerToTeam,
-  getStandard: getStandard
+  getStandard: getStandard,
+  getUserFirstName: getUserFirstName,
+  logout: logout
 }
 }]);

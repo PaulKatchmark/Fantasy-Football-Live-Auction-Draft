@@ -1,7 +1,7 @@
 angular.module('auctionApp')
 .controller('LoginController', LoginController);
 
-function LoginController($http, $location) {
+function LoginController($http, $location, SetupService) {
   // console.log('LoginController loaded');
   var ctrl = this;
 
@@ -14,13 +14,12 @@ function LoginController($http, $location) {
   }
 
   navBarLogin();
-  console.log('signedInAs ', ctrl.signedInAs);
 
 
-
-  // SetUpService.navBarLogin();
   ctrl.login = function() {
-    // console.log('logging in');
+    SetupService.data.username = ctrl.username;
+    SetupService.getUserFirstName();
+    console.log('logging in as ', ctrl.username);
     $http.post('/login', {
       username: ctrl.username,
       password: ctrl.password

@@ -4,8 +4,8 @@
       <li ng-show="league.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
       <li ng-show="league.draftTab" style="color: white;" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
       <li ng-show="league.leagueTab" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
-      <li ng-show="league.signOut" role="presentation" class="btn btn-white navbar-right"><a href="/login">Sign Out</a></li>
-      <li ng-show="league.signedInAs" role="presentation" class="navbar-text text-white navbar-right">Signed in as: <span>PaulK</span></li>
+      <li ng-show="league.signOut" role="presentation" class="btn btn-white navbar-right"><button ng-click="league.logout()">Sign Out</button></li>
+      <li ng-show="league.signedInAs" role="presentation" class="navbar-text text-white navbar-right">{{league.firstname}}'s signed in</li>
     </ul>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane" id="/home"></div>

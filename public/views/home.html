@@ -4,8 +4,8 @@
       <li ng-show="draft.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
       <li ng-show="draft.draftTab" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
       <li ng-show="draft.leagueTab" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
-      <li ng-show="draft.signOut" role="presentation" class="btn btn-black navbar-right"><a href="/login">Sign Out</a></li>
-      <li ng-show="draft.signedInAs" role="presentation" class="navbar-text navbar-right">Signed in as: <span>PaulK</span></li>
+      <li ng-show="draft.signOut" role="presentation" class="btn btn-black navbar-right"><button ng-click="draft.logout()">Sign Out</button></li>
+      <li ng-show="draft.signedInAs" role="presentation" class="navbar-text navbar-right">{{draft.firstname}}'s signed in</li>
     </ul>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane" id="/home"></div>

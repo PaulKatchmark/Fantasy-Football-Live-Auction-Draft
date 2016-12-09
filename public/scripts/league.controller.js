@@ -1,8 +1,11 @@
 angular.module('auctionApp')
- .controller('LeagueController', ['$location', 'SetupService', function ($location, SetupService) {
+ .controller('LeagueController', ['SetupService', function (SetupService) {
    console.log('LeagueController loaded');
    var vm = this;
    vm.data = SetupService.data;
+   vm.firstname;
+
+   vm.firstname = SetupService.data.firstname;
 
    var navBarTeams= function() {
      vm.signedInAs = true;
@@ -11,6 +14,10 @@ angular.module('auctionApp')
      vm.draftTab = true;
      vm.settingsTab = false;
    }
+
+   vm.logout = function() {
+     SetupService.logout();
+    };
 
    navBarTeams();
    console.log('signedInAs ', vm.signedInAs);

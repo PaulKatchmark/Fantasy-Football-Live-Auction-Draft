@@ -2,6 +2,7 @@ angular.module('auctionApp')
  .controller('SettingsController', ['$location', 'SetupService', function ($location, SetupService) {
   //  console.log('SettingsController loaded');
    var vm = this;
+   vm.firstname;
    vm.numTeams = [8,10,12,14,16];
    vm.auctionAmount = [100, 150, 200, 250, 300, 350, 400];
    vm.quarterBacks = [1,2];
@@ -25,6 +26,12 @@ angular.module('auctionApp')
     vm.settingsTab = false;
   }
 
+  vm.logout = function() {
+    SetupService.logout();
+   };
+
+  console.log('firstname ', SetupService.data.firstname);
+  vm.firstname = SetupService.data.firstname;
   navBarSettings();
   console.log('signedInAs ', vm.signedInAs);
 
