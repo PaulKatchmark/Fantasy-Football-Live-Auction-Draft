@@ -11,7 +11,7 @@
 - As players are drafted, they are removed from the list of available NFL players.
 
 ###Technologies Used
-- JavaScript, AngularJS, Bootstrap, Node.js, Express.js, Passport, PostgreSQL, Fantasy-Football-Nerd API, HTML5 and CSS3
+- JavaScript, AngularJS, Bootstrap, Node.js, Express.js, Passport, PostgreSQL, Fantasy-Football-Nerd API, HTML5, CSS3 and hosted on Heroku.
 
 ###Link
 - https://fierce-wave-32837.herokuapp.com/
