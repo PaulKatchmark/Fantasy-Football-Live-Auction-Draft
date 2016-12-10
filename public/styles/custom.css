@@ -20,6 +20,9 @@ html, body {
   background-position: center;*/
   background-color: #d3d3d3;
 }
+.navbar-text {
+  padding-right: 10%;
+}
 
 .nav-tabs>li>a {
   color: white;

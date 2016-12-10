@@ -52,6 +52,7 @@ angular.module('auctionApp')
       vm.data.amountPaid = "";
       vm.selectedP = "";
       vm.data.teamArray = "";
+      vm.searchForPlayer = ""
       vm.playerSelected = false;
       vm.array.splice(vm.elementPos, 1);
     } else {
