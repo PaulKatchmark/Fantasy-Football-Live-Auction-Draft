@@ -14,7 +14,7 @@
 - JavaScript, AngularJS, Bootstrap, Node.js, Express.js, Passport, PostgreSQL, Fantasy-Football-Nerd API, HTML5, CSS3 and hosted on Heroku.
 
 ###Link
-- https://fierce-wave-32837.herokuapp.com/
+- https://ff-live-auction-tracker.herokuapp.com/
 
 ## Author
 #### Paul Katchmark
