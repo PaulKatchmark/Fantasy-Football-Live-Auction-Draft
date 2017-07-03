@@ -117,3 +117,28 @@ h2 {
 .centerClass {
   text-align: center;
 }
+td:empty {
+ background: white; 
+}
+.qbClass {
+  background-color: red;
+  color: white;
+}
+.wrClass {
+  background-color: green;
+  color: white;
+}
+.rbClass {
+  background-color: blue;
+  color: white;
+}
+.kClass {
+  background-color: yellow;
+}
+.teClass {
+  background-color: purple;
+  color: white;
+}
+.defClass {
+  background-color: orange;
+}

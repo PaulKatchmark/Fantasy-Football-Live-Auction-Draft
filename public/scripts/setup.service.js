@@ -21,11 +21,10 @@ angular.module('auctionApp')
   data.leagueTeams;
   data.numberArray = [0,1,2,3,4,5,6,7,8];
   data.teamArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
-
-//add search and sort options to full player list
-data.sortType = teamCol;
-data.sortReverse = true;
-data.searchPlayer = '';
+  //add search and sort options to full player list
+  data.sortType = teamCol;
+  data.sortReverse = true;
+  data.searchPlayer = '';
 
 
 
@@ -75,6 +74,7 @@ function allTeams (){
           response.data[i][teamCol] *= 2.00;
         }
       }
+      console.log(data.players);
       return data.players = response.data;
     });
   }
@@ -103,6 +103,23 @@ function allTeams (){
       return data.players = response.data;
     });
   }
+
+  // function positionColor(position) {
+  //   if (position == "QB") {
+  //     return "qbClass"
+  //   } else if ( position == "WR") {
+  //     return "wrClass"
+  //   } else if ( position == "RB") {
+  //     return "rbClass"
+  //   } else if ( position == "TE") {
+  //     return "teClass"
+  //   } else if ( position == "K") {
+  //     return "kClass"
+  //   } else {
+  //     return "defClass"
+  //   }
+  // }
+
 
   function getUserFirstName() {
     var username = data.username;
@@ -292,7 +309,7 @@ function allTeams (){
         id: 0,
         byeweek: '',
         displayname: '',
-        pos: 'FP',
+        pos: 'Flex',
         team: '',
         paid: 0
       };
@@ -331,7 +348,7 @@ function allTeams (){
         id: 0,
         byeweek: '',
         displayname: '',
-        pos: 'BS',
+        pos: 'Bench',
         team: '',
         paid: 0
       };
@@ -397,5 +414,6 @@ return {
   getStandard: getStandard,
   getUserFirstName: getUserFirstName,
   logout: logout
+  //positionColor: positionColor
 }
 }]);

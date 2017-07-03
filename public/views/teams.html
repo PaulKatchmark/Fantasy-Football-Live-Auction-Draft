@@ -34,19 +34,19 @@
 
          <tbody style="background-color: #ffffff;">
             <tr ng-repeat="team in totalTeams.team">
-                <td ng-if="team.qb.pos === 'QB' ">QB</td>
-                <td ng-if="team.rb.pos === 'RB' ">RB</td>
-                <td ng-if="team.wr.pos === 'WR' ">WR</td>
-                <td ng-if="team.te.pos === 'TE' ">TE</td>
-                <td ng-if="team.fp.pos === 'FP' || team.fp.pos === 'WR' || team.fp.pos === 'RB' || team.fp.pos === 'TE' ">Flex</td>
-                <td ng-if="team.k.pos === 'K' ">K</td>
-                <td ng-if="team.def.pos === 'DEF' ">Def</td>
-                <td ng-if="team.bs.pos === 'BS' || team.bs.pos === 'QB' || team.bs.pos === 'RB' || team.bs.pos === 'WR' || team.bs.pos === 'TE' || team.bs.pos === 'K' || team.bs.pos === 'DEF' ">Bench</td>
-                <!-- <td>{{team.qb.pos || team.rb.pos || team.wr.pos || team.te.pos || team.fp.pos || team.k.pos || team.def.pos || team.bs.pos}}</td> -->
-                <td>{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
-                <td>{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
-                <td>{{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}</td>
-                <td>{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency:"$":0}}</td>
+                <td class="qbClass" ng-if="team.qb.pos === 'QB' ">QB</td>
+                <td class="rbClass" ng-if="team.rb.pos === 'RB' ">RB</td>
+                <td class="wrClass" ng-if="team.wr.pos === 'WR' ">WR</td>
+                <td class="teClass" ng-if="team.te.pos === 'TE' ">TE</td>
+                <td ng-if="team.fp.pos === 'Flex' || team.fp.pos === 'WR' || team.fp.pos === 'RB' || team.fp.pos === 'TE' ">Flex</td>
+                <td class="kClass" ng-if="team.k.pos === 'K' ">K</td>
+                <td class="defClass" ng-if="team.def.pos === 'DEF' ">Def</td>
+                <td ng-if="team.bs.pos === 'Bench' || team.bs.pos === 'QB' || team.bs.pos === 'RB' || team.bs.pos === 'WR' || team.bs.pos === 'TE' || team.bs.pos === 'K' || team.bs.pos === 'DEF' ">Bench</td>
+                 <!-- <td>{{team.qb.pos || team.rb.pos || team.wr.pos || team.te.pos || team.fp.pos || team.k.pos || team.def.pos || team.bs.pos}}</td> -->
+                <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
+                <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
+                <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">{{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}</td>
+                <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency:"$":0}}</td>
             </tr>
         </tbody>
     </table>

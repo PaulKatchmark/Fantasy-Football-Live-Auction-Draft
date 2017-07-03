@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-static-top">
+1<nav class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     <ul class="nav nav-tabs" role="tablist">
       <li ng-show="draft.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
@@ -32,14 +32,41 @@
         <br /> estimated value: {{draft.selectedP.teams_8 | currency:"$":0}}{{draft.selectedP.teams_10 | currency:"$":0}}{{draft.selectedP.teams_12 | currency:"$":0}}{{draft.selectedP.teams_14 | currency:"$":0}}{{draft.selectedP.teams_16 | currency:"$":0}}</h4>
         <label for="teamWon"> Team that won the bid: </label>
         <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams">  </select><br />
-        <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label>
-        <form name="form">
+
+        <!-- <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label> -->
+
+        <!-- <form name="form">
         <input type="number" step="1" min="1" ng-model="draft.data.amountPaid" required />
         <button type="button" ng-disabled="form.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
-        </form>
+        </form> -->
+        <div class="form-group" ng-class="{ 'has-error': form.amountPaid.$dirty && form.amountPaid.$error.required }">
+            <label for="teamWon">Amount paid for {{draft.selectedP.displayname}}: </label>
+            <input type="number" step="1" min="1" name="amountPaid" id="amountPaid" ng-model="draft.data.amountPaid" required />
+            <span ng-show="form.amountPaid.$dirty && form.amountPaid.$error.required" class="help-block">Please enter how much was spent on this player.</span>
+        </div>
+        <div class="form-actions">
+          <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
+            <!-- <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" class="btn btn-primary">Login</button> -->
+            <img ng-if="draft.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
         </div>
     </div>
   </form>
+
+
+  <!-- <div class="form-group" ng-class="{ 'has-error': form.paidAmount.$dirty && form.paidAmount.$error.required }">
+      <label for="teamWon">Amount paid for {{draft.selectedP.displayname}}: </label>
+      <input type="number" step="1" min="1" name="paidAmount" id="paidAmount" class="form-control" ng-model="draft.data.amountPaid" required />
+      <span ng-show="form.paidAmount.$dirty && form.paidAmount.$error.required" class="help-block">Please enter how much was spent on this player.</span>
+  </div>
+  <div class="form-actions">
+      <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" class="btn btn-primary">Login</button>
+      <img ng-if="draft.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <button type="button" ng-disabled="form.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
+  </div> -->
+
+
+
 <div class="col-xs-6" id="draftPlayer">
 <TABLE class="table table-straight">
     <THEAD style="postion: absolute;">
@@ -56,8 +83,8 @@
        </TR>
     </THEAD>
     <TBODY>
-       <TR ng-repeat="player in draft.data.players | orderBy: draft.data.sortType:draft.data.sortReverse | filter: draft.searchForPlayer" adapter="adapter">
-
+       <TR ng-repeat="player in draft.data.players | orderBy: draft.data.sortType:draft.data.sortReverse | filter: draft.searchForPlayer" adapter="adapter" ng-class="{ qbClass: player.pos === 'QB', wrClass: player.pos === 'WR', rbClass: player.pos === 'RB', teClass: player.pos === 'TE', kClass: player.pos === 'K', defClass: player.pos === 'DEF'}" >
+<!-- Stuck RIGHT HERE ONLY READING ONE OF THE NG-CLASSES AT A TIME. At least it covers the whole row!!! -->
          <TD class="filterable-cell" ng-click="draft.selectPlayer(player)">{{player.displayname}}</TD>
          <TD class="filterable-cell">{{player.pos}}</TD>
          <TD class="filterable-cell">{{player.team}}</TD>
@@ -82,11 +109,19 @@
 
          <tbody style="background-color: #ffffff;">
             <tr ng-repeat="team in draft.data.totalTeams[0].team"> <!--SOMETHING AFTER THIS TO FILTER!!! -->
-              <td>{{team.qb.pos || team.rb.pos || team.wr.pos || team.te.pos || team.fp.pos || team.k.pos || team.def.pos || team.bs.pos}}</td>
-              <td>{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
-              <td>{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
-              <td>{{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}</td>
-              <td>{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency:"$":0}}</td>
+              <td class="qbClass" ng-if="team.qb.pos === 'QB' ">QB</td>
+              <td class="rbClass" ng-if="team.rb.pos === 'RB' ">RB</td>
+              <td class="wrClass" ng-if="team.wr.pos === 'WR' " ng-class="wrClass">WR</td>
+              <td class="teClass" ng-if="team.te.pos === 'TE' ">TE</td>
+              <td ng-if="team.fp.pos === 'Flex' || team.fp.pos === 'WR' || team.fp.pos === 'RB' || team.fp.pos === 'TE' ">Flex</td>
+              <td class="kClass" ng-if="team.k.pos === 'K' ">K</td>
+              <td class="defClass" ng-if="team.def.pos === 'DEF' ">Def</td>
+              <td ng-if="team.bs.pos === 'Bench' || team.bs.pos === 'QB' || team.bs.pos === 'RB' || team.bs.pos === 'WR' || team.bs.pos === 'TE' || team.bs.pos === 'K' || team.bs.pos === 'DEF' ">Bench</td>
+              <!-- <td>{{team.qb.pos || team.rb.pos || team.wr.pos || team.te.pos || team.fp.pos || team.k.pos || team.def.pos || team.bs.pos}}</td> -->
+              <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">{{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}</td>
+              <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">{{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}</td>
+              <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">{{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}</td>
+              <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">{{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency:"$":0}}</td>
             </tr>
         </tbody>
     </table>
