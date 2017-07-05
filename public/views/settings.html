@@ -21,36 +21,45 @@
   <div ng-hide="settings.setLeague" ng-model-"settings.setLeague">
     <h3>Let's start by setting up your league</h3>
   <form name="myForm">
-    <label for="setUpLeague"> League Type: </label>
-    <select name="setUpLeague" ng-model="settings.setUpLeague.model" ng-options="type.name for type in settings.setUpLeague.availableOptions">  </select><br />
-    <label for="numTeams"> Number of Teams: </label>
-    <select name="numTeams" ng-model="settings.league.numTeams" ng-options="num for num in settings.numTeams">  </select></br>
-    <label for="auctionAmount"> Starting Auction Amount: </label>
-    <select name="auctionAmount" ng-model="settings.league.auctionAmount" ng-options="amt for amt in settings.auctionAmount">  </select></br>
-    <button type="button" ng-click="settings.hideShow()" class="btn btn-default btn-primary">Submit</button>
+    <div style="text-align: center; margin-top: 20px;">
+      <div style="display: inline-block; text-align: left;">
+        <label for="setUpLeague"> League Type: </label>
+        <select name="setUpLeague" ng-model="settings.setUpLeague.model" ng-options="type.name for type in settings.setUpLeague.availableOptions" style="margin-left: 83px;" class="setWidth">  </select><br />
+        <label for="numTeams"> Number of Teams: </label>
+        <select name="numTeams" ng-model="settings.league.numTeams" ng-options="num for num in settings.numTeams" style="margin-left: 49.5px;" class="setWidth">  </select>
+          <span><button type="button" class="btn btn-primary btn-xs" id="nameButton">Add Team Names</button></span></br>
+        <label for="auctionAmount"> Starting Auction Amount: </label>
+        <select name="auctionAmount" ng-model="settings.league.auctionAmount" ng-options="amt for amt in settings.auctionAmount" style="margin-left: 2.75px;" class="setWidth">  </select></br>
+      </div>
+    </div>
+    <button type="button" ng-click="settings.hideShow()" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
   </form>
   </div>
   <div id="left" class="col-md-6 col-xs-6">
   <form name="buildRoster" ng-show="settings.teamSet">
     <h3>Let's build your roster</h3>
-    <label for="quarterBacks"> Quarterback(s): </label>
-    <select name="quarterBacks" ng-model="settings.team[0].quarterBacks" ng-options="qb for qb in settings.quarterBacks">  </select><br />
-    <label for="runningBacks"> Running Backs: </label>
-    <select name="runningBacks" ng-model="settings.team[0].runningBacks" ng-options="rb for rb in settings.runningBacks">  </select><br />
-    <label for="wideReceivers"> Wide Receivers: </label>
-    <select name="wideReceivers" ng-model="settings.team[0].wideReceivers" ng-options="wr for wr in settings.wideReceivers">  </select><br />
-    <label for="tightEnds"> Tight End(s): </label>
-    <select name="tightEnds" ng-model="settings.team[0].tightEnds" ng-options="te for te in settings.tightEnds">  </select><br />
-    <label for="flexSpot"> Flex Position(s): </label>
-    <select name="flexSpot" ng-model="settings.team[0].flexSpot" ng-options="fp for fp in settings.flexSpot">  </select><br />
-    <label for="kicker"> Kicker: </label>
-    <select name="kicker" ng-model="settings.team[0].kicker" ng-options="k for k in settings.kicker">  </select><br />
-    <label for="defense"> Defense: </label>
-    <select name="defense" ng-model="settings.team[0].defense" ng-options="d for d in settings.defense">  </select><br />
-    <label for="benchSpots"> Bench Spots: </label>
-    <select name="benchSpots" ng-model="settings.team[0].benchSpots" ng-options="bs for bs in settings.benchSpots">  </select><br />
-    <p>If everything looks correct, click submit to continue</p>
-    <button type="button" ng-click="settings.createLeague()" class="btn btn-default btn-primary">Submit</button>
+    <div style="text-align: center; margin-top: 20px;">
+      <div style="display: inline-block; text-align: left;">
+        <label for="quarterBacks"> Quarterback(s): </label>
+        <select name="quarterBacks" ng-model="settings.team[0].quarterBacks" ng-options="qb for qb in settings.quarterBacks" style="margin-left: 10px;">  </select><br />
+        <label for="runningBacks"> Running Backs: </label>
+        <select name="runningBacks" ng-model="settings.team[0].runningBacks" ng-options="rb for rb in settings.runningBacks" style="margin-left: 8px;">  </select><br />
+        <label for="wideReceivers"> Wide Receivers: </label>
+        <select name="wideReceivers" ng-model="settings.team[0].wideReceivers" ng-options="wr for wr in settings.wideReceivers" style="margin-left: 6px;">  </select><br />
+        <label for="tightEnds"> Tight End(s): </label>
+        <select name="tightEnds" ng-model="settings.team[0].tightEnds" ng-options="te for te in settings.tightEnds" style="margin-left: 29.5px;">  </select><br />
+        <label for="flexSpot"> Flex Position(s): </label>
+        <select name="flexSpot" ng-model="settings.team[0].flexSpot" ng-options="fp for fp in settings.flexSpot" style="margin-left: 8px;">  </select><br />
+        <label for="kicker"> Kicker: </label>
+        <select name="kicker" ng-model="settings.team[0].kicker" ng-options="k for k in settings.kicker" style="margin-left: 65.5px;">  </select><br />
+        <label for="defense"> Defense: </label>
+        <select name="defense" ng-model="settings.team[0].defense" ng-options="d for d in settings.defense" style="margin-left: 53px;">  </select><br />
+        <label for="benchSpots"> Bench Spots: </label>
+        <select name="benchSpots" ng-model="settings.team[0].benchSpots" ng-options="bs for bs in settings.benchSpots" style="margin-left: 23px;">  </select><br />
+      </div>
+    </div>
+  <!--   <p>If everything looks correct, click submit to continue</p> -->
+    <button type="button" ng-click="settings.createLeague()" class="btn btn-default btn-primary" style="margin-top: 20px;">Submit</button>
     <!-- inside ng-click ; settings.getPPR() -->
     <hr>
     <tt>League Type = {{settings.setUpLeague.model.name}}  </tt><br/>
@@ -74,28 +83,28 @@
 
          <tbody style="background-color: #ffffff;">
             <tr ng-repeat="model in settings.setTeams | limitTo: settings.team[0].quarterBacks">
-                <td>QB</td>
+                <td class="qbClass">QB</td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td></td>></td>
             </tr>
             <tr ng-repeat="model in settings.setTeams | limitTo: settings.team[0].runningBacks">
-                <td>RB</td>
+                <td class="rbClass">RB</td>
                 <td></td>
-                <td></td>
+                <td></td>></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr ng-repeat="model in settings.setTeams | limitTo: settings.team[0].wideReceivers">
-                <td>WR</td>
+                <td class="wrClass" >WR</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr ng-repeat="model in settings.setTeams | limitTo: settings.team[0].tightEnds">
-                <td>TE</td>
+                <td class="teClass">TE</td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -109,14 +118,14 @@
                 <td></td>
             </tr>
             <tr ng-repeat="model in settings.setTeams | limitTo: settings.team[0].kicker">
-                <td>K</td>
+                <td class="kClass">K</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr ng-repeat="model in settings.setTeams | limitTo: settings.team[0].defense">
-                <td>Defense</td>
+                <td class="defClass">Defense</td>
                 <td></td>
                 <td></td>
                 <td></td>

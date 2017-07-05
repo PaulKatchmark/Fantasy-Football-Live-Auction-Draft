@@ -142,3 +142,23 @@ td:empty {
 .defClass {
   background-color: orange;
 }
+#nameButton {
+  margin-left: 60px;
+}
+#positionContainer{
+  width: 250px;
+  display: absolute;
+}
+.setWidth {
+  width: 60px;
+  text-align: center;
+}
+
+/*#settingsContainer{
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}*/
+/*#textContainer {
+  text-align: left;
+}*/
