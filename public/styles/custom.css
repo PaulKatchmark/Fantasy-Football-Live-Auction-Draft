@@ -42,6 +42,27 @@ html, body {
   min-height:32px !important
   absolute;
 }
+#searchBar {
+  padding-left: 10%;
+}
+/*.form-group {
+  width: 45%;
+
+}
+.input-group .form-control {
+  width: 50%;
+}*/
+#draftPlayer {
+  vertical-align: center;
+  text-align: center;
+  align-content: center;
+  padding-left: 10%;
+}
+#myTeamTable {
+  vertical-align: center;
+  text-align: center;
+  align-content: center;
+}
 td {
   font-size: 10px;
   text-align: center;
@@ -75,10 +96,14 @@ th {
     overflow-y: auto;
 }
 
-#draftPlayer thead {
-    /* fallback */
+#tableHeader {
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    margin: 0 0 0 1px;
+    text-transform: uppercase;
+    width: 99.5%;
 }
-
 
 #draftPlayer tbody td, #draftPlayer thead th {
     width: 19.2%;
@@ -143,7 +168,10 @@ td:empty {
   background-color: orange;
 }
 #nameButton {
-  margin-left: 60px;
+  margin-left: 30px;
+  background-color: #d3d3d3;
+  border: none;
+  color: blue;
 }
 #positionContainer{
   width: 250px;

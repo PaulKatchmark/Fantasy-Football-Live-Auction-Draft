@@ -22,7 +22,8 @@
 <div ng-repeat="totalTeams in league.data.totalTeams | limitTo: league.data.totalTeams track by $index">
 <div class="col-xs-4">
     <table  class="table table-bordered" >
-        <thead> {{totalTeams.name}}
+    <h3 class="col-xs-12" id="tableHeader">{{totalTeams.name}}</h3>
+        <thead>
             <tr style="background-color: #111111; color: #ffffff;">
                 <th>Position</th>
                 <th>Player</th>

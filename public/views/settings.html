@@ -27,7 +27,7 @@
         <select name="setUpLeague" ng-model="settings.setUpLeague.model" ng-options="type.name for type in settings.setUpLeague.availableOptions" style="margin-left: 83px;" class="setWidth">  </select><br />
         <label for="numTeams"> Number of Teams: </label>
         <select name="numTeams" ng-model="settings.league.numTeams" ng-options="num for num in settings.numTeams" style="margin-left: 49.5px;" class="setWidth">  </select>
-          <span><button type="button" class="btn btn-primary btn-xs" id="nameButton">Add Team Names</button></span></br>
+          <span><button type="button" id="nameButton">Add Team Names</button></span></br>
         <label for="auctionAmount"> Starting Auction Amount: </label>
         <select name="auctionAmount" ng-model="settings.league.auctionAmount" ng-options="amt for amt in settings.auctionAmount" style="margin-left: 2.75px;" class="setWidth">  </select></br>
       </div>
@@ -71,7 +71,7 @@
 </div>
 <div class="col-xs-4" ng-show="settings.teamSet">
     <table class="table table-bordered">
-        <thead> team 1
+        <thead>
             <tr style="background-color: #111111; color: #ffffff;">
                 <th>Position</th>
                 <th>Player</th>
@@ -87,12 +87,12 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>></td>
+                <td></td></td>
             </tr>
             <tr ng-repeat="model in settings.setTeams | limitTo: settings.team[0].runningBacks">
                 <td class="rbClass">RB</td>
                 <td></td>
-                <td></td>></td>
+                <td></td></td>
                 <td></td>
                 <td></td>
             </tr>
