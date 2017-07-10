@@ -1,33 +1,30 @@
 angular.module('auctionApp')
- .controller('DraftController', ['SetupService', function (SetupService) {
+.controller('DraftController', ['SetupService', function (SetupService) {
   //  console.log('DraftController loaded');
-   var vm = this;
-   vm.firstname;
-   vm.data = SetupService.data;
-   vm.playerSelected = false;
-   vm.selectedP;
-   vm.selectedPlayer;
-   vm.elementPos;
-   vm.array;
-
-
-   vm.firstname = SetupService.data.firstname;
-
+  var vm = this;
+  vm.firstname;
+  vm.data = SetupService.data;
+  vm.playerSelected = false;
+  vm.selectedP;
+  vm.selectedPlayer;
+  vm.elementPos;
+  vm.array;
+  vm.firstname = SetupService.data.firstname;
+  
   vm.logout = function() {
     SetupService.logout();
-   };
-
-   var navBarDraft= function() {
-     vm.signedInAs = true;
-     vm.signOut = true;
-     vm.leagueTab = true;
-     vm.draftTab = true;
-     vm.settingsTab = false;
-   }
+  };
+  
+  var navBarDraft= function() {
+    vm.signedInAs = true;
+    vm.signOut = true;
+    vm.leagueTab = true;
+    vm.draftTab = true;
+    vm.settingsTab = false;
+  }
 
    navBarDraft();
    console.log('signedInAs ', vm.signedInAs);
-
 
   //function used to select player upon click
   vm.selectPlayer = function(player){
@@ -76,11 +73,11 @@ angular.module('auctionApp')
   // console.log('DraftController data.setTeams ', vm.data.setTeams);
   // console.log('DraftController data.setTeams.auction ', vm.data.setTeams[3].auctionAmount);
   // vm.array.push(angular.copy(vm.data.team));
- }]);
- //
- // vm.getPPR = function(nflPlayers){
- //   SetupService.getPPR(nflPlayers)
- //   .then(function(response){
- //     console.log('getPPR response ', response );
- //   })
- // };
+}]);
+//
+// vm.getPPR = function(nflPlayers){
+//   SetupService.getPPR(nflPlayers)
+//   .then(function(response){
+//     console.log('getPPR response ', response );
+//   })
+// };

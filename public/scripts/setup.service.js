@@ -26,11 +26,10 @@ angular.module('auctionApp')
   data.sortReverse = true;
   data.searchPlayer = '';
 
+  //THIS IS WHERE WE WILL ADD ARAY OF TEAM NAMES
 
-
-
- //create a team for each person in league
-function allTeams (){
+  //create a team for each person in league
+  function allTeams (){
     if(data.leagueTeams>0){
       for (var i=0; i<data.leagueTeams; i++){
         var createTeams = {};
@@ -42,16 +41,17 @@ function allTeams (){
         // console.log('createTeams ', createTeams);
         data.totalTeams.push(createTeams);
         // console.log('allTeams function ', data.setTeams[0].auctionAmount);
-
       }
       // vm.teamSet=false;
       // data.totalTeams = data.setTeams;
       console.log('data.totalTeams ', data.totalTeams);
     }
   }
+
   function returnInt (element) {
     return parseInt(element, 10);
   }
+
     //function to get full players list from DB with values for PPR League
   function getPPR(){
     teamCol = 'teams_' + data.league.numTeams;
@@ -84,7 +84,6 @@ function allTeams (){
     $http.get('/standard/'+teamCol).then(function(response) {
       data.sortType = teamCol;
       data.sortReverse = true;
-
       for (i = 0; i < response.data.length; i++) {
         if (data.league.auctionAmount === 100) {
           response.data[i][teamCol] *= .5;
@@ -120,7 +119,6 @@ function allTeams (){
   //   }
   // }
 
-
   function getUserFirstName() {
     var username = data.username;
     $http.get('/login/'+username).then(function(response) {
@@ -130,8 +128,7 @@ function allTeams (){
   }
 
   function logout() {
-    $http.get('/logout')
-    .then(function(){
+    $http.get('/logout').then(function(){
       data.firstname = "";
       $location.path('/');
       window.location.reload(true);
@@ -139,8 +136,6 @@ function allTeams (){
       console.log('error logging out', error);
     });
   };
-
-
 
   //function used to locate player index in the master list of players, takes a player and uses their id
   function locatePlayer(player){
@@ -150,105 +145,105 @@ function allTeams (){
     console.log('displayname id ', id);
     // return player;
   }
-  function playerToTeam() {
-      console.log('data.players ', data.players);
-      var x = data.teamArray.teamId;
-      data.chosenTeam = {};
-      data.chosenTeam.team = [];
-      data.chosenTeam.team = data.totalTeams[x].team;
-      data.cost = 0;
-      data.cost = data.amountPaid;
 
-      console.log('service selected team ', data.teamArray);
-      // console.log('service selected player ', data.draftedPlayer.pos);
-      console.log('service amount paid ', data.amountPaid);
-      // console.log('find out array length ', data.teamArray.team.length);
-      if (data.teamArray.team.length > 0) {
-          data.chosenTeam.team.some(function(item) {
-              // console.log('item ', item);
-              if (data.draftedPlayer.pos === "QB") {
-                  if (item.qb !== undefined && item.qb.id === 0) {
-                      // console.log('data.teamArray ', data.chosenTeam.team);
-                      item.qb = data.draftedPlayer;
-                      item.qb.paid = parseInt(data.amountPaid);
-                      data.teamArray.auctionAmount -= data.amountPaid;
-                      console.log('chosenTeam ', data.chosenTeam.team);
-                      return item.qb;
-                    }
-              }
-              if (data.draftedPlayer.pos === "RB") {
-                  if (item.rb !== undefined && item.rb.id === 0) {
-                      // console.log('data.teamArray ', data.chosenTeam.team);
-                      item.rb = data.draftedPlayer;
-                      item.rb.paid = parseInt(data.amountPaid);
-                      data.teamArray.auctionAmount -= data.amountPaid;
-                      console.log('chosenTeam ', data.chosenTeam.team);
-                      return item.rb;
-                  }
-              }
-              if (data.draftedPlayer.pos === "WR") {
-                  if (item.wr !== undefined && item.wr.id === 0) {
-                      // console.log('data.teamArray ', data.chosenTeam.team);
-                      item.wr = data.draftedPlayer;
-                      item.wr.paid = parseInt(data.amountPaid);
-                      data.teamArray.auctionAmount -= data.amountPaid;
-                      console.log('chosenTeam ', data.chosenTeam.team);
-                      return item.wr;
-                  }
-              }
-              if (data.draftedPlayer.pos === "TE") {
-                  if (item.te !== undefined && item.te.id === 0) {
-                      // console.log('data.teamArray ', data.chosenTeam.team);
-                      item.te = data.draftedPlayer;
-                      item.te.paid = parseInt(data.amountPaid);
-                      data.teamArray.auctionAmount -= data.amountPaid;
-                      console.log('chosenTeam ', data.chosenTeam.team);
-                      return item.te;
-                  }
-              }
-              if (data.draftedPlayer.pos === "RB" || "WR" || "TE") {
-                  if (item.fp !== undefined && item.fp.id === 0) {
-                      // console.log('data.teamArray ', data.chosenTeam.team);
-                      item.fp = data.draftedPlayer;
-                      item.fp.paid = parseInt(data.amountPaid);
-                      data.teamArray.auctionAmount -= data.amountPaid;
-                      console.log('chosenTeam ', data.chosenTeam.team);
-                      return item.fp;
-                  }
-              }
-              if (data.draftedPlayer.pos === "K") {
-                  if (item.k !== undefined && item.k.id === 0) {
-                      // console.log('data.teamArray ', data.chosenTeam.team);
-                      item.k = data.draftedPlayer;
-                      item.k.paid = parseInt(data.amountPaid);
-                      data.teamArray.auctionAmount -= data.amountPaid;
-                      console.log('chosenTeam ', data.chosenTeam.team);
-                      return item.k;
-                  }
-              }
-              if (data.draftedPlayer.pos === "DEF") {
-                  if (item.def !== undefined && item.def.id === 0) {
-                      // console.log('data.teamArray ', data.chosenTeam.team);
-                      item.def = data.draftedPlayer;
-                      item.def.paid = parseInt(data.amountPaid);
-                      data.teamArray.auctionAmount -= data.amountPaid;
-                      console.log('chosenTeam ', data.chosenTeam.team);
-                      return item.def;
-                  }
-              }
-              if (data.draftedPlayer.pos === "QB" || "RB" || "WR" || "TE" || "K" || "DEF") {
-                  if (item.bs !== undefined && item.bs.id === 0) {
-                      // console.log('data.teamArray ', data.chosenTeam.team);
-                      item.bs = data.draftedPlayer;
-                      item.bs.paid = parseInt(data.amountPaid);
-                      data.teamArray.auctionAmount -= data.amountPaid;
-                      console.log('chosenTeam ', data.chosenTeam.team);
-                      return item.bs;
-                  }
-              }
-          });
-          console.log('all the teams ', data.totalTeams);
-      }
+  function playerToTeam() {
+    console.log('data.players ', data.players);
+    var x = data.teamArray.teamId;
+    data.chosenTeam = {};
+    data.chosenTeam.team = [];
+    data.chosenTeam.team = data.totalTeams[x].team;
+    data.cost = 0;
+    data.cost = data.amountPaid;
+    console.log('service selected team ', data.teamArray);
+    // console.log('service selected player ', data.draftedPlayer.pos);
+    console.log('service amount paid ', data.amountPaid);
+    // console.log('find out array length ', data.teamArray.team.length);
+    if (data.teamArray.team.length > 0) {
+      data.chosenTeam.team.some(function(item) {
+        // console.log('item ', item);
+        if (data.draftedPlayer.pos === "QB") {
+          if (item.qb !== undefined && item.qb.id === 0) {
+            // console.log('data.teamArray ', data.chosenTeam.team);
+            item.qb = data.draftedPlayer;
+            item.qb.paid = parseInt(data.amountPaid);
+            data.teamArray.auctionAmount -= data.amountPaid;
+            console.log('chosenTeam ', data.chosenTeam.team);
+            return item.qb;
+          }
+        }
+        if (data.draftedPlayer.pos === "RB") {
+          if (item.rb !== undefined && item.rb.id === 0) {
+            // console.log('data.teamArray ', data.chosenTeam.team);
+            item.rb = data.draftedPlayer;
+            item.rb.paid = parseInt(data.amountPaid);
+            data.teamArray.auctionAmount -= data.amountPaid;
+            console.log('chosenTeam ', data.chosenTeam.team);
+            return item.rb;
+          }
+        }
+        if (data.draftedPlayer.pos === "WR") {
+          if (item.wr !== undefined && item.wr.id === 0) {
+            // console.log('data.teamArray ', data.chosenTeam.team);
+            item.wr = data.draftedPlayer;
+            item.wr.paid = parseInt(data.amountPaid);
+            data.teamArray.auctionAmount -= data.amountPaid;
+            console.log('chosenTeam ', data.chosenTeam.team);
+            return item.wr;
+          }
+        }
+        if (data.draftedPlayer.pos === "TE") {
+          if (item.te !== undefined && item.te.id === 0) {
+            // console.log('data.teamArray ', data.chosenTeam.team);
+            item.te = data.draftedPlayer;
+            item.te.paid = parseInt(data.amountPaid);
+            data.teamArray.auctionAmount -= data.amountPaid;
+            console.log('chosenTeam ', data.chosenTeam.team);
+            return item.te;
+          }
+        }
+        if (data.draftedPlayer.pos === "RB" || "WR" || "TE") {
+          if (item.fp !== undefined && item.fp.id === 0) {
+            // console.log('data.teamArray ', data.chosenTeam.team);
+            item.fp = data.draftedPlayer;
+            item.fp.paid = parseInt(data.amountPaid);
+            data.teamArray.auctionAmount -= data.amountPaid;
+            console.log('chosenTeam ', data.chosenTeam.team);
+            return item.fp;
+          }
+        }
+        if (data.draftedPlayer.pos === "K") {
+          if (item.k !== undefined && item.k.id === 0) {
+            // console.log('data.teamArray ', data.chosenTeam.team);
+            item.k = data.draftedPlayer;
+            item.k.paid = parseInt(data.amountPaid);
+            data.teamArray.auctionAmount -= data.amountPaid;
+            console.log('chosenTeam ', data.chosenTeam.team);
+            return item.k;
+          }
+        }
+        if (data.draftedPlayer.pos === "DEF") {
+          if (item.def !== undefined && item.def.id === 0) {
+            // console.log('data.teamArray ', data.chosenTeam.team);
+            item.def = data.draftedPlayer;
+            item.def.paid = parseInt(data.amountPaid);
+            data.teamArray.auctionAmount -= data.amountPaid;
+            console.log('chosenTeam ', data.chosenTeam.team);
+            return item.def;
+          }
+        }
+        if (data.draftedPlayer.pos === "QB" || "RB" || "WR" || "TE" || "K" || "DEF") {
+          if (item.bs !== undefined && item.bs.id === 0) {
+            // console.log('data.teamArray ', data.chosenTeam.team);
+            item.bs = data.draftedPlayer;
+            item.bs.paid = parseInt(data.amountPaid);
+            data.teamArray.auctionAmount -= data.amountPaid;
+            console.log('chosenTeam ', data.chosenTeam.team);
+            return item.bs;
+          }
+        }
+      });
+      console.log('all the teams ', data.totalTeams);
+    }
   };
 
   function translatePostions(){
@@ -267,12 +262,12 @@ function allTeams (){
     };
     if (data.team[0].runningBacks > 0) {
       var rb = {
-          id: 0,
-          byeweek: '',
-          displayname: '',
-          pos: 'RB',
-          team: '',
-          paid: 0
+        id: 0,
+        byeweek: '',
+        displayname: '',
+        pos: 'RB',
+        team: '',
+        paid: 0
       };
       for (i=1; i <= data.team[0].runningBacks; i++ ) {
         data.team.push({'rb':rb});
@@ -305,7 +300,7 @@ function allTeams (){
       }
     };
     if (data.team[0].flexSpot > 0) {
-       var fp = {
+      var fp = {
         id: 0,
         byeweek: '',
         displayname: '',
@@ -359,61 +354,61 @@ function allTeams (){
     data.team.shift(); //THIS NEEDS TO BE THERE BUT DUE TO SETTINGS HTML CHANGES, Need to look at why objects aren't being created.
   }
 
-
   function setTeamInfo() {
-      console.log('setUpLeague ', data.setUpLeague);
-      console.log('Number of teams in league ', data.league.numTeams);
-      if (data.setUpLeague === 1) {
-          getPPR();
-      }
-      if (data.setUpLeague === 0) {
-          getStandard();
-      } else {
-          console.log('error getting players from DB');
-      }
-      data.leagueTeams = data.league.numTeams;
-      translatePostions();
-      allTeams();
+    console.log('setUpLeague ', data.setUpLeague);
+    console.log('Number of teams in league ', data.league.numTeams);
+    if (data.setUpLeague === 1) {
+      getPPR();
+    }
+    if (data.setUpLeague === 0) {
+      getStandard();
+    } else {
+      console.log('error getting players from DB');
+    }
+    data.leagueTeams = data.league.numTeams;
+    translatePostions();
+    allTeams();
   };
 
   function clone(obj) {
-      var copy;
-      // Handle the 3 simple types, and null or undefined
-      if (null == obj || "object" != typeof obj) return obj;
-      // Handle Date
-      if (obj instanceof Date) {
-          copy = new Date();
-          copy.setTime(obj.getTime());
-          return copy;
+    var copy;
+    // Handle the 3 simple types, and null or undefined
+    if (null == obj || "object" != typeof obj) return obj;
+    // Handle Date
+    if (obj instanceof Date) {
+      copy = new Date();
+      copy.setTime(obj.getTime());
+      return copy;
+    }
+    // Handle Array
+    if (obj instanceof Array) {
+      copy = [];
+      for (var i = 0, len = obj.length; i < len; i++) {
+        copy[i] = clone(obj[i]);
       }
-      // Handle Array
-      if (obj instanceof Array) {
-          copy = [];
-          for (var i = 0, len = obj.length; i < len; i++) {
-              copy[i] = clone(obj[i]);
-          }
-          return copy;
+      return copy;
+    }
+    // Handle Object
+    if (obj instanceof Object) {
+      copy = {};
+      for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
       }
-      // Handle Object
-      if (obj instanceof Object) {
-          copy = {};
-          for (var attr in obj) {
-              if (obj.hasOwnProperty(attr)) copy[attr] = clone(obj[attr]);
-          }
-          return copy;
-      }
-      throw new Error("Unable to copy obj! Its type isn't supported.");
+       return copy;
+    }
+    throw new Error("Unable to copy obj! Its type isn't supported.");
   }
 
-return {
-  data: data,
-  setTeamInfo: setTeamInfo,
-  getPPR: getPPR,
-  locatePlayer: locatePlayer,
-  playerToTeam: playerToTeam,
-  getStandard: getStandard,
-  getUserFirstName: getUserFirstName,
-  logout: logout
-  //positionColor: positionColor
-}
+  return {
+    data: data,
+    setTeamInfo: setTeamInfo,
+    getPPR: getPPR,
+    locatePlayer: locatePlayer,
+    playerToTeam: playerToTeam,
+    getStandard: getStandard,
+    getUserFirstName: getUserFirstName,
+    logout: logout
+    //positionColor: positionColor
+  }
+
 }]);

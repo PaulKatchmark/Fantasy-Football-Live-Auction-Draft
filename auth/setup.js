@@ -4,7 +4,6 @@ const User = require('../models/user');
 
 exports.setup = function () {
   // passport configuration
-
   // when someone asks for the 'local' strategy,
   // use the following information from the request
   // and the findAndComparePassword function to validate
@@ -26,7 +25,6 @@ exports.setup = function () {
       done(err);
     });
   });
-
 };
 
 function findAndComparePassword(username, password, done){
@@ -46,7 +44,6 @@ function findAndComparePassword(username, password, done){
         done(null, false);
       }
     });
-
   }).catch(function(err){
     console.log('Error finding user', err);
     done(err);

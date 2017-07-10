@@ -1,22 +1,25 @@
 angular.module('auctionApp')
- .controller('SettingsController', ['$location', 'SetupService', function ($location, SetupService) {
+.controller('SettingsController', ['$location', 'SetupService', function ($location, SetupService) {
   //  console.log('SettingsController loaded');
-   var vm = this;
-   vm.firstname;
-   vm.numTeams = [8,10,12,14,16];
-   vm.auctionAmount = [100, 150, 200, 250, 300, 350, 400];
-   vm.quarterBacks = [1,2];
-   vm.runningBacks = [2,3];
-   vm.wideReceivers = [2,3];
-   vm.tightEnds = [1,2];
-   vm.flexSpot = [0,1,2];
-   vm.kicker = [0,1];
-   vm.defense = [0,1];
-   vm.benchSpots = [2,3,4,5,6,7,8];
-   vm.setTeams = [0,1,2,3,4,5,6,7,8];
-   vm.teamsDone = false;
-   vm.setLeague = false;
-   vm.teamSet = false;
+  var vm = this;
+  vm.firstname;
+  vm.numTeams = [8,10,12,14,16];
+  vm.teamNames = [];
+  vm.auctionAmount = [100, 150, 200, 250, 300, 350, 400];
+  vm.quarterBacks = [1,2];
+  vm.runningBacks = [2,3];
+  vm.wideReceivers = [2,3];
+  vm.tightEnds = [1,2];
+  vm.flexSpot = [0,1,2];
+  vm.kicker = [0,1];
+  vm.defense = [0,1];
+  vm.benchSpots = [2,3,4,5,6,7,8];
+  vm.setTeams = [0,1,2,3,4,5,6,7,8];
+  vm.teamsDone = false;
+  vm.setLeague = false;
+  vm.teamSet = false;
+  vm.showDiv = false;
+  vm.placeholderName = [];
 
   var navBarSettings = function() {
     vm.signedInAs = true;
@@ -35,37 +38,63 @@ angular.module('auctionApp')
   navBarSettings();
   console.log('signedInAs ', vm.signedInAs);
 
-   vm.league = {
-     auctionAmount: 0,
-     numTeams: 0
-   }
+  vm.league = {
+    auctionAmount: 0,
+    numTeams: 0
+  }
 
-   vm.team = [{
-     quarterBacks: 0,
-     runningBacks: 0,
-     wideReceivers: 0,
-     tightEnds: 0,
-     flexSpot: 0,
-     kicker: 0,
-     defense: 0,
-     benchSpots: 0
-   }];
+  vm.team = [{
+    quarterBacks: 0,
+    runningBacks: 0,
+    wideReceivers: 0,
+    tightEnds: 0,
+    flexSpot: 0,
+    kicker: 0,
+    defense: 0,
+    benchSpots: 0
+  }];
 
-   vm.setUpLeague = {
+  vm.setUpLeague = {
     model: null,
     availableOptions: [
-      {value: 1, name: 'PPR'},
-      {value: 0, name: 'Standard'}
+      {
+        value: 1,
+        name: 'PPR'
+      },
+      {
+        value: 0,
+        name: 'Standard'
+      }
     ]
   };
 
+  vm.changedValue = function(item) {
+    //$scope.itemList.push(item.name);
+    console.log('number of teams selected ', item);
+    //console.log(vm.league.numTeams)
+    vm.placeholderName = [];
+    if (item > 0) {
+      vm.showDiv = true
+      for (i = 0; i < vm.league.numTeams; i++) {
+        var tempName = "team " + (i+1);
+        vm.placeholderName.push(tempName)
+        console.log(vm.placeholderName)
+      }
+      console.log('showDiv value ', vm.showDiv)
+    }
+    else {
+      vm.showDiv = false
+      console.log('showDiv value ', vm.showDiv)
+    }
+    // console.log('or item? ', vm.item);
+  }    
 
   vm.hideShow = function() {
     vm.setLeague = true;
     // console.log('vm.setLeague ',vm.setLeague);
     vm.teamSet = true;
-
   };
+
   vm.createLeague = function (){
     // console.log('controller setUpLeague ', vm.setUpLeague.model.value);
     console.log('controller league ', vm.league);
@@ -78,8 +107,6 @@ angular.module('auctionApp')
     SetupService.data.team = vm.team;
     SetupService.setTeamInfo();
     $location.path('/home');
-
   };
-
 
 }]);

@@ -74,10 +74,12 @@ th {
   text-align: center;
 }
 #draftPlayer table {
-        width: 100%;
-    }
+  width: 100%;
+}
 
-#draftPlayer thead, #draftPlayer tbody, #draftPlayer tr, #draftPlayer td, #draftPlayer th { display: block; }
+#draftPlayer thead, #draftPlayer tbody, #draftPlayer tr, #draftPlayer td, #draftPlayer th { 
+  display: block;
+}
 
 #draftPlayer tr:after {
   content: ' ';
@@ -87,27 +89,27 @@ th {
 }
 
 #draftPlayer thead th {
-    height: 30px;
-    /*text-align: left;*/
+  height: 30px;
+  /*text-align: left;*/
 }
 
 #draftPlayer tbody {
-    height: 350px;
-    overflow-y: auto;
+  height: 350px;
+  overflow-y: auto;
 }
 
 #tableHeader {
-    text-align: center;
-    background-color: #000;
-    color: #fff;
-    margin: 0 0 0 1px;
-    text-transform: uppercase;
-    width: 99.5%;
+  text-align: center;
+  background-color: #000;
+  color: #fff;
+  margin: 0 0 0 1px;
+  text-transform: uppercase;
+  width: 99.5%;
 }
 
 #draftPlayer tbody td, #draftPlayer thead th {
-    width: 19.2%;
-    float: left;
+  width: 19.2%;
+  float: left;
 }
 .pageHeader {
   text-align: center;

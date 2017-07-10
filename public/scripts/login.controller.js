@@ -4,7 +4,6 @@ angular.module('auctionApp')
 function LoginController($http, $location, SetupService) {
   // console.log('LoginController loaded');
   var ctrl = this;
-
   var navBarLogin = function() {
     ctrl.signedInAs = false;
     ctrl.signOut = false;
@@ -12,10 +11,7 @@ function LoginController($http, $location, SetupService) {
     ctrl.draftTab = false;
     ctrl.settingsTab = false;
   }
-
   navBarLogin();
-
-
   ctrl.login = function() {
     SetupService.data.username = ctrl.username;
     SetupService.getUserFirstName();

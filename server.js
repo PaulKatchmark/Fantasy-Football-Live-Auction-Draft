@@ -13,8 +13,6 @@ const session = require('express-session');
 // const assert = require('chai').assert;
 const FFNerd = require('fantasy-football-nerd');
 
-
-
 auth.setup();
 
 const sessionConfig = {
@@ -28,18 +26,15 @@ const sessionConfig = {
   }
 };
 
-
 // auth.setup();
 
 const app = express();
-
 
 app.use(session(sessionConfig));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use('/login', login);
 app.use('/logout', logout);

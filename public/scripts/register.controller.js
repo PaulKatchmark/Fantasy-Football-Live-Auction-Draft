@@ -14,10 +14,8 @@ function RegisterController($http, $location) {
 
   navBarRegister();
   console.log('signedInAs ', ctrl.signedInAs);
-
-
   ctrl.register = function() {
-    console.log('registering new user');
+  console.log('registering new user');
     $http.post('/register', {
       firstName: ctrl.firstName,
       lastName: ctrl.lastName,

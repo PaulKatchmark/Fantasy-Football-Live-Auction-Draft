@@ -10,7 +10,6 @@ function findByUsername(username) {
         done();
         return reject(err);
       }
-
       client.query('SELECT * FROM users WHERE username=$1',
       [username],
       function(err, result){
@@ -18,14 +17,11 @@ function findByUsername(username) {
         if (err) {
           reject(err);
         }
-
         resolve(result.rows[0]);
       });
     });
   });
 }
-
-
 
 // find by id
 function findById(id) {
@@ -35,7 +31,6 @@ function findById(id) {
         done();
         return reject(err);
       }
-
       client.query('SELECT * FROM users WHERE id=$1',
       [id],
       function(err, result){
@@ -43,7 +38,6 @@ function findById(id) {
         if (err) {
           reject(err);
         }
-
         resolve(result.rows[0]);
       });
     });
@@ -59,23 +53,20 @@ function create(firstName, lastName, username, password) {
         console.log('Error hashing password', err);
         return reject(err);
       }
-
       pool.connect(function(err, client, done){
         if (err) {
           done();
           return reject(err);
         }
-
         client.query('INSERT INTO users (firstName, lastName, username, password) VALUES ($1, $2, $3, $4) RETURNING *',
-                     [firstName, lastName, username, hash],
-                     function(err, result){
-                       done();
-                       if (err) {
-                         return reject(err);
-                       }
-
-                       resolve(result.rows[0]);
-                     });
+          [firstName, lastName, username, hash],
+          function(err, result){
+            done();
+            if (err) {
+              return reject(err);
+            }
+            resolve(result.rows[0]);
+          });
       });
     });
   });
@@ -89,7 +80,6 @@ function comparePassword(user, passwordToCompare) {
         console.log('Error comparing password', err);
         return resolve(false);
       }
-
       resolve(match);
     });
   });
