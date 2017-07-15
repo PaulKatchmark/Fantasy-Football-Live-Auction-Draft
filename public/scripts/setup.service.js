@@ -8,6 +8,7 @@ angular.module('auctionApp')
   data.firstname;
   data.league = {};
   data.team = [];
+  data.customTeamNames = [];
   data.auctionAmount = [];
   data.teamId = [];
   // var createTeams;
@@ -34,7 +35,7 @@ angular.module('auctionApp')
       for (var i=0; i<data.leagueTeams; i++){
         var createTeams = {};
         createTeams.teamId = i;
-        createTeams.name = "team " + (i+1);
+        createTeams.name = data.customTeamNames[i];
         createTeams.auctionAmount = data.league.auctionAmount;
         console.log('inside service.js ', data.league.auctionAmount);
         createTeams.team = clone(data.team);

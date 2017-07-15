@@ -29,24 +29,28 @@
               <label for="numTeams"> Number of Teams: </label>
               <select name="numTeams" ng-model="settings.league.numTeams" ng-options="num for num in settings.numTeams" ng-change="settings.changedValue(settings.league.numTeams)" style="margin-left: 49.5px;" class="setWidth">  </select></br>
               <label for="auctionAmount"> Starting Auction Amount: </label>
-              <select name="auctionAmount" ng-model="settings.league.auctionAmount" ng-options="amt for amt in settings.auctionAmount" style="margin-left: 2.75px;" class="setWidth"></select><br/>
+              <select name="auctionAmount" ng-model="settings.league.auctionAmount" ng-options="amt for amt in settings.auctionAmount" style="margin-left: 2.75px;" class="setWidth">  </select><br/>
+              <div style="text-align: center;">
+                <button type="button" ng-click="settings.hideShow()" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
+              </div>
             </div>
           </div>
         </div>
-        <div id="right" class="col-md-5">
+        <div id="right" class="col-md-2" style="text-align: center;">
+          <!-- <div style="display: inline-block; text-align: left"> -->
           <div ng-if="settings.showDiv">
             <form name="teamNameForm" >
-              <div ng-repeat="name in settings.placeholderName track by $index+1">
+              <div ng-repeat="name in settings.placeholderName track by $index">
                 <form name="teamNameFieldForm" >
-                  <label for="teamNames"> {{$index+1}} </label>
-                  <input type="text" name="teamNames" ng-model="settings.teamNames" placeholder="team name" style="text-align: center;"/>
+                  <!-- <label for="teamNames"> {{$index+1}} </label> -->
+                  <input type="text" name="settings.teamNames[$index]" ng-model="settings.teamNames[$index]" placeholder="{{name}}" style="text-align: center;" />
                 </form>
               </div>
             </form>
+          <!-- </div> -->
           </div>
         </div>
-        <div class="col-md-7" style="left: 45%;">
-          <button type="button" ng-click="settings.hideShow()" class="btn btn-primary" style="margin-top: 20px;">Submit</button>
+        <div class="col-md-3">
         </div>
       </form>
     </div>

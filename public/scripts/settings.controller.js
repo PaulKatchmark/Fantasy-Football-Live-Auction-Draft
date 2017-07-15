@@ -78,13 +78,12 @@ angular.module('auctionApp')
       for (i = 0; i < vm.league.numTeams; i++) {
         var tempName = "team " + (i+1);
         vm.placeholderName.push(tempName)
-        console.log(vm.placeholderName)
+        //console.log(vm.placeholderName)
       }
-      console.log('showDiv value ', vm.showDiv)
+      return vm.placeholderName
     }
     else {
       vm.showDiv = false
-      console.log('showDiv value ', vm.showDiv)
     }
     // console.log('or item? ', vm.item);
   }    
@@ -93,12 +92,33 @@ angular.module('auctionApp')
     vm.setLeague = true;
     // console.log('vm.setLeague ',vm.setLeague);
     vm.teamSet = true;
+
+
+    for (i = 0; i < vm.placeholderName.length; i++) {
+      console.log('inside for loop ', i)
+      console.log('teamNames[i] ', vm.teamNames[i])
+      if (typeof vm.teamNames[i] == 'undefined') {
+        vm.teamNames[i] = 'team '+ (i+1)
+      }
+    }
+
+    // if (vm.teamNames.length < vm.placeholderName.length) {
+    //   var difference = vm.placeholderName.length - vm.teamNames.length;
+    //   var i = 0;
+    //   while (i < difference) {
+    //     var genericName = 'team '+ (vm.teamNames.length + 1);
+    //     vm.teamNames.push(genericName);
+    //     i++;
+    //   }
+    // }
   };
 
   vm.createLeague = function (){
     // console.log('controller setUpLeague ', vm.setUpLeague.model.value);
     console.log('controller league ', vm.league);
     console.log('controller teamsize', vm.team);
+    console.log('team Names ', vm.teamNames)
+    SetupService.data.customTeamNames = vm.teamNames;
     //value for API call
     SetupService.data.setUpLeague = vm.setUpLeague.model.value;
     // auction value and number of teams
