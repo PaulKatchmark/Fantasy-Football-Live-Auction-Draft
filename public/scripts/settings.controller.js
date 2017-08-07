@@ -95,22 +95,11 @@ angular.module('auctionApp')
 
 
     for (i = 0; i < vm.placeholderName.length; i++) {
-      console.log('inside for loop ', i)
-      console.log('teamNames[i] ', vm.teamNames[i])
       if (typeof vm.teamNames[i] == 'undefined') {
         vm.teamNames[i] = 'team '+ (i+1)
       }
     }
 
-    // if (vm.teamNames.length < vm.placeholderName.length) {
-    //   var difference = vm.placeholderName.length - vm.teamNames.length;
-    //   var i = 0;
-    //   while (i < difference) {
-    //     var genericName = 'team '+ (vm.teamNames.length + 1);
-    //     vm.teamNames.push(genericName);
-    //     i++;
-    //   }
-    // }
   };
 
   vm.createLeague = function (){

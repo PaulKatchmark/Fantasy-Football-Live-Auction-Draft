@@ -7,6 +7,7 @@ angular.module('auctionApp')
   vm.playerSelected = false;
   vm.selectedP;
   vm.selectedPlayer;
+  vm.editing = false;
   vm.elementPos;
   vm.array;
   vm.firstname = SetupService.data.firstname;

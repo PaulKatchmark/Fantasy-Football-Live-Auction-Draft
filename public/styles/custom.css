@@ -183,7 +183,18 @@ td:empty {
   width: 60px;
   text-align: center;
 }
-
+input:focus {
+   /* //change more attributes, if you want.*/
+   color: black;
+}
+input {
+  color: red;
+/*    border:none;*/
+/*    background-color:transparent;*/
+}
+ul, input, .container {
+/*    padding:10px;*/
+}
 /*#settingsContainer{
   justify-content: center;
   align-items: center;

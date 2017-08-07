@@ -11,7 +11,7 @@ pool.connect(function(err, client, done) {
                 return;
             }
 
-            client.query('SELECT id, displayname, team, pos, byeweek, ' + req.params.teamCol + ' FROM standard_2016', function(err, result) {
+            client.query('SELECT id, displayname, team, pos, byeweek, editing, ' + req.params.teamCol + ' FROM standard_2016', function(err, result) {
             if (err) {
                 console.log('Error querying the DB', err);
                 res.sendStatus(500);

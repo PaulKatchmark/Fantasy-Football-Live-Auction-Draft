@@ -3,6 +3,8 @@ angular.module('auctionApp')
   var data = {};
   var vm = this;
   var teamCol;
+  var valueDiff;
+  var teamToEdit;
   data.setUpLeague;
   data.username;
   data.firstname;
@@ -26,6 +28,7 @@ angular.module('auctionApp')
   data.sortType = teamCol;
   data.sortReverse = true;
   data.searchPlayer = '';
+  data.editedPlayer = [];
 
   //THIS IS WHERE WE WILL ADD ARAY OF TEAM NAMES
 
@@ -120,6 +123,7 @@ angular.module('auctionApp')
   //   }
   // }
 
+
   function getUserFirstName() {
     var username = data.username;
     $http.get('/login/'+username).then(function(response) {
@@ -127,6 +131,43 @@ angular.module('auctionApp')
       console.log('firstname ', data.firstname);
     });
   }
+
+
+  function editDollars(team, item) {
+      console.log('team edited ', team)
+      console.log('data.totalTeams ', data.totalTeams)
+      for (i = 0; i < data.totalTeams.length; i++){
+        if (data.totalTeams[i].name === team) {
+          console.log('this is the team name inside if statement ', data.totalTeams[i].name)
+        }
+      }
+      //console.log('editDollars in Service ', item);
+      data.editedPlayer.editing = false;
+      data.editedPlayer = '';
+      data.editedPlayer = item;
+      teamToEdit = '';
+      teamToEdit = team;
+      console.log('edited player ', data.editedPlayer)
+  }
+  function doneEditing(item) {
+      console.log('doneEditing in Service ', item);
+      console.log('inside doneEditing edited player ', data.editedPlayer)
+      valueDiff = data.editedPlayer.paid - item;
+      console.log('valueDiff ', valueDiff)
+      if (item > 0) {
+        for (i = 0; i < data.totalTeams.length; i++){
+          if (data.totalTeams[i].name === teamToEdit) {
+            console.log('this is the team name inside if statement ', data.totalTeams[i].name)
+            //data.teamArray.auctionAmount += valueDiff;
+            data.editedPlayer.paid = item;
+            data.totalTeams[i].auctionAmount += valueDiff;
+          }
+        }
+      }  
+      data.editedPlayer.editing = false;
+      //item = ;
+  }
+
 
   function logout() {
     $http.get('/logout').then(function(){
@@ -169,6 +210,7 @@ angular.module('auctionApp')
             item.qb.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
+            console.log('item.qb ', item.qb)
             return item.qb;
           }
         }
@@ -255,7 +297,8 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'QB',
         team: '',
-        paid: 0
+        paid: 0,
+        editing: false
       };
       for (i=1; i <= data.team[0].quarterBacks; i++ ) {
         data.team.push({'qb':qb});
@@ -268,7 +311,8 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'RB',
         team: '',
-        paid: 0
+        paid: 0,
+        editing: false
       };
       for (i=1; i <= data.team[0].runningBacks; i++ ) {
         data.team.push({'rb':rb});
@@ -281,7 +325,8 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'WR',
         team: '',
-        paid: 0
+        paid: 0,
+        editing: false
       };
       for (i=1; i <= data.team[0].wideReceivers; i++ ) {
         data.team.push({'wr':wr});
@@ -294,7 +339,8 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'TE',
         team: '',
-        paid: 0
+        paid: 0,
+        editing: false
       };
       for (i=1; i <= data.team[0].tightEnds; i++ ) {
         data.team.push({'te':te});
@@ -307,7 +353,8 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'Flex',
         team: '',
-        paid: 0
+        paid: 0,
+        editing: false
       };
       for (i=1; i <= data.team[0].flexSpot; i++ ) {
         data.team.push({'fp':fp});
@@ -320,7 +367,8 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'K',
         team: '',
-        paid: 0
+        paid: 0,
+        editing: false
       };
       for (i=1; i <= data.team[0].kicker; i++ ) {
         data.team.push({'k':k});
@@ -333,7 +381,8 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'DEF',
         team: '',
-        paid: 0
+        paid: 0,
+        editing: false
       };
       for (i=1; i <= data.team[0].defense; i++ ) {
         data.team.push({'def':def});
@@ -346,7 +395,8 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'Bench',
         team: '',
-        paid: 0
+        paid: 0,
+        editing: false
       };
       for (i=1; i <= data.team[0].benchSpots; i++ ) {
         data.team.push({'bs':bs});
@@ -408,7 +458,9 @@ angular.module('auctionApp')
     playerToTeam: playerToTeam,
     getStandard: getStandard,
     getUserFirstName: getUserFirstName,
-    logout: logout
+    logout: logout,
+    editDollars: editDollars,
+    doneEditing: doneEditing
     //positionColor: positionColor
   }
 
