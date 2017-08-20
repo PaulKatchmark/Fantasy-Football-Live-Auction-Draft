@@ -195,6 +195,12 @@ input {
 ul, input, .container {
 /*    padding:10px;*/
 }
+#undraftButton {
+  background-color: red;
+  color: white;
+  font-size: 8px;
+  border-radius: 3px;
+}
 /*#settingsContainer{
   justify-content: center;
   align-items: center;

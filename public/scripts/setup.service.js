@@ -132,7 +132,6 @@ angular.module('auctionApp')
     });
   }
 
-
   function editDollars(team, item) {
       console.log('team edited ', team)
       console.log('data.totalTeams ', data.totalTeams)
@@ -168,6 +167,156 @@ angular.module('auctionApp')
       //item = ;
   }
 
+  //undraft or potentially move player to another team
+  // function movePlayer(team, item) {
+  //     console.log('team edited ', team)
+  //     console.log('data.totalTeams ', data.totalTeams)
+  //     for (i = 0; i < data.totalTeams.length; i++){
+  //       if (data.totalTeams[i].name === team) {
+  //         console.log('this is the team name inside if statement ', data.totalTeams[i].name)
+  //       }
+  //     }
+  //     data.editedPlayer.transfer = false;
+  // }
+
+  function undraftPlayer(team, item) {
+    console.log('player to undraft ', item.displayname)
+    for (i = 0; i < data.totalTeams.length; i++){
+        if (data.totalTeams[i].name === team) {
+          console.log('this is the team name inside if statement ', data.totalTeams[i].team)
+          for(index=0; index<data.totalTeams[i].team.length; index++) {
+            if (data.totalTeams[i].team[index].qb) {
+              if (data.totalTeams[i].team[index].qb.displayname === item.displayname) {
+                item.transfer = false;
+                data.totalTeams[i].auctionAmount += item.paid;
+                data.players.push(item);
+                data.totalTeams[i].team[index].qb = {
+                  id: 0,
+                  byeweek: '',
+                  displayname: '',
+                  pos: 'QB',
+                  team: '',
+                  paid: 0
+                };
+                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
+              }
+            }
+            if (data.totalTeams[i].team[index].rb) {
+              if (data.totalTeams[i].team[index].rb.displayname === item.displayname) {
+                item.transfer = false;
+                data.totalTeams[i].auctionAmount += item.paid;
+                data.players.push(item);
+                data.totalTeams[i].team[index].rb = {
+                  id: 0,
+                  byeweek: '',
+                  displayname: '',
+                  pos: 'RB',
+                  team: '',
+                  paid: 0
+                };
+                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
+              }
+            }
+            if (data.totalTeams[i].team[index].wr) {
+              if (data.totalTeams[i].team[index].wr.displayname === item.displayname) {
+                item.transfer = false;
+                data.totalTeams[i].auctionAmount += item.paid;
+                data.players.push(item);
+                data.totalTeams[i].team[index].wr = {
+                  id: 0,
+                  byeweek: '',
+                  displayname: '',
+                  pos: 'WR',
+                  team: '',
+                  paid: 0
+                };
+                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
+              }
+            }
+            if (data.totalTeams[i].team[index].te) {
+              if (data.totalTeams[i].team[index].te.displayname === item.displayname) {
+                item.transfer = false;
+                data.totalTeams[i].auctionAmount += item.paid;
+                data.players.push(item);
+                data.totalTeams[i].team[index].te = {
+                  id: 0,
+                  byeweek: '',
+                  displayname: '',
+                  pos: 'TE',
+                  team: '',
+                  paid: 0
+                };
+                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
+              }
+            }
+            if (data.totalTeams[i].team[index].fp) {
+              if (data.totalTeams[i].team[index].fp.displayname === item.displayname) {
+                item.transfer = false;
+                data.totalTeams[i].auctionAmount += item.paid;
+                data.players.push(item);
+                data.totalTeams[i].team[index].fp = {
+                  id: 0,
+                  byeweek: '',
+                  displayname: '',
+                  pos: 'FLEX',
+                  team: '',
+                  paid: 0
+                };
+                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
+              }
+            }
+            if (data.totalTeams[i].team[index].k) {
+              if (data.totalTeams[i].team[index].k.displayname === item.displayname) {
+                item.transfer = false;
+                data.totalTeams[i].auctionAmount += item.paid;
+                data.players.push(item);
+                data.totalTeams[i].team[index].k = {
+                  id: 0,
+                  byeweek: '',
+                  displayname: '',
+                  pos: 'K',
+                  team: '',
+                  paid: 0
+                };
+                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
+              }
+            }
+            if (data.totalTeams[i].team[index].def) {
+              if (data.totalTeams[i].team[index].def.displayname === item.displayname) {
+                item.transfer = false;
+                data.totalTeams[i].auctionAmount += item.paid;
+                data.players.push(item);
+                data.totalTeams[i].team[index].def = {
+                  id: 0,
+                  byeweek: '',
+                  displayname: '',
+                  pos: 'DEF',
+                  team: '',
+                  paid: 0
+                };
+                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
+              }
+            }
+            if (data.totalTeams[i].team[index].bs) {
+              if (data.totalTeams[i].team[index].bs.displayname === item.displayname) {
+                item.transfer = false;
+                data.totalTeams[i].auctionAmount += item.paid;
+                data.players.push(item);
+                data.totalTeams[i].team[index].bs = {
+                  id: 0,
+                  byeweek: '',
+                  displayname: '',
+                  pos: 'BENCH',
+                  team: '',
+                  paid: 0
+                };
+                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
+              }
+            }
+          }
+        }
+      }
+  }
 
   function logout() {
     $http.get('/logout').then(function(){
@@ -297,8 +446,7 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'QB',
         team: '',
-        paid: 0,
-        editing: false
+        paid: 0
       };
       for (i=1; i <= data.team[0].quarterBacks; i++ ) {
         data.team.push({'qb':qb});
@@ -311,8 +459,7 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'RB',
         team: '',
-        paid: 0,
-        editing: false
+        paid: 0
       };
       for (i=1; i <= data.team[0].runningBacks; i++ ) {
         data.team.push({'rb':rb});
@@ -325,8 +472,7 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'WR',
         team: '',
-        paid: 0,
-        editing: false
+        paid: 0
       };
       for (i=1; i <= data.team[0].wideReceivers; i++ ) {
         data.team.push({'wr':wr});
@@ -339,8 +485,7 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'TE',
         team: '',
-        paid: 0,
-        editing: false
+        paid: 0
       };
       for (i=1; i <= data.team[0].tightEnds; i++ ) {
         data.team.push({'te':te});
@@ -353,8 +498,7 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'Flex',
         team: '',
-        paid: 0,
-        editing: false
+        paid: 0
       };
       for (i=1; i <= data.team[0].flexSpot; i++ ) {
         data.team.push({'fp':fp});
@@ -367,8 +511,7 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'K',
         team: '',
-        paid: 0,
-        editing: false
+        paid: 0
       };
       for (i=1; i <= data.team[0].kicker; i++ ) {
         data.team.push({'k':k});
@@ -381,8 +524,7 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'DEF',
         team: '',
-        paid: 0,
-        editing: false
+        paid: 0
       };
       for (i=1; i <= data.team[0].defense; i++ ) {
         data.team.push({'def':def});
@@ -395,8 +537,7 @@ angular.module('auctionApp')
         displayname: '',
         pos: 'Bench',
         team: '',
-        paid: 0,
-        editing: false
+        paid: 0
       };
       for (i=1; i <= data.team[0].benchSpots; i++ ) {
         data.team.push({'bs':bs});
@@ -460,7 +601,9 @@ angular.module('auctionApp')
     getUserFirstName: getUserFirstName,
     logout: logout,
     editDollars: editDollars,
-    doneEditing: doneEditing
+    doneEditing: doneEditing,
+    // movePlayer: movePlayer,
+    undraftPlayer: undraftPlayer
     //positionColor: positionColor
   }
 
