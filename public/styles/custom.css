@@ -45,6 +45,15 @@ html, body {
 #searchBar {
   padding-left: 10%;
 }
+
+#teamTransfer {
+  color: black;
+  background-color: white;
+  width: 60px;
+}
+
+
+
 /*.form-group {
   width: 45%;
 
@@ -184,16 +193,19 @@ td:empty {
   text-align: center;
 }
 input:focus {
-   /* //change more attributes, if you want.*/
    color: black;
 }
-input {
+.overpriced {
   color: red;
-/*    border:none;*/
-/*    background-color:transparent;*/
+}
+.bargin {
+  color: green;
+}
+input {
+
 }
 ul, input, .container {
-/*    padding:10px;*/
+
 }
 #undraftButton {
   background-color: red;
@@ -201,11 +213,3 @@ ul, input, .container {
   font-size: 8px;
   border-radius: 3px;
 }
-/*#settingsContainer{
-  justify-content: center;
-  align-items: center;
-  text-align: left;
-}*/
-/*#textContainer {
-  text-align: left;
-}*/

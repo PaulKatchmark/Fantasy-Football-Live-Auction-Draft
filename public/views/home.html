@@ -17,7 +17,7 @@
 
 <h1 class="pageHeader">Fantasy Football</h1>
 <h2 class="pageHeader">Live Auction Tracker</h2>
-<form class="paddingTop">
+<form name="draftInfo" class="paddingTop">
 <h3 class="centerClass">Draft Page</h3>
 <div class="row">
   <div class="col-xs-6">
@@ -36,7 +36,7 @@
             <br/> estimated value: {{draft.selectedP.teams_8 | currency:"$":0}}{{draft.selectedP.teams_10 | currency:"$":0}}{{draft.selectedP.teams_12 | currency:"$":0}}{{draft.selectedP.teams_14 | currency:"$":0}}{{draft.selectedP.teams_16 | currency:"$":0}}
           </h4>
           <label for="teamWon"> Team that won the bid:</label>
-          <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams">  </select><br />
+          <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams" ng-required="true">  </select><br />
           <!-- <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label> -->
           <!-- <form name="form">
             <input type="number" step="1" min="1" ng-model="draft.data.amountPaid" required />
@@ -44,11 +44,11 @@
           </form> -->
           <div class="form-group" ng-class="{ 'has-error': form.amountPaid.$dirty && form.amountPaid.$error.required }">
             <label for="teamWon">Amount paid for {{draft.selectedP.displayname}}: </label>
-            <input type="number" step="1" min="1" name="amountPaid" id="amountPaid" ng-model="draft.data.amountPaid" required />
+            <input type="number" step="1" min="1" name="amountPaid" id="amountPaid" ng-model="draft.data.amountPaid" ng-required="true"/>
             <span ng-show="form.amountPaid.$dirty && form.amountPaid.$error.required" class="help-block">Please enter how much was spent on this player.</span>
           </div>
           <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
+            <button type="submit" ng-disabled="draftInfo.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
             <!-- <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" class="btn btn-primary">Login</button> -->
             <img ng-if="draft.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
           </div>

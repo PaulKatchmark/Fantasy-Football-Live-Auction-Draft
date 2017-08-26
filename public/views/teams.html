@@ -53,7 +53,14 @@
               <span ng-hide="team.transfer" ng-dblclick="league.movePlayer(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)"> <!-- Technically this could be function can have empty parameters, will leave for now just in case-->
                   {{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}
               </span> 
-              <button id="undraftButton" ng-click="league.undraftPlayer(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)" ng-show="team.qb.transfer || team.rb.transfer || team.wr.transfer || team.te.transfer || team.k.transfer || team.def.transfer || team.fp.transfer || team.bs.transfer">Undraft</button>
+              <span ng-show="team.qb.transfer || team.rb.transfer || team.wr.transfer || team.te.transfer || team.k.transfer || team.def.transfer || team.fp.transfer || team.bs.transfer">
+                <br/>
+                <select id="teamTransfer" name="numTeams" ng-model="league.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in league.data.totalTeams" class="fa fa-angle-down"> {{league.data.teamArray.name}}</select>
+                <button id="undraftButton" ng-disabled="league.data.teamArray ===''" ng-click="league.teamTransfer(totalTeams, league.data.teamArray, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)">Transfer</button>
+                <br/>
+                <button id="undraftButton" ng-click="league.undraftPlayer(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)">Undraft</button>
+
+              </span>
           </td>
 
 

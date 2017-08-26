@@ -4,6 +4,7 @@ angular.module('auctionApp')
   var vm = this;
   vm.firstname;
   vm.data = SetupService.data;
+  vm.data.amountPaid = "";
   vm.playerSelected = false;
   vm.selectedP;
   vm.selectedPlayer;
@@ -11,7 +12,7 @@ angular.module('auctionApp')
   vm.elementPos;
   vm.array;
   vm.firstname = SetupService.data.firstname;
-  
+  var projValue = 'teams_' + vm.data.league.numTeams;
   vm.logout = function() {
     SetupService.logout();
   };
@@ -42,10 +43,22 @@ angular.module('auctionApp')
     }
   }
   vm.sendPlayer = function($event){
-    console.log('selected team ', vm.data.teamArray);
-    console.log('selected player ', vm.data.draftedPlayer);
+    // console.log('selected team ', vm.data.teamArray);
+    // console.log('selected player ', vm.data.draftedPlayer);
     // console.log('amount paid ', vm.data.amountPaid);
+    console.log('amount paid for player ', vm.data.amountPaid);
+    console.log('the value of projValue ', projValue)
+    console.log('projected value of said player ', vm.data.draftedPlayer[projValue])
     if(vm.data.teamArray.auctionAmount >= vm.data.amountPaid) {
+      if (vm.data.amountPaid <= vm.data.draftedPlayer[projValue]) {
+        // vm.data.draftedPlayer.myClass ("bargin")
+        console.log('adding class of bargin')
+
+
+      } else {
+        // vm.data.draftedPlayer.addClass("overpriced")
+        console.log('adding class of overpriced')
+      }
       SetupService.playerToTeam();
       vm.data.amountPaid = "";
       vm.selectedP = "";

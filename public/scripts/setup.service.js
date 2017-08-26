@@ -179,6 +179,15 @@ angular.module('auctionApp')
   //     data.editedPlayer.transfer = false;
   // }
 
+
+
+//**********************************************************
+
+//this function can be simplified, check "team" parameter and compare to
+// league.controller.js line 46
+
+//need to reset the drafted amount. it repears in auction showing last value
+//**********************************************************
   function undraftPlayer(team, item) {
     console.log('player to undraft ', item.displayname)
     for (i = 0; i < data.totalTeams.length; i++){
@@ -198,7 +207,6 @@ angular.module('auctionApp')
                   team: '',
                   paid: 0
                 };
-                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
               }
             }
             if (data.totalTeams[i].team[index].rb) {
@@ -214,7 +222,6 @@ angular.module('auctionApp')
                   team: '',
                   paid: 0
                 };
-                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
               }
             }
             if (data.totalTeams[i].team[index].wr) {
@@ -230,7 +237,6 @@ angular.module('auctionApp')
                   team: '',
                   paid: 0
                 };
-                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
               }
             }
             if (data.totalTeams[i].team[index].te) {
@@ -246,7 +252,6 @@ angular.module('auctionApp')
                   team: '',
                   paid: 0
                 };
-                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
               }
             }
             if (data.totalTeams[i].team[index].fp) {
@@ -262,7 +267,6 @@ angular.module('auctionApp')
                   team: '',
                   paid: 0
                 };
-                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
               }
             }
             if (data.totalTeams[i].team[index].k) {
@@ -278,7 +282,6 @@ angular.module('auctionApp')
                   team: '',
                   paid: 0
                 };
-                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
               }
             }
             if (data.totalTeams[i].team[index].def) {
@@ -294,7 +297,6 @@ angular.module('auctionApp')
                   team: '',
                   paid: 0
                 };
-                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
               }
             }
             if (data.totalTeams[i].team[index].bs) {
@@ -310,7 +312,6 @@ angular.module('auctionApp')
                   team: '',
                   paid: 0
                 };
-                console.log('this is the droid i am looking for ', data.totalTeams[i].team[index])
               }
             }
           }
@@ -603,7 +604,7 @@ angular.module('auctionApp')
     editDollars: editDollars,
     doneEditing: doneEditing,
     // movePlayer: movePlayer,
-    undraftPlayer: undraftPlayer
+    undraftPlayer: undraftPlayer,
     //positionColor: positionColor
   }
 
