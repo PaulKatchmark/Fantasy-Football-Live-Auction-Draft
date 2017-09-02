@@ -150,6 +150,9 @@ h2 {
 .paddingTop {
   padding-top: 40px;
 }
+.lessPaddingTop {
+  padding-top: 25px;
+}
 .centerClass {
   text-align: center;
 }
@@ -227,6 +230,88 @@ button[disabled], html input[disabled] {
 #amountPaid {
   width: 43px;
 }
+
+div.transbox {
+  margin: 0 auto;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+  background: -o-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+  background: -moz-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+  border-radius: 10px;
+}
+.header {
+  position: relative;
+  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background: -o-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background: -moz-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background-position: top;
+  z-index: 100;
+  padding: 15px 0 5px;
+  margin: 0px auto 35px;
+}
+.header2 {
+  position: relative;
+  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  background: -o-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  background: -moz-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  background-position: top;
+  z-index: 100;
+  padding: 15px 0 5px;
+  margin: 0px auto 35px;
+}
+#username, 
+#password, 
+#firstName, 
+#lastName {
+  width: 175px;
+  margin: 0 auto 10px;
+  text-align: center;
+}
+#loginButton,
+#registerButton,
+#cancelButton {
+  background-color: #584278;
+  color: white;
+  border-color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 5px auto 15px;
+  width: 125px;
+  padding: 5px 10px;
+}
+#loginButton:hover,
+#registerButton:hover,
+#cancelButton:hover {
+  color: #584278;
+  border-color: #584278;
+  background-color: white;
+  text-decoration: underline;
+}
+.welcome {
+  margin: 2px auto 25px;
+}
+.register {
+  margin: 5px auto 0;
+  font-size: 11px;
+}
+#register-link {
+  color: #f3ce40;
+  font-size: 11px;
+  margin: -7px auto 15px;
+  text-decoration: underline;
+}
+#register-link:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+
 /*#settingsContainer{
   justify-content: center;
   align-items: center;
