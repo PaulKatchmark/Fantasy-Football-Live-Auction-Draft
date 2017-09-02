@@ -1,39 +1,113 @@
-<nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container">
-    <ul class="nav nav-tabs" role="tablist">
-      <li ng-show="login.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
-      <li ng-show="login.draftTab" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
-      <li ng-show="login.leagueTab" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
-      <li ng-show="login.signOut" role="presentation" class="btn btn-default navbar-right"><a href="/login">Sign Out</a></li>
-      <li ng-show="login.signedInAs" role="presentation" class="navbar-text navbar-right">Signed in as: <span>PaulK</span></li>
-    </ul>
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane" id="/home"></div>
-      <div role="tabpanel" class="tab-pane" id="/teams"></div>
-      <div role="tabpanel" class="tab-pane" id="/settings"></div>
-    </div>
-  </div>
-</nav>
-
-<div class="col-md-6 col-md-offset-3">
+<html>
+<head>
+<style type="text/css">
+html {
+  background: none; 
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  background-image: url('../assets/images/vikings-stadium1.jpg');
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+div.transbox {
+  margin: 0 auto;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+  background: -o-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+  background: -moz-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2));
+  border-radius: 10px;
+}
+.header {
+  position: relative;
+  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background: -o-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background: -moz-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background-position: top;
+  z-index: 100;
+  padding: 15px 0 5px;
+  margin: 0px auto 35px;
+}
+#username, #password {
+  width: 175px;
+  margin: 0 auto 10px;
+  text-align: center;
+}
+#loginButton {
+  background-color: #584278;
+  color: white;
+  border-color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 5px auto 15px;
+  width: 125px;
+  padding: 5px 10px;
+}
+#loginButton:hover {
+  color: #584278;
+  border-color: #584278;
+  background-color: white;
+}
+img {
+  height: 40px;
+  width: auto;
+}
+.welcome {
+  margin: 2px auto 25px;
+}
+.register {
+  margin: 5px auto 0;
+  font-size: 11px;
+}
+#register-link {
+  color: #f3ce40;
+  font-size: 11px;
+  margin: -7px auto 15px;
+  text-decoration: underline;
+}
+#register-link:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="header">
   <h1 class="pageHeader">Fantasy Football</h1>
   <h2 class="pageHeader">Live Auction Tracker</h2>
+</div>
+<div class="transbox">
   <form name="form" ng-submit="login.login()" role="form" class="paddingTop">
-    <h3>Login</h3>
+    <img src="../assets/images/user-login.png">
+    <h3 class="welcome">User Login</h3>
     <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-      <label for="username">Username</label>
-      <input type="text" name="username" id="username" class="form-control" ng-model="login.username" required />
+      <!-- <label for="username">Username</label> -->
+      <input type="text" name="username" id="username" class="form-control" ng-model="login.username" placeholder="Username" required />
       <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
     </div>
     <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" class="form-control" ng-model="login.password" required />
+      <!-- <label for="password">Password</label> -->
+      <input type="password" name="password" id="password" class="form-control" ng-model="login.password" placeholder="Password" required />
       <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
     </div>
     <div class="form-actions">
-      <button type="submit" ng-disabled="form.$invalid || login.dataLoading" class="btn btn-primary">Login</button>
+      <button type="submit" ng-disabled="form.$invalid || login.dataLoading" class="btn btn-primary" id="loginButton">Login</button>
       <img ng-if="login.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-      <a href="/register" class="btn btn-link">Register</a>
+      <br/>
+      <p class="register">Or if you don't have an accout</p>
+      <a href="/register" class="btn btn-link" id="register-link">Click Here to Register</a>
     </div>
   </form>
 </div>
+</body>
+</html>

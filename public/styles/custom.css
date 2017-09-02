@@ -123,7 +123,7 @@ th {
 .pageHeader {
   text-align: center;
   /*font-family: 'Bungee Shade', cursive;*/
-  color: purple;
+  color: #584278;
   text-shadow:     0 1px 0 hsl(174,5%,80%),
                      0 2px 0 hsl(174,5%,75%),
                      0 3px 0 hsl(174,5%,70%),
@@ -193,19 +193,26 @@ td:empty {
   text-align: center;
 }
 input:focus {
+   /* //change more attributes, if you want.*/
    color: black;
 }
-.overpriced {
-  color: red;
-}
-.bargin {
-  color: green;
-}
-input {
 
+input {
+  /*color: red;*/
+/*    border:none;*/
+/*    background-color:transparent;*/
 }
 ul, input, .container {
-
+/*    padding:10px;*/
+}
+.whiteBackground {
+  background-color: white;
+  padding: 20px 30px;
+  margin: 10px auto;
+}
+#centerId {
+  margin: 5px auto;
+  text-align: center;
 }
 #undraftButton {
   background-color: red;
@@ -213,3 +220,18 @@ ul, input, .container {
   font-size: 8px;
   border-radius: 3px;
 }
+button[disabled], html input[disabled] {
+  opacity: 0.65; 
+  cursor: not-allowed;
+}
+#amountPaid {
+  width: 43px;
+}
+/*#settingsContainer{
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}*/
+/*#textContainer {
+  text-align: left;
+}*/
