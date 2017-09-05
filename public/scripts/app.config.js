@@ -1,5 +1,5 @@
 angular.module('auctionApp')
-app.config(function ($routeProvider, $locationProvider) {
+app.config(function ($routeProvider, $locationProvider, localStorageServiceProvider) {
   $routeProvider.when('/register', {
     templateUrl: 'views/register.html',
     controller: 'RegisterController as register'
@@ -17,4 +17,10 @@ app.config(function ($routeProvider, $locationProvider) {
     controller: 'LoginController as login'
   });
   $locationProvider.html5Mode(true);
+  localStorageServiceProvider
+    .setPrefix('auctionApp')
+    .setStorageType('localStorage')
+    .setNotify(true, true)
+    .setStorageCookieDomain('')
+    .setStorageCookie(2, '/', false)
 });

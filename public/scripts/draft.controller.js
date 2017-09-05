@@ -1,5 +1,5 @@
 angular.module('auctionApp')
-.controller('DraftController', ['SetupService', function (SetupService) {
+.controller('DraftController', ['SetupService', 'localStorageService', function (SetupService, localStorageService) {
   //  console.log('DraftController loaded');
   var vm = this;
   vm.firstname;
@@ -16,7 +16,10 @@ angular.module('auctionApp')
   vm.logout = function() {
     SetupService.logout();
   };
-  
+
+  // SetupService.data.currentTeams = SetupService.getItem('currentTeams');
+  // SetupService.data.totalTeams = SetupService.getItem('totalTeams')
+
   var navBarDraft= function() {
     vm.signedInAs = true;
     vm.signOut = true;
@@ -30,7 +33,10 @@ angular.module('auctionApp')
 
   //function used to select player upon click
   vm.selectPlayer = function(player){
+    SetupService.data.ableToDraft === false
+    SetupService.getItem('currentTeams')
     vm.array = [];
+    SetupService.data.totalTeams = SetupService.getItem('totalTeams')
     vm.array = vm.data.players;
     vm.elementPos = vm.array.indexOf(player);
     vm.playerSelected = true;
@@ -43,29 +49,38 @@ angular.module('auctionApp')
     }
   }
   vm.sendPlayer = function($event){
-    // console.log('selected team ', vm.data.teamArray);
-    // console.log('selected player ', vm.data.draftedPlayer);
-    // console.log('amount paid ', vm.data.amountPaid);
-    console.log('amount paid for player ', vm.data.amountPaid);
-    console.log('the value of projValue ', projValue)
-    console.log('projected value of said player ', vm.data.draftedPlayer[projValue])
+    // console.log('amount paid for player ', vm.data.amountPaid);
+    // console.log('the value of projValue ', projValue)
+    // console.log('projected value of said player ', vm.data.draftedPlayer[projValue])
     if(vm.data.teamArray.auctionAmount >= vm.data.amountPaid) {
-      if (vm.data.amountPaid <= vm.data.draftedPlayer[projValue]) {
-        // vm.data.draftedPlayer.myClass ("bargin")
-        console.log('adding class of bargin')
+      // if (vm.data.amountPaid <= vm.data.draftedPlayer[projValue]) {
+      //   // vm.data.draftedPlayer.myClass ("bargin")
+      //   console.log('adding class of bargin')
+      //   // vm.data.draftedPlayer.bargin = true;
 
-
-      } else {
-        // vm.data.draftedPlayer.addClass("overpriced")
-        console.log('adding class of overpriced')
-      }
+      // } else {
+      //   // vm.data.draftedPlayer.addClass("overpriced")
+      //   console.log('adding class of overpriced')
+      //   // vm.data.draftedPlayer.overpriced = true;
+      // }
+      SetupService.getItem('currentTeams')
+      SetupService.data.ableToDraft === false
       SetupService.playerToTeam();
-      vm.data.amountPaid = "";
-      vm.selectedP = "";
-      vm.data.teamArray = "";
-      vm.searchForPlayer = "";
-      vm.playerSelected = false;
-      vm.array.splice(vm.elementPos, 1);
+      console.log('LOOK HERE ', vm.data.currentTeams[0].team)
+      if (SetupService.data.ableToDraft === true) {
+        vm.data.amountPaid = "";
+        vm.selectedP = "";
+        vm.data.teamArray = "";
+        vm.searchForPlayer = "";
+        vm.playerSelected = false;
+        vm.array.splice(vm.elementPos, 1);
+        SetupService.submit('players', vm.data.players)
+      } else {
+        alert("Sorry, " + vm.data.teamArray.name + " doesn't have any roster spots left open.")
+        vm.data.amountPaid = "";
+        vm.data.teamArray = "";
+        vm.searchForPlayer = "";
+      }
     } else {
       alert("Sorry, " + vm.data.teamArray.name + " doesn't have enough money.")
       $event.preventDefault();

@@ -1,8 +1,8 @@
 angular.module('auctionApp')
-.controller('SettingsController', ['$location', 'SetupService', function ($location, SetupService) {
+.controller('SettingsController', ['$location', 'SetupService', 'localStorageService', function ($location, SetupService, localStorageService) {
   //  console.log('SettingsController loaded');
   var vm = this;
-  vm.firstname;
+  vm.firstname = SetupService.getItem('firstname');
   vm.numTeams = [8,10,12,14,16];
   vm.teamNames = [];
   vm.auctionAmount = [100, 150, 200, 250, 300, 350, 400];
@@ -33,7 +33,9 @@ angular.module('auctionApp')
     SetupService.logout();
    };
 
-  console.log('firstname ', SetupService.data.firstname);
+  SetupService.submit('firstname', SetupService.data.firstname);
+
+  console.log('firstname ', vm.firstname);
   vm.firstname = SetupService.data.firstname;
   navBarSettings();
   console.log('signedInAs ', vm.signedInAs);
@@ -104,16 +106,24 @@ angular.module('auctionApp')
 
   vm.createLeague = function (){
     // console.log('controller setUpLeague ', vm.setUpLeague.model.value);
-    console.log('controller league ', vm.league);
-    console.log('controller teamsize', vm.team);
-    console.log('team Names ', vm.teamNames)
+    // console.log('controller league ', vm.league);
+    // console.log('controller teamsize', vm.team);
+    // console.log('team Names ', vm.teamNames)
+    SetupService.submit('auctionAmount', vm.auctionAmount);
+    
+
     SetupService.data.customTeamNames = vm.teamNames;
+    SetupService.submit('customTeamNames', SetupService.data.customTeamNames)
     //value for API call
     SetupService.data.setUpLeague = vm.setUpLeague.model.value;
+    SetupService.submit('setUpLeague', SetupService.data.setUpLeague)
     // auction value and number of teams
     SetupService.data.league = vm.league;
+    SetupService.submit('league', SetupService.data.league)
     //number of positions
     SetupService.data.team = vm.team;
+    SetupService.submit('team', SetupService.data.team)
+
     SetupService.setTeamInfo();
     $location.path('/home');
   };

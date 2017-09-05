@@ -1,1 +1,1 @@
-var app = angular.module('auctionApp', ['ngRoute']);
+var app = angular.module('auctionApp', ['ngRoute', 'LocalStorageModule']);

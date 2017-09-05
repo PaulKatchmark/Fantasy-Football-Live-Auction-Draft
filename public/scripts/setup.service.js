@@ -1,26 +1,28 @@
 angular.module('auctionApp')
-.service('SetupService',['$http', '$location', function($http, $location){
+.service('SetupService',['$http', '$location', 'localStorageService', function($http, $location, localStorageService){
   var data = {};
   var vm = this;
   var teamCol;
   var valueDiff;
   var teamToEdit;
-  data.setUpLeague;
-  data.username;
-  data.firstname;
-  data.league = {};
-  data.team = [];
-  data.customTeamNames = [];
-  data.auctionAmount = [];
+  data.setUpLeague = getItem('setUpLeague');
+  data.username = getItem('username');
+  data.firstname = getItem('firstname');
+  data.league = getItem('league');
+  data.team = getItem('team');
+  data.customTeamNames = getItem('customTeamNames');
+  data.auctionAmount = getItem('auctionAmount');
   data.teamId = [];
+  data.currentTeams = getItem('currentTeams')
   // var createTeams;
   data.draftedPlayer;
   // data.setTeams = [];
   data.totalTeams = [];
   // data.teamSet = true;
+  data.ableToDraft = false;
   vm.draftTeam;
   data.amountPaid;
-  data.players = [];
+  data.players = getItem('players');
   data.leagueTeams;
   data.numberArray = [0,1,2,3,4,5,6,7,8];
   data.teamArray = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
@@ -29,6 +31,41 @@ angular.module('auctionApp')
   data.sortReverse = true;
   data.searchPlayer = '';
   data.editedPlayer = [];
+
+  // SetupService.getItem(SetupService.data.username);
+
+  function submit(key, val) {
+    console.log('setting local storage k/v ', key, val)
+    return localStorageService.set(key, val);
+  }
+
+  function getItem(key) {
+    console.log('getting local storage key ', key)
+    return localStorageService.get(key);
+  }
+
+  function removeItem(key) {
+   return localStorageService.remove(key);
+  }
+
+  function removeItems(key1, key2, key3) {
+   return localStorageService.remove(key1, key2, key3);
+  }
+
+  function clearAll() {
+   return localStorageService.clearAll();
+  }
+
+  // if (data.setUpLeague === 0 || data.setUpLeague ===1 ) {
+  //   setTeamInfo();
+  // }
+  console.log('HERE HERE HERE is currentTeams ', data.currentTeams)
+  // if(data.currentTeams) {
+  //   data.currentTeams = getItem('currentTeams');
+  //   data.players = getItem('players')
+  //   console.log('here is the new value of currentTeams ', data.totalTeams)
+  // } 
+    
 
   //THIS IS WHERE WE WILL ADD ARAY OF TEAM NAMES
 
@@ -46,6 +83,9 @@ angular.module('auctionApp')
         data.totalTeams.push(createTeams);
         // console.log('allTeams function ', data.setTeams[0].auctionAmount);
       }
+      submit('currentTeams', data.totalTeams)
+      submit('totalTeams', data.totalTeams)
+      data.currentTeams = data.totalTeams
       // vm.teamSet=false;
       // data.totalTeams = data.setTeams;
       console.log('data.totalTeams ', data.totalTeams);
@@ -79,6 +119,7 @@ angular.module('auctionApp')
         }
       }
       console.log(data.players);
+      submit('players', response.data);
       return data.players = response.data;
     });
   }
@@ -103,6 +144,7 @@ angular.module('auctionApp')
           response.data[i][teamCol] *= 2.00;
         }
       }
+      submit('players', response.data);
       return data.players = response.data;
     });
   }
@@ -146,6 +188,9 @@ angular.module('auctionApp')
       data.editedPlayer = item;
       teamToEdit = '';
       teamToEdit = team;
+      submit('currentTeams', data.totalTeams)
+      submit('totalTeams', data.totalTeams)
+      submit('players', data.players)
       console.log('edited player ', data.editedPlayer)
   }
   function doneEditing(item) {
@@ -164,6 +209,10 @@ angular.module('auctionApp')
         }
       }  
       data.editedPlayer.editing = false;
+      console.log('EDITED PLAYER ', data.editedPlayer)
+      submit('currentTeams', data.totalTeams)
+      submit('totalTeams', data.totalTeams)
+      submit('players', data.players)
       //item = ;
   }
 
@@ -199,6 +248,7 @@ angular.module('auctionApp')
                 item.transfer = false;
                 data.totalTeams[i].auctionAmount += item.paid;
                 data.players.push(item);
+                submit('players', data.players)
                 data.totalTeams[i].team[index].qb = {
                   id: 0,
                   byeweek: '',
@@ -214,6 +264,7 @@ angular.module('auctionApp')
                 item.transfer = false;
                 data.totalTeams[i].auctionAmount += item.paid;
                 data.players.push(item);
+                submit('players', data.players)
                 data.totalTeams[i].team[index].rb = {
                   id: 0,
                   byeweek: '',
@@ -229,6 +280,7 @@ angular.module('auctionApp')
                 item.transfer = false;
                 data.totalTeams[i].auctionAmount += item.paid;
                 data.players.push(item);
+                submit('players', data.players)
                 data.totalTeams[i].team[index].wr = {
                   id: 0,
                   byeweek: '',
@@ -244,6 +296,7 @@ angular.module('auctionApp')
                 item.transfer = false;
                 data.totalTeams[i].auctionAmount += item.paid;
                 data.players.push(item);
+                submit('players', data.players)
                 data.totalTeams[i].team[index].te = {
                   id: 0,
                   byeweek: '',
@@ -259,6 +312,7 @@ angular.module('auctionApp')
                 item.transfer = false;
                 data.totalTeams[i].auctionAmount += item.paid;
                 data.players.push(item);
+                submit('players', data.players)
                 data.totalTeams[i].team[index].fp = {
                   id: 0,
                   byeweek: '',
@@ -274,6 +328,7 @@ angular.module('auctionApp')
                 item.transfer = false;
                 data.totalTeams[i].auctionAmount += item.paid;
                 data.players.push(item);
+                submit('players', data.players)
                 data.totalTeams[i].team[index].k = {
                   id: 0,
                   byeweek: '',
@@ -289,6 +344,7 @@ angular.module('auctionApp')
                 item.transfer = false;
                 data.totalTeams[i].auctionAmount += item.paid;
                 data.players.push(item);
+                submit('players', data.players)
                 data.totalTeams[i].team[index].def = {
                   id: 0,
                   byeweek: '',
@@ -304,6 +360,7 @@ angular.module('auctionApp')
                 item.transfer = false;
                 data.totalTeams[i].auctionAmount += item.paid;
                 data.players.push(item);
+                submit('players', data.players)
                 data.totalTeams[i].team[index].bs = {
                   id: 0,
                   byeweek: '',
@@ -315,11 +372,15 @@ angular.module('auctionApp')
               }
             }
           }
+          data.currentTeams = data.totalTeams
+          submit('currentTeams', data.totalTeams)
+          submit('totalTeams', data.totalTeams)
         }
       }
   }
 
   function logout() {
+    clearAll();
     $http.get('/logout').then(function(){
       data.firstname = "";
       $location.path('/');
@@ -347,8 +408,9 @@ angular.module('auctionApp')
     data.cost = 0;
     data.cost = data.amountPaid;
     console.log('service selected team ', data.teamArray);
-    // console.log('service selected player ', data.draftedPlayer.pos);
+    console.log('service selected player ', data.draftedPlayer);
     console.log('service amount paid ', data.amountPaid);
+
     // console.log('find out array length ', data.teamArray.team.length);
     if (data.teamArray.team.length > 0) {
       data.chosenTeam.team.some(function(item) {
@@ -356,83 +418,121 @@ angular.module('auctionApp')
         if (data.draftedPlayer.pos === "QB") {
           if (item.qb !== undefined && item.qb.id === 0) {
             // console.log('data.teamArray ', data.chosenTeam.team);
+            data.ableToDraft = true;
             item.qb = data.draftedPlayer;
             item.qb.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
             console.log('item.qb ', item.qb)
+            data.currentTeams = data.totalTeams
+            submit('currentTeams', data.totalTeams)
+            submit('totalTeams', data.totalTeams)
             return item.qb;
           }
         }
         if (data.draftedPlayer.pos === "RB") {
           if (item.rb !== undefined && item.rb.id === 0) {
             // console.log('data.teamArray ', data.chosenTeam.team);
+            data.ableToDraft = true;
             item.rb = data.draftedPlayer;
             item.rb.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
+            data.currentTeams = data.totalTeams
+            submit('currentTeams', data.totalTeams)
+            submit('totalTeams', data.totalTeams)
             return item.rb;
           }
         }
         if (data.draftedPlayer.pos === "WR") {
           if (item.wr !== undefined && item.wr.id === 0) {
             // console.log('data.teamArray ', data.chosenTeam.team);
+            data.ableToDraft = true;
             item.wr = data.draftedPlayer;
             item.wr.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
+            data.currentTeams = data.totalTeams
+            submit('currentTeams', data.totalTeams)
+            submit('totalTeams', data.totalTeams)
             return item.wr;
           }
         }
         if (data.draftedPlayer.pos === "TE") {
           if (item.te !== undefined && item.te.id === 0) {
             // console.log('data.teamArray ', data.chosenTeam.team);
+            data.ableToDraft = true;
             item.te = data.draftedPlayer;
             item.te.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
+            data.currentTeams = data.totalTeams
+            submit('currentTeams', data.totalTeams)
+            submit('totalTeams', data.totalTeams)
             return item.te;
           }
         }
-        if (data.draftedPlayer.pos === "RB" || "WR" || "TE") {
+        if (data.draftedPlayer.pos === "RB" || data.draftedPlayer.pos === "WR" || data.draftedPlayer.pos === "TE") {
+            console.log('********* ', data.draftedPlayer.pos)
+            console.log('********* ', data.draftedPlayer)
           if (item.fp !== undefined && item.fp.id === 0) {
             // console.log('data.teamArray ', data.chosenTeam.team);
+            data.ableToDraft = true;
             item.fp = data.draftedPlayer;
             item.fp.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
+            data.currentTeams = data.totalTeams
+            submit('currentTeams', data.totalTeams)
+            submit('totalTeams', data.totalTeams)
             return item.fp;
           }
         }
         if (data.draftedPlayer.pos === "K") {
           if (item.k !== undefined && item.k.id === 0) {
             // console.log('data.teamArray ', data.chosenTeam.team);
+            data.ableToDraft = true;
             item.k = data.draftedPlayer;
             item.k.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
+            data.currentTeams = data.totalTeams
+            submit('currentTeams', data.totalTeams)
+            submit('totalTeams', data.totalTeams)
             return item.k;
           }
         }
         if (data.draftedPlayer.pos === "DEF") {
           if (item.def !== undefined && item.def.id === 0) {
             // console.log('data.teamArray ', data.chosenTeam.team);
+            data.ableToDraft = true;
             item.def = data.draftedPlayer;
             item.def.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
+            data.currentTeams = data.totalTeams
+            submit('currentTeams', data.totalTeams)
+            submit('totalTeams', data.totalTeams)
             return item.def;
           }
         }
-        if (data.draftedPlayer.pos === "QB" || "RB" || "WR" || "TE" || "K" || "DEF") {
+        if (data.draftedPlayer.pos === "QB" || data.draftedPlayer.pos === "RB" || data.draftedPlayer.pos === "WR" || data.draftedPlayer.pos === "TE" || data.draftedPlayer.pos === "K" || data.draftedPlayer.pos === "DEF") {
           if (item.bs !== undefined && item.bs.id === 0) {
             // console.log('data.teamArray ', data.chosenTeam.team);
+            data.ableToDraft = true;
             item.bs = data.draftedPlayer;
             item.bs.paid = parseInt(data.amountPaid);
             data.teamArray.auctionAmount -= data.amountPaid;
             console.log('chosenTeam ', data.chosenTeam.team);
+            data.currentTeams = data.totalTeams
+            submit('currentTeams', data.totalTeams)
+            submit('totalTeams', data.totalTeams)
             return item.bs;
+          } else {
+            return data.ableToDraft = false;
           }
+        } else {
+          return data.ableToDraft = false;
         }
       });
       console.log('all the teams ', data.totalTeams);
@@ -605,6 +705,11 @@ angular.module('auctionApp')
     doneEditing: doneEditing,
     // movePlayer: movePlayer,
     undraftPlayer: undraftPlayer,
+    getItem: getItem,
+    submit: submit,
+    removeItem: removeItem,
+    removeItems: removeItems,
+    clearAll: clearAll
     //positionColor: positionColor
   }
 
