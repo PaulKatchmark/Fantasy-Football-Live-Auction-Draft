@@ -44,6 +44,7 @@ html, body {
 }
 #searchBar {
   padding-left: 10%;
+  width:98.5%;
 }
 
 #teamTransfer {
@@ -66,11 +67,13 @@ html, body {
   text-align: center;
   align-content: center;
   padding-left: 10%;
+  width: 95%;
 }
 #myTeamTable {
   vertical-align: center;
   text-align: center;
   align-content: center;
+  box-shadow: 10px 10px 5px grey;
 }
 td {
   font-size: 10px;
@@ -84,10 +87,12 @@ th {
 }
 #draftPlayer table {
   width: 100%;
+  box-shadow: 10px 10px 5px grey;
 }
 
 #draftPlayer thead, #draftPlayer tbody, #draftPlayer tr, #draftPlayer td, #draftPlayer th { 
   display: block;
+  width: 104%;
 }
 
 #draftPlayer tr:after {
@@ -96,7 +101,12 @@ th {
   visibility: hidden;
   clear: both;
 }
-
+.col-xs-4 {
+    width: 30%;
+    box-shadow: 10px 10px 5px grey;
+    padding: 0;
+    margin: 20px;
+}
 #draftPlayer thead th {
   height: 30px;
   /*text-align: left;*/
@@ -160,26 +170,28 @@ td:empty {
  background: white; 
 }
 .qbClass {
-  background-color: red;
-  color: white;
+  background-color: #ffa07a;
+  color: black;
 }
 .wrClass {
-  background-color: green;
-  color: white;
+  background-color: #90ee90;
+  color: black;
 }
 .rbClass {
-  background-color: blue;
-  color: white;
+  background-color: #98f5ff;
+  color: black;
 }
 .kClass {
-  background-color: yellow;
+  background-color: #fff68f;
+  color: black;
 }
 .teClass {
-  background-color: purple;
-  color: white;
+  background-color: #ab82ff;
+  color: black;
 }
 .defClass {
-  background-color: orange;
+  background-color: #f5deb3;
+  color: black;
 }
 #nameButton {
   margin-left: 30px;

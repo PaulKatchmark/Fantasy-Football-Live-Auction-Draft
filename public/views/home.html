@@ -18,7 +18,7 @@
 <h1 class="pageHeader">Fantasy Football</h1>
 <h2 class="pageHeader">Live Auction Tracker</h2>
 <form name="draftInfo" class="paddingTop">
-<h3 class="centerClass">Draft Page</h3>
+<!-- <h3 class="centerClass">Draft Page</h3> -->
 <div class="row">
   <div class="col-xs-6">
     <div class="col-xs-11" id="searchBar">
@@ -105,7 +105,7 @@
   <div class="col-xs-6">
     <!-- <ANY ui-scroll-viewport></ANY> -->
     <div class="col-xs-11" id="myTeamTable">
-      <h3 class="col-xs-12" id="tableHeader">{{draft.data.totalTeams[0].name}}</h3>
+      <h3 class="col-xs-12" id="tableHeader">{{draft.data.currentTeams[0].name}}</h3>
       <table class="table table-bordered">
         <thead >
           <tr style="background-color: #111111; color: #ffffff;">
@@ -113,12 +113,12 @@
             <th>Player</th>
             <th>Team</th>
             <th>Bye</th>
-            <th>{{draft.data.totalTeams[0].auctionAmount | currency:"$":0}}</th>
+            <th>{{draft.data.currentTeams[0].auctionAmount | currency:"$":0}}</th>
           </tr>
         </thead>
 
         <tbody style="background-color: #ffffff;">
-          <tr ng-repeat="team in draft.data.totalTeams[0].team"> <!--SOMETHING AFTER THIS TO FILTER!!! -->
+          <tr ng-repeat="team in draft.data.currentTeams[0].team"> <!--SOMETHING AFTER THIS TO FILTER!!! -->
             <td class="qbClass" ng-if="team.qb.pos === 'QB' ">QB</td>
             <td class="rbClass" ng-if="team.rb.pos === 'RB' ">RB</td>
             <td class="wrClass" ng-if="team.wr.pos === 'WR' " ng-class="wrClass">WR</td>
