@@ -13,8 +13,5 @@
 ### Technologies Used
 - JavaScript, AngularJS, Bootstrap, Node.js, Express.js, Passport, PostgreSQL, Fantasy-Football-Nerd API, HTML5, CSS3 and hosted on Heroku.
 
-<### Link>
-<- https://ff-live-auction-tracker.herokuapp.com/>
-
 ## Author
 #### Paul Katchmark
