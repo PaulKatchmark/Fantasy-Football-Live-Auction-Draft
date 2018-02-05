@@ -10,11 +10,11 @@
 - Easily able to see status of your team as it is on the "Draft" page, other teams in the league can be seen on the "League" page.
 - As players are drafted, they are removed from the list of available NFL players.
 
-###Technologies Used
+### Technologies Used
 - JavaScript, AngularJS, Bootstrap, Node.js, Express.js, Passport, PostgreSQL, Fantasy-Football-Nerd API, HTML5, CSS3 and hosted on Heroku.
 
-###Link
-- https://ff-live-auction-tracker.herokuapp.com/
+<### Link>
+<- https://ff-live-auction-tracker.herokuapp.com/>
 
 ## Author
 #### Paul Katchmark
