@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
+
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const register = require('./routes/register');
@@ -8,7 +10,7 @@ const ppr = require('./routes/ppr');
 const standard = require('./routes/standard');
 const auth = require('./auth/setup');
 const passport = require('passport');
-const session = require('express-session');
+
 // const auction = require('./routes/auction');
 // const assert = require('chai').assert;
 const FFNerd = require('fantasy-football-nerd');
