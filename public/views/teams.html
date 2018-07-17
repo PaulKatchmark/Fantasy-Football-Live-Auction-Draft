@@ -2,11 +2,12 @@
   <div class="container">
     <ul class="nav nav-tabs" role="tablist">
       <li ng-show="league.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
-      <li ng-show="league.draftTab" style="color: white;" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
-      <li ng-show="league.leagueTab" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
+      <li ng-show="league.draftTab" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
+      <li ng-show="league.leagueTab" class="active" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
       <li ng-show="league.signOut" role="presentation" class="btn btn-white navbar-right"><button ng-click="league.logout()">Sign Out</button></li>
-      <li ng-show="league.signedInAs" role="presentation" class="navbar-text text-white navbar-right">{{league.firstname}}'s signed in</li>
+      <li ng-show="league.signedInAs" role="presentation" class="navbar-text text-white navbar-right">{{league.firstname}}'s Draft</li>
     </ul>
+
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane" id="/home"></div>
       <div role="tabpanel" class="tab-pane" id="/teams"></div>
@@ -21,10 +22,26 @@
   <!-- <h3 class="centerClass">League</h3> -->
 </div>
 
+<p class="draftDirections" ng-show="league.wrongChoiceTip">If the wrong player was drafted or sent to the wrong team, double click their name for options.
+  <button type="button" class="close" aria-label="Close" ng-click="league.tipOff('wrongChoiceTip')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</p>
+
+<p class="draftDirections" ng-show="league.wrongValueTip" style="margin: 15px auto 0;">If the price of the player is incorrect, double click their cost to correct it.
+  <button type="button" class="close" aria-label="Close" ng-click="league.tipOff('wrongValueTip')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</p>
+
+<div class="showTips" ng-show="league.showLeagueTips">
+  <button type="button" class="tipsButton" ng-click="league.tipsOn()">Show Tips</button>
+</div>
+
 <div ng-repeat="totalTeams in league.data.totalTeams | limitTo: league.data.totalTeams track by $index">
   <div class="col-xs-4">
     <table  class="table table-bordered" >
-    <h3 class="col-xs-12" id="tableHeader">{{totalTeams.name}}</h3>
+      <h3 class="col-xs-12" id="tableHeader">{{totalTeams.name}}</h3>
       <thead>
         <tr style="background-color: #111111; color: #ffffff;">
           <th>Position</th>
@@ -50,38 +67,36 @@
           also, don't need player.transfer as a t/f statement. Can accomplish by
           reusing player.edit just have it trigger button vs input -->
           <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">
-              <span ng-hide="team.transfer" ng-dblclick="league.movePlayer(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)"> <!-- Technically this could be function can have empty parameters, will leave for now just in case-->
-                  {{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}
-              </span> 
-              <span ng-show="team.qb.transfer || team.rb.transfer || team.wr.transfer || team.te.transfer || team.k.transfer || team.def.transfer || team.fp.transfer || team.bs.transfer">
-                <br/>
-                <select id="teamTransfer" name="numTeams" ng-model="league.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in league.data.totalTeams" class="fa fa-angle-down"> {{league.data.teamArray.name}}</select>
-                <button id="undraftButton" ng-disabled="league.data.teamArray ===''" ng-click="league.teamTransfer(totalTeams, league.data.teamArray, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)">Transfer</button>
-                <br/>
-                <button id="undraftButton" ng-click="league.undraftPlayer(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)">Undraft</button>
+            <span ng-hide="team.transfer" ng-dblclick="league.movePlayer(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)"> <!-- Technically this could be function can have empty parameters, will leave for now just in case-->
+              {{team.qb.displayname || team.rb.displayname || team.wr.displayname || team.te.displayname || team.fp.displayname || team.k.displayname || team.def.displayname || team.bs.displayname}}
+            </span> 
 
-              </span>
+            <span ng-show="team.qb.transfer || team.rb.transfer || team.wr.transfer || team.te.transfer || team.k.transfer || team.def.transfer || team.fp.transfer || team.bs.transfer">
+              <br/>
+              <select id="teamTransfer" name="numTeams" ng-model="league.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in league.data.totalTeams" class="fa fa-angle-down"> {{league.data.teamArray.name}}</select>
+              <button id="undraftButton" ng-disabled="league.data.teamArray ===''" ng-click="league.teamTransfer(totalTeams, league.data.teamArray, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)">Transfer</button>
+              <br/>
+              <button id="undraftButton" ng-click="league.undraftPlayer(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)">Undraft</button>
+            </span>
           </td>
 
-
           <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">
-              {{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}
+            {{team.qb.team || team.rb.team || team.wr.team || team.te.team || team.fp.team || team.k.team || team.def.team || team.bs.team}}
           </td>
 
-
           <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">
-              {{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}
+            {{team.qb.byeweek || team.rb.byeweek || team.wr.byeweek || team.te.byeweek || team.fp.byeweek || team.k.byeweek || team.def.byeweek || team.bs.byeweek}}
           </td>
 
-
           <td ng-class="{ qbClass: team.qb.pos === 'QB' || team.bs.pos === 'QB', wrClass: team.wr.pos === 'WR' || team.fp.pos === 'WR' || team.bs.pos === 'WR', rbClass: team.rb.pos === 'RB'  || team.fp.pos === 'RB' || team.bs.pos === 'RB', teClass: team.te.pos === 'TE'  || team.fp.pos === 'TE' || team.bs.pos === 'TE', kClass: team.k.pos === 'K' || team.bs.pos === 'K', defClass: team.def.pos === 'DEF' || team.bs.pos === 'DEF' }">
-              <span ng-hide="team.editing" ng-dblclick="league.editDollars(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)">
-                  {{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency:"$":0}}
-              </span> 
+            <span ng-hide="team.editing" ng-dblclick="league.editDollars(totalTeams.name, team.qb || team.rb || team.wr || team.te || team.fp || team.k || team.def || team.bs)">
+              {{team.qb.paid || team.rb.paid || team.wr.paid || team.te.paid || team.fp.paid || team.k.paid || team.def.paid || team.bs.paid | currency:"$":0}}
+            </span>
+
+            <form ng-submit="league.doneEditing(league.newValue)">
               <input type="number" ng-show="team.qb.editing || team.rb.editing || team.wr.editing || team.te.editing || team.k.editing || team.def.editing || team.fp.editing || team.bs.editing" ng-model="league.newValue" ng-blur="league.doneEditing(league.newValue)" autofocus />
+            </form>
           </td>
-
-
         </tr>
       </tbody>
     </table>

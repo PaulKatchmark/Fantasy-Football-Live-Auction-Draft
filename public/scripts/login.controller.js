@@ -13,6 +13,7 @@ function LoginController($http, $location, SetupService, localStorageService) {
   // }
   ctrl.username = SetupService.getItem('username');
   ctrl.firstname = SetupService.getItem('firstname');
+  ctrl.loginError = false;
 
   if(localStorageService.isSupported) {
     console.log('ready to rock and roll')
@@ -20,6 +21,7 @@ function LoginController($http, $location, SetupService, localStorageService) {
 
   // navBarLogin();
   ctrl.login = function() {
+    ctrl.loginError = false;
     SetupService.data.username = ctrl.username;
     SetupService.data.firstname = ctrl.firstname;
     SetupService.getUserFirstName();
@@ -32,6 +34,8 @@ function LoginController($http, $location, SetupService, localStorageService) {
     }).then(function(){
       $location.path('/settings');
     }, function(error) {
+      ctrl.loginError = true;
+      console.log('ctrl.loginError = ', ctrl.loginError)
       console.log('error loggin in', error);
     });
   };

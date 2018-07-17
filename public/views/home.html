@@ -2,11 +2,12 @@
   <div class="container">
     <ul class="nav nav-tabs" role="tablist">
       <li ng-show="draft.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
-      <li ng-show="draft.draftTab" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
+      <li ng-show="draft.draftTab" class="active" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
       <li ng-show="draft.leagueTab" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
       <li ng-show="draft.signOut" role="presentation" class="btn btn-black navbar-right"><button ng-click="draft.logout()">Sign Out</button></li>
-      <li ng-show="draft.signedInAs" role="presentation" class="navbar-text navbar-right">{{draft.firstname}}'s signed in</li>
+      <li ng-show="draft.signedInAs" role="presentation" class="navbar-text navbar-right">{{draft.firstname}}'s Draft</li>
     </ul>
+
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane" id="/home"></div>
       <div role="tabpanel" class="tab-pane" id="/teams"></div>
@@ -17,47 +18,71 @@
 
 <h1 class="pageHeader">Fantasy Football</h1>
 <h2 class="pageHeader">Live Auction Tracker</h2>
-<form name="draftInfo" class="paddingTop">
-<!-- <h3 class="centerClass">Draft Page</h3> -->
+
+  <!-- <h3 class="centerClass">Draft Page</h3> -->
+<p class="draftDirections" ng-show="draft.tabTip" style="margin: 30px auto 0;">Toggle between checking the status of your opponents' team and drafting by using the 'League' and 'Draft' tabs at the top left corner of the page.
+  <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('tabTip')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</p>
+
+<p class="draftDirections" ng-show="draft.searchTip" style="margin: 15px auto;">Search for players by name or filter by typing in their position like RB, WR, QB...etc.
+  <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('searchTip')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</p>
+
+<p class="draftDirections" ng-show="draft.draftTip" style="margin: 0 auto 30px;">Click on the player's name that is being auctioned in order to draft them to the appropriate team.
+  <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('draftTip')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</p>
+
+<div class="showTips" ng-show="draft.showDraftTips">
+  <button type="button" class="tipsButton" ng-click="draft.tipsOn()">Show Tips</button>
+</div>
+
 <div class="row">
   <div class="col-xs-6">
-    <div class="col-xs-11" id="searchBar">
-      <div class="form-group">
-
-        <div class="input-group">
-          <div class="input-group-addon"><i class="fa fa-search"></i>
+    <form name="draftInfo">
+      <div class="col-xs-11" id="searchBar">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-addon"><i class="fa fa-search"></i>
+            </div>
+            <input type="text" class="form-control" placeholder="Search for players" ng-model="draft.searchForPlayer" />
           </div>
-          <input type="text" class="form-control" placeholder="Search for players" ng-model="draft.searchForPlayer" />
+
+          <div ng-show="draft.playerSelected" ng-model="draft.playerSelected" class="whiteBackground">
+            <h4 class="selected"><span style="font-size:18px;">{{draft.selectedP.displayname}}</span>
+              <br/><span style="font-size: 14px;">{{draft.selectedP.pos}} for {{draft.selectedP.team}}
+              <br/>estimated value: {{draft.selectedP.teams_8 | currency:"$":0}}{{draft.selectedP.teams_10 | currency:"$":0}}{{draft.selectedP.teams_12 | currency:"$":0}}{{draft.selectedP.teams_14 | currency:"$":0}}{{draft.selectedP.teams_16 | currency:"$":0}}</span>
+            </h4>
+
+            <label for="teamWon"> Team that won the bid:</label>
+            <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams" ng-required="true">  </select><br />
+
+            <!-- <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label> -->
+            <!-- <form name="form">
+              <input type="number" step="1" min="1" ng-model="draft.data.amountPaid" required />
+              <button type="button" ng-disabled="form.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
+            </form> -->
+
+            <div class="form-group" ng-class="{ 'has-error': form.amountPaid.$dirty && form.amountPaid.$error.required }">
+              <label for="teamWon">Amount paid for {{draft.selectedP.displayname}}: </label>
+              <input type="number" step="1" min="1" name="amountPaid" id="amountPaid" ng-model="draft.data.amountPaid" ng-required="true"/>
+              <span ng-show="form.amountPaid.$dirty && form.amountPaid.$error.required" class="help-block">Please enter how much was spent on this player.</span>
+            </div>
+
+            <div class="form-actions" id="centerId">
+              <button type="submit" ng-disabled="draftInfo.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
+              <!-- <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" class="btn btn-primary">Login</button> -->
+              <img ng-if="draft.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+          </div>
         </div>
-
-        <div ng-show="draft.playerSelected" ng-model="draft.playerSelected" class="whiteBackground">
-          <h4 class="selected">{{draft.selectedP.displayname}}
-            <br/> {{draft.selectedP.pos}} for {{draft.selectedP.team}}
-            <br/> estimated value: {{draft.selectedP.teams_8 | currency:"$":0}}{{draft.selectedP.teams_10 | currency:"$":0}}{{draft.selectedP.teams_12 | currency:"$":0}}{{draft.selectedP.teams_14 | currency:"$":0}}{{draft.selectedP.teams_16 | currency:"$":0}}
-          </h4>
-          <label for="teamWon"> Team that won the bid:</label>
-          <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams" ng-required="true">  </select><br />
-          <!-- <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label> -->
-          <!-- <form name="form">
-            <input type="number" step="1" min="1" ng-model="draft.data.amountPaid" required />
-            <button type="button" ng-disabled="form.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
-          </form> -->
-          <div class="form-group" ng-class="{ 'has-error': form.amountPaid.$dirty && form.amountPaid.$error.required }">
-            <label for="teamWon">Amount paid for {{draft.selectedP.displayname}}: </label>
-            <input type="number" step="1" min="1" name="amountPaid" id="amountPaid" ng-model="draft.data.amountPaid" ng-required="true"/>
-            <span ng-show="form.amountPaid.$dirty && form.amountPaid.$error.required" class="help-block">Please enter how much was spent on this player.</span>
-          </div>
-          <div class="form-actions" id="centerId">
-            <button type="submit" ng-disabled="draftInfo.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
-            <!-- <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" class="btn btn-primary">Login</button> -->
-            <img ng-if="draft.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-          </div>
-        </div>
-
       </div>
-    </div>
-
-</form>
+    </form>
 
 
     <!-- <div class="form-group" ng-class="{ 'has-error': form.paidAmount.$dirty && form.paidAmount.$error.required }">
@@ -89,8 +114,9 @@
             <TH class=""> <a href="#" ng-click="draft.data.sortType = 'teams_8' || 'teams_10' || 'teams_12' || 'teams_14' || 'teams_16'; draft.data.sortReverse = !draft.data.sortReverse">Value<span ng-show="draft.data.sortType == 'teams_8' || 'teams_10' || 'teams_12' || 'teams_14' || 'teams_16'" class="fa fa-caret-down"></span></a></TH>
           </TR>
         </THEAD>
+
         <TBODY>
-            <TR ng-repeat="player in draft.data.players | orderBy: draft.data.sortType:draft.data.sortReverse | filter: draft.searchForPlayer" adapter="adapter" ng-class="{ qbClass: player.pos === 'QB', wrClass: player.pos === 'WR', rbClass: player.pos === 'RB', teClass: player.pos === 'TE', kClass: player.pos === 'K', defClass: player.pos === 'DEF'}" >
+          <TR ng-repeat="player in draft.data.players | orderBy: draft.data.sortType:draft.data.sortReverse | filter: draft.searchForPlayer" adapter="adapter" ng-class="{ qbClass: player.pos === 'QB', wrClass: player.pos === 'WR', rbClass: player.pos === 'RB', teClass: player.pos === 'TE', kClass: player.pos === 'K', defClass: player.pos === 'DEF'}" >
             <!-- Stuck RIGHT HERE ONLY READING ONE OF THE NG-CLASSES AT A TIME. At least it covers the whole row!!! -->
             <TD class="filterable-cell" ng-click="draft.selectPlayer(player)">{{player.displayname}}</TD>
             <TD class="filterable-cell">{{player.pos}}</TD>
@@ -102,6 +128,7 @@
       </TABLE>
     </div>
   </div>
+
   <div class="col-xs-6">
     <!-- <ANY ui-scroll-viewport></ANY> -->
     <div class="col-xs-11" id="myTeamTable">

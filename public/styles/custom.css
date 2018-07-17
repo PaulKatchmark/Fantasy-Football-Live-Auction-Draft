@@ -19,11 +19,22 @@ html, body {
   /*position: absolute;
   background-position: center;*/
   background-color: #d3d3d3;
+  height: 100%;
+  width: 100%;
 }
+.selected {
+  text-align: center;
+  margin: 0px auto 20px;
+  font-weight: bold;
+}
+.nav-tabs>li.active>a {
+  background: #000;
+  color: #fff;
+}
+/* .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover*/
 .navbar-text {
   padding-right: 10%;
 }
-
 .nav-tabs>li>a {
   color: white;
 }
@@ -46,14 +57,15 @@ html, body {
   padding-left: 10%;
   width:98.5%;
 }
-
 #teamTransfer {
   color: black;
   background-color: white;
   width: 60px;
 }
-
-
+.showTips {
+  margin: 15px auto;
+  text-align: center;
+}
 
 /*.form-group {
   width: 45%;
@@ -67,7 +79,7 @@ html, body {
   text-align: center;
   align-content: center;
   padding-left: 10%;
-  width: 95%;
+  width: 100%;
 }
 #myTeamTable {
   vertical-align: center;
@@ -78,8 +90,7 @@ html, body {
 td {
   font-size: 10px;
   text-align: center;
-  height: 31px
-
+  height: 31px;
 }
 th {
   font-size: 14px;
@@ -92,9 +103,8 @@ th {
 
 #draftPlayer thead, #draftPlayer tbody, #draftPlayer tr, #draftPlayer td, #draftPlayer th { 
   display: block;
-  width: 104%;
+  width: 102%;
 }
-
 #draftPlayer tr:after {
   content: ' ';
   display: block;
@@ -115,6 +125,7 @@ th {
 #draftPlayer tbody {
   height: 350px;
   overflow-y: auto;
+  width: 100%;
 }
 
 #tableHeader {
@@ -129,6 +140,13 @@ th {
 #draftPlayer tbody td, #draftPlayer thead th {
   width: 19.2%;
   float: left;
+  padding: 10px 0 0 0;
+  margin: 0 auto;
+}
+#draftPlayer td {
+  vertical-align: middle;
+  padding: 10;
+  height: 35px;
 }
 .pageHeader {
   text-align: center;
@@ -158,13 +176,25 @@ h2 {
   font-size: 40px;
 }
 .paddingTop {
-  padding-top: 40px;
+  padding-top: 20px;
 }
 .lessPaddingTop {
   padding-top: 25px;
 }
 .centerClass {
   text-align: center;
+}
+.draftDirections {
+  margin: 0 auto;
+  text-align: center;
+  color: black;
+  background-color: yellow;
+  width: 50%;
+}
+.loginError,
+.help-block {
+  color: red;
+  background-color: rgba(0,0,0,.8);
 }
 td:empty {
  background: white; 
@@ -310,11 +340,11 @@ div.transbox {
 }
 .register {
   margin: 5px auto 0;
-  font-size: 11px;
+  font-size: 13px;
 }
 #register-link {
   color: #f3ce40;
-  font-size: 11px;
+  font-size: 13px;
   margin: -7px auto 15px;
   text-decoration: underline;
 }

@@ -6,6 +6,9 @@ angular.module('auctionApp')
   vm.newValue;
   vm.firstname;
   vm.firstname = SetupService.data.firstname;
+  vm.wrongChoiceTip = SetupService.data.wrongChoiceTip;
+  vm.wrongValueTip = SetupService.data.wrongValueTip;
+  vm.showLeagueTips = SetupService.data.showLeagueTips;
 
   SetupService.data.totalTeams = SetupService.getItem('totalTeams');
 
@@ -21,10 +24,25 @@ angular.module('auctionApp')
     SetupService.logout();
   };
 
+  vm.tipOff = function(tip) {
+    SetupService.tipOff(tip)
+    vm.wrongChoiceTip = SetupService.data.wrongChoiceTip;
+    vm.wrongValueTip = SetupService.data.wrongValueTip;
+    vm.showLeagueTips = SetupService.data.showLeagueTips;
+  }
+
+  vm.tipsOn = function() {
+    SetupService.tipsOn('league')
+    vm.showLeagueTips = SetupService.data.showLeagueTips;
+    vm.wrongChoiceTip = SetupService.data.wrongChoiceTip;
+    vm.wrongValueTip = SetupService.data.wrongValueTip;
+  }
+
   vm.editDollars = function(team, item) {
     //trigger function on service to change player editing to true
     //team.paid is what will change
     item.editing = true;
+    item.transfer = false;
     SetupService.editDollars(team, item);
     // SetupService.submit('currentTeam', SetupService.data.totalTeams)
   }
@@ -32,6 +50,8 @@ angular.module('auctionApp')
   vm.doneEditing = function(item) {
     //send new amount back and change editing back to false
     //team.paid will be the value edited.
+    item.editing = false;
+    item.transfer = false;
     SetupService.doneEditing(item);
     vm.newValue = '';
     // SetupService.submit('players', vm.data.players)
@@ -39,12 +59,14 @@ angular.module('auctionApp')
   }
 
   vm.undraftPlayer = function (team, item) {
+    item.editing = false;
     SetupService.undraftPlayer(team, item);
     SetupService.submit('players', vm.data.players)
     SetupService.submit('currentTeam', SetupService.data.totalTeams)
   }
 
   vm.movePlayer = function(team, item) {
+    item.editing = false;
     SetupService.data.draftedPlayer = item;
     console.log('inside undraft function: team is', team);
     console.log('inside undraft function: item is', item);

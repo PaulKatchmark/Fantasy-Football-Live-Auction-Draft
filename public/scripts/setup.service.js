@@ -31,7 +31,13 @@ angular.module('auctionApp')
   data.sortReverse = true;
   data.searchPlayer = '';
   data.editedPlayer = [];
-
+  data.wrongChoiceTip = true;
+  data.wrongValueTip = true;
+  data.showLeagueTips = false;
+  data.tabTip = true;
+  data.searchTip = true;
+  data.draftTip = true;
+  data.showDraftTips = false;
   // SetupService.getItem(SetupService.data.username);
 
   function submit(key, val) {
@@ -85,7 +91,7 @@ angular.module('auctionApp')
       }
       submit('currentTeams', data.totalTeams)
       submit('totalTeams', data.totalTeams)
-      data.currentTeams = data.totalTeams
+      data.currentTeams = data.totalTeams;
       // vm.teamSet=false;
       // data.totalTeams = data.setTeams;
       console.log('data.totalTeams ', data.totalTeams);
@@ -170,50 +176,52 @@ angular.module('auctionApp')
     var username = data.username;
     $http.get('/login/'+username).then(function(response) {
       data.firstname = response.data[0].firstname;
+      data.firstname = data.firstname.charAt(0).toUpperCase() + data.firstname.substr(1);
       console.log('firstname ', data.firstname);
     });
   }
 
   function editDollars(team, item) {
-      console.log('team edited ', team)
-      console.log('data.totalTeams ', data.totalTeams)
-      for (i = 0; i < data.totalTeams.length; i++){
-        if (data.totalTeams[i].name === team) {
-          console.log('this is the team name inside if statement ', data.totalTeams[i].name)
-        }
+    console.log('team edited ', team)
+    console.log('data.totalTeams ', data.totalTeams)
+    for (i = 0; i < data.totalTeams.length; i++){
+      if (data.totalTeams[i].name === team) {
+        console.log('this is the team name inside if statement ', data.totalTeams[i].name)
       }
-      //console.log('editDollars in Service ', item);
-      data.editedPlayer.editing = false;
-      data.editedPlayer = '';
-      data.editedPlayer = item;
-      teamToEdit = '';
-      teamToEdit = team;
-      submit('currentTeams', data.totalTeams)
-      submit('totalTeams', data.totalTeams)
-      submit('players', data.players)
-      console.log('edited player ', data.editedPlayer)
+    }
+    //console.log('editDollars in Service ', item);
+    data.editedPlayer.editing = false;
+    data.editedPlayer = '';
+    data.editedPlayer = item;
+    teamToEdit = '';
+    teamToEdit = team;
+    data.currentTeams = data.totalTeams;
+    submit('currentTeams', data.currentTeams)
+    submit('totalTeams', data.totalTeams)
+    submit('players', data.players)
+    console.log('edited player ', data.editedPlayer)
   }
   function doneEditing(item) {
-      console.log('doneEditing in Service ', item);
-      console.log('inside doneEditing edited player ', data.editedPlayer)
-      valueDiff = data.editedPlayer.paid - item;
-      console.log('valueDiff ', valueDiff)
-      if (item > 0) {
-        for (i = 0; i < data.totalTeams.length; i++){
-          if (data.totalTeams[i].name === teamToEdit) {
-            console.log('this is the team name inside if statement ', data.totalTeams[i].name)
-            //data.teamArray.auctionAmount += valueDiff;
-            data.editedPlayer.paid = item;
-            data.totalTeams[i].auctionAmount += valueDiff;
-          }
+    console.log('doneEditing in Service ', item);
+    console.log('inside doneEditing edited player ', data.editedPlayer)
+    valueDiff = data.editedPlayer.paid - item;
+    console.log('valueDiff ', valueDiff)
+    if (item > 0) {
+      for (i = 0; i < data.totalTeams.length; i++){
+        if (data.totalTeams[i].name === teamToEdit) {
+          console.log('this is the team name inside if statement ', data.totalTeams[i].name)
+          //data.teamArray.auctionAmount += valueDiff;
+          data.editedPlayer.paid = item;
+          data.totalTeams[i].auctionAmount += valueDiff;
         }
-      }  
-      data.editedPlayer.editing = false;
-      console.log('EDITED PLAYER ', data.editedPlayer)
-      submit('currentTeams', data.totalTeams)
-      submit('totalTeams', data.totalTeams)
-      submit('players', data.players)
-      //item = ;
+      }
+    }  
+    data.editedPlayer.editing = false;
+    console.log('EDITED PLAYER ', data.editedPlayer)
+    submit('currentTeams', data.totalTeams)
+    submit('totalTeams', data.totalTeams)
+    submit('players', data.players)
+    //item = ;
   }
 
   //undraft or potentially move player to another team
@@ -692,6 +700,44 @@ angular.module('auctionApp')
     throw new Error("Unable to copy obj! Its type isn't supported.");
   }
 
+  function tipOff(tip) {
+    console.log('heres our tip: ', tip);
+    if (tip === 'wrongChoiceTip') {
+      data.wrongChoiceTip = false;
+      data.showLeagueTips = true;
+    }
+    if (tip === 'wrongValueTip') {
+      data.wrongValueTip = false;
+      data.showLeagueTips = true;
+    }
+    if (tip === 'tabTip') {
+      data.tabTip = false;
+      data.showDraftTips = true;
+    }
+    if (tip === 'searchTip') {
+      data.searchTip = false;
+      data.showDraftTips = true;
+    }
+    if (tip === 'draftTip') {
+      data.draftTip = false;
+      data.showDraftTips = true;
+    }
+  }
+
+  function tipsOn(page) {
+    if (page === 'league') {
+      data.wrongChoiceTip = true;
+      data.wrongValueTip = true;
+      data.showLeagueTips = false;
+    }
+    if (page === 'draft'){
+      data.tabTip = true;
+      data.searchTip = true;
+      data.draftTip = true;
+      data.showDraftTips = false;
+    }
+  }
+
   return {
     data: data,
     setTeamInfo: setTeamInfo,
@@ -709,7 +755,9 @@ angular.module('auctionApp')
     submit: submit,
     removeItem: removeItem,
     removeItems: removeItems,
-    clearAll: clearAll
+    clearAll: clearAll,
+    tipsOn: tipsOn,
+    tipOff: tipOff
     //positionColor: positionColor
   }
 

@@ -74,11 +74,11 @@ angular.module('auctionApp')
     //$scope.itemList.push(item.name);
     console.log('number of teams selected ', item);
     //console.log(vm.league.numTeams)
-    vm.placeholderName = [];
+    vm.placeholderName = ['Your Team'];
     if (item > 0) {
       vm.showDiv = true
-      for (i = 0; i < vm.league.numTeams; i++) {
-        var tempName = "team " + (i+1);
+      for (i = 1; i < vm.league.numTeams; i++) {
+        var tempName = "Team " + (i+1);
         vm.placeholderName.push(tempName)
         //console.log(vm.placeholderName)
       }
@@ -98,7 +98,7 @@ angular.module('auctionApp')
 
     for (i = 0; i < vm.placeholderName.length; i++) {
       if (typeof vm.teamNames[i] == 'undefined') {
-        vm.teamNames[i] = 'team '+ (i+1)
+        vm.teamNames[i] = 'Team '+ (i+1)
       }
     }
 

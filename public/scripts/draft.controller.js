@@ -1,5 +1,5 @@
 angular.module('auctionApp')
-.controller('DraftController', ['SetupService', 'localStorageService', function (SetupService, localStorageService) {
+.controller('DraftController', ['SetupService', 'localStorageService', '$location', function (SetupService, localStorageService, $location) {
   //  console.log('DraftController loaded');
   var vm = this;
   vm.firstname;
@@ -13,12 +13,37 @@ angular.module('auctionApp')
   vm.array;
   vm.firstname = SetupService.data.firstname;
   var projValue = 'teams_' + vm.data.league.numTeams;
+  vm.searchTip = SetupService.data.searchTip;
+  vm.tabTip = SetupService.data.tabTip;
+  vm.draftTip = SetupService.data.draftTip;
+  vm.showDraftTips = SetupService.data.showDraftTips;
   vm.logout = function() {
     SetupService.logout();
   };
 
   // SetupService.data.currentTeams = SetupService.getItem('currentTeams');
   // SetupService.data.totalTeams = SetupService.getItem('totalTeams')
+
+  vm.tipOff = function(tip) {
+    SetupService.tipOff(tip)
+    vm.searchTip = SetupService.data.searchTip;
+    vm.tabTip = SetupService.data.tabTip;
+    vm.draftTip = SetupService.data.draftTip;
+    vm.showDraftTips = SetupService.data.showDraftTips;
+  }
+
+  vm.tipsOn = function() {
+    SetupService.tipsOn('draft')
+    vm.searchTip = SetupService.data.searchTip;
+    vm.tabTip = SetupService.data.tabTip;
+    vm.draftTip = SetupService.data.draftTip;
+    vm.showDraftTips = SetupService.data.showDraftTips;
+  }
+
+  vm.isActive = function (viewLocation) {
+    console.log('is this working: ', viewLocation)
+    return viewLocation === $location.path();
+  };
 
   var navBarDraft= function() {
     vm.signedInAs = true;
