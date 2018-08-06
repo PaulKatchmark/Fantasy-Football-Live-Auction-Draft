@@ -5,7 +5,7 @@ angular.module('auctionApp')
   vm.firstname = SetupService.getItem('firstname');
   vm.numTeams = [8,10,12,14,16];
   vm.teamNames = [];
-  vm.auctionAmount = [100, 150, 200, 250, 300, 350, 400];
+  vm.auctionAmount = [100, 120, 150, 200, 250, 300, 350, 400];
   vm.quarterBacks = [1,2];
   vm.runningBacks = [2,3];
   vm.wideReceivers = [2,3];

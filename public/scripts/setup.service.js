@@ -112,6 +112,8 @@ angular.module('auctionApp')
       for (i = 0; i < response.data.length; i++) {
         if (data.league.auctionAmount === 100) {
           response.data[i][teamCol] *= .5;
+        } if (data.league.auctionAmount === 120) {
+          response.data[i][teamCol] *= .6;
         } if (data.league.auctionAmount === 150) {
           response.data[i][teamCol] *= .75;
         } if (data.league.auctionAmount === 250) {
@@ -138,6 +140,8 @@ angular.module('auctionApp')
       for (i = 0; i < response.data.length; i++) {
         if (data.league.auctionAmount === 100) {
           response.data[i][teamCol] *= .5;
+        } if (data.league.auctionAmount === 120) {
+          response.data[i][teamCol] *= .6;
         } if (data.league.auctionAmount === 150) {
           response.data[i][teamCol] *= .75;
         } if (data.league.auctionAmount === 250) {
@@ -660,8 +664,7 @@ angular.module('auctionApp')
     console.log('Number of teams in league ', data.league.numTeams);
     if (data.setUpLeague === 1) {
       getPPR();
-    }
-    if (data.setUpLeague === 0) {
+    } else if (data.setUpLeague === 0) {
       getStandard();
     } else {
       console.log('error getting players from DB');
