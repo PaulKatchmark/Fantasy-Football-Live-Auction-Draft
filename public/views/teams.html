@@ -1,10 +1,31 @@
-<nav class="navbar navbar-inverse navbar-static-top">
+<html>
+<head>
+<style type="text/css">
+html {
+  background: none; 
+}
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+  background-color: #000;
+  background-image: url('../assets/images/draft-pagebg2.jpg');
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <ul class="nav nav-tabs" role="tablist">
       <li ng-show="league.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
       <li ng-show="league.draftTab" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
       <li ng-show="league.leagueTab" class="active" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
-      <li ng-show="league.signOut" role="presentation" class="btn btn-white navbar-right"><button ng-click="league.logout()">Sign Out</button></li>
+      <li ng-show="league.signOut" role="presentation" class="btn btn-white navbar-right"><button style="color: #000;" ng-click="league.logout()">Sign Out</button></li>
       <li ng-show="league.signedInAs" role="presentation" class="navbar-text text-white navbar-right">{{league.firstname}}'s Draft</li>
     </ul>
 
@@ -18,29 +39,28 @@
 
 <h1 class="pageHeader">Fantasy Football</h1>
 <h2 class="pageHeader">Live Auction Tracker</h2>
-<div class="paddingTop">
-  <!-- <h3 class="centerClass">League</h3> -->
-</div>
 
-<p class="draftDirections" ng-show="league.wrongChoiceTip">If the wrong player was drafted or sent to the wrong team, double click their name for options.
-  <button type="button" class="close" aria-label="Close" ng-click="league.tipOff('wrongChoiceTip')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</p>
+<div style="margin: 50px auto;">
+  <p class="draftDirections" ng-show="league.wrongChoiceTip">Double click their name for options to transfer<br/>them to another team or undraft them.
+    <button type="button" class="close" aria-label="Close" ng-click="league.tipOff('wrongChoiceTip')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </p>
 
-<p class="draftDirections" ng-show="league.wrongValueTip" style="margin: 15px auto 0;">If the price of the player is incorrect, double click their cost to correct it.
-  <button type="button" class="close" aria-label="Close" ng-click="league.tipOff('wrongValueTip')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</p>
+  <p class="draftDirections" ng-show="league.wrongValueTip" style="margin: 15px auto 0;">If the price of the player is incorrect, double click their cost to correct it.
+    <button type="button" class="close" aria-label="Close" ng-click="league.tipOff('wrongValueTip')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </p>
 
-<div class="showTips" ng-show="league.showLeagueTips">
-  <button type="button" class="tipsButton" ng-click="league.tipsOn()">Show Tips</button>
+  <div class="showTips" ng-show="league.showLeagueTips">
+    <button type="button" class="tipsButton" ng-click="league.tipsOn()">Show Tips</button>
+  </div>
 </div>
 
 <div ng-repeat="totalTeams in league.data.totalTeams | limitTo: league.data.totalTeams track by $index">
   <div class="col-xs-4">
-    <table  class="table table-bordered" >
+    <table  id="teamTables" class="table table-bordered" >
       <h3 class="col-xs-12" id="tableHeader">{{totalTeams.name}}</h3>
       <thead>
         <tr style="background-color: #111111; color: #ffffff;">
@@ -52,7 +72,7 @@
         </tr>
       </thead>
 
-      <tbody style="background-color: #ffffff;">
+      <tbody>
         <tr ng-repeat="team in totalTeams.team">
           <td class="qbClass" ng-if="team.qb.pos === 'QB' ">QB</td>
           <td class="rbClass" ng-if="team.rb.pos === 'RB' ">RB</td>
@@ -102,3 +122,5 @@
     </table>
   </div>
 </div>
+</body>
+</html>

@@ -21,6 +21,10 @@ html, body {
   background-color: #d3d3d3;
   height: 100%;
   width: 100%;
+  font-family: 'Roboto Slab', serif;
+}
+a {
+  color: #fff;
 }
 .selected {
   text-align: center;
@@ -85,7 +89,6 @@ html, body {
   vertical-align: center;
   text-align: center;
   align-content: center;
-  box-shadow: 10px 10px 5px grey;
 }
 td {
   font-size: 10px;
@@ -98,7 +101,7 @@ th {
 }
 #draftPlayer table {
   width: 100%;
-  box-shadow: 10px 10px 5px grey;
+/*  box-shadow: 10px 10px 5px grey;*/
 }
 
 #draftPlayer thead, #draftPlayer tbody, #draftPlayer tr, #draftPlayer td, #draftPlayer th { 
@@ -111,9 +114,19 @@ th {
   visibility: hidden;
   clear: both;
 }
+/*.table table {
+  background-color: none;
+  background-color: #fff;
+}*/
+#teamTables {
+  background-color: #fff;
+  color: #000;
+}
+/*.table>tbody>tr>td:empty {
+  background-color: #fff;
+}*/
 .col-xs-4 {
     width: 30%;
-    box-shadow: 10px 10px 5px grey;
     padding: 0;
     margin: 20px;
 }
@@ -151,29 +164,19 @@ th {
 .pageHeader {
   text-align: center;
   /*font-family: 'Bungee Shade', cursive;*/
-  color: #584278;
-  text-shadow:     0 1px 0 hsl(174,5%,80%),
-                     0 2px 0 hsl(174,5%,75%),
-                     0 3px 0 hsl(174,5%,70%),
-                     0 4px 0 hsl(174,5%,66%),
-                     0 5px 0 hsl(174,5%,64%),
-                     0 6px 0 hsl(174,5%,62%),
-                     0 7px 0 hsl(174,5%,61%),
-                     0 8px 0 hsl(174,5%,60%),
-
-                     0 0 5px rgba(0,0,0,.05),
-                    0 1px 3px rgba(0,0,0,.2),
-                    0 3px 5px rgba(0,0,0,.2),
-                   0 5px 10px rgba(0,0,0,.2),
-                  0 10px 10px rgba(0,0,0,.2),
-                  0 20px 20px rgba(0,0,0,.3);
+  /*color: #584278;*/
+  margin: 5px auto 0;
+  color: #fff;
+  text-shadow: 2px 2px rgba(200, 200, 200, .7);
 }
 
 h1 {
   font-size: 60px;
+  font-family: 'Raleway', sans-serif;
 }
 h2 {
   font-size: 40px;
+  font-family: 'Raleway', sans-serif;
 }
 .paddingTop {
   padding-top: 20px;
@@ -185,20 +188,37 @@ h2 {
   text-align: center;
 }
 .draftDirections {
-  margin: 0 auto;
+  margin: 0 auto 15px;
   text-align: center;
-  color: black;
-  background-color: yellow;
+  background-color: rgba(0,0,0,0.7);
+  padding: 3px 0 3px 0;
   width: 50%;
+  color: yellow;
+}
+.close {
+  float: right;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 0.4;
+  margin-right: 4px;
+  padding: 0;
+  color: yellow;
+  text-shadow: 0 1px 0 yellow;
+  opacity: .7;
+}
+.close:hover {
+  opacity: 1;
+  color: #fff;
 }
 .loginError,
 .help-block {
   color: red;
   background-color: rgba(0,0,0,.8);
 }
-td:empty {
- background: white; 
-}
+/*td:empty {
+ background: #fff; 
+ color: #000;
+}*/
 .qbClass {
   background-color: #ffa07a;
   color: black;
@@ -236,6 +256,7 @@ td:empty {
 .setWidth {
   width: 60px;
   text-align: center;
+  float: right;
 }
 input:focus {
    /* //change more attributes, if you want.*/
@@ -254,6 +275,13 @@ ul, input, .container {
   background-color: white;
   padding: 20px 30px;
   margin: 10px auto;
+  color: #000;
+}
+.tipsButton {
+  color: #f3ce40;
+  border: 1px solid #f3ce40;
+  background: #584278;
+  padding: 6px 18px;
 }
 #centerId {
   margin: 5px auto;
@@ -286,21 +314,21 @@ div.transbox {
 }
 .header {
   position: relative;
-  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-  background: -o-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-  background: -moz-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  background: -o-linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  background: -moz-linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
   background-position: top;
   z-index: 100;
-  padding: 15px 0 5px;
-  margin: 0px auto 35px;
+  padding: 15px 0 40px 0;
+  margin: 0px auto 10px
 }
 .header2 {
   position: relative;
-  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-  background: -o-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-  background: -moz-linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  background: -o-linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  background: -moz-linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
   background-position: top;
   z-index: 100;
   padding: 15px 0 5px;
@@ -316,10 +344,13 @@ div.transbox {
 }
 #loginButton,
 #registerButton,
-#cancelButton {
+#cancelButton,
+#settingsButton,
+#buildButton {
   background-color: #584278;
   color: white;
-  border-color: white;
+  border-color: 1px solid #fff;
+  border-radius: 0;
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -329,11 +360,12 @@ div.transbox {
 }
 #loginButton:hover,
 #registerButton:hover,
-#cancelButton:hover {
+#cancelButton:hover,
+#settingsButton:hover,
+#buildButton:hover {
   color: #584278;
-  border-color: #584278;
-  background-color: white;
-  text-decoration: underline;
+  border-color: 1px solid #584278;
+  background-color: #f3ce40;
 }
 .welcome {
   margin: 2px auto 25px;

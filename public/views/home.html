@@ -1,10 +1,31 @@
-<nav class="navbar navbar-inverse navbar-static-top">
+<html>
+<head>
+<style type="text/css">
+html {
+  background: none; 
+}
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 70px;
+  background-color: #000;
+  background-image: url('../assets/images/draft-pagebg2.jpg');
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <ul class="nav nav-tabs" role="tablist">
       <li ng-show="draft.settingsTab" role="presentation" ><a href="/settings" aria-controls="settings" role="tab" data-toggle="tab">Set-Up</a></li>
       <li ng-show="draft.draftTab" class="active" role="presentation"><a href="/home" aria-controls="home" role="tab" data-toggle="tab">Draft</a></li>
       <li ng-show="draft.leagueTab" role="presentation" ><a href="/teams" aria-controls="teams" role="tab" data-toggle="tab">League</a></li>
-      <li ng-show="draft.signOut" role="presentation" class="btn btn-black navbar-right"><button ng-click="draft.logout()">Sign Out</button></li>
+      <li ng-show="draft.signOut" role="presentation" class="btn btn-black navbar-right"><button style="color: #000;" ng-click="draft.logout()">Sign Out</button></li>
       <li ng-show="draft.signedInAs" role="presentation" class="navbar-text navbar-right">{{draft.firstname}}'s Draft</li>
     </ul>
 
@@ -20,26 +41,29 @@
 <h2 class="pageHeader">Live Auction Tracker</h2>
 
   <!-- <h3 class="centerClass">Draft Page</h3> -->
-<p class="draftDirections" ng-show="draft.tabTip" style="margin: 30px auto 0;">Toggle between checking the status of your opponents' team and drafting by using the 'League' and 'Draft' tabs at the top left corner of the page.
-  <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('tabTip')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</p>
+<div style="margin: 50px auto;">
+  <p class="draftDirections" ng-show="draft.tabTip">Toggle between checking the status of your opponents' team and drafting
+    <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('tabTip')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <br/>by using the 'League' and 'Draft' tabs at the top left corner of the page.
+  </p>
 
-<p class="draftDirections" ng-show="draft.searchTip" style="margin: 15px auto;">Search for players by name or filter by typing in their position like RB, WR, QB...etc.
-  <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('searchTip')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</p>
+  <p class="draftDirections" ng-show="draft.searchTip">Search for players by name or filter by typing<br/>in their position like RB, WR, QB...etc.
+    <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('searchTip')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </p>
 
-<p class="draftDirections" ng-show="draft.draftTip" style="margin: 0 auto 30px;">Click on the player's name that is being auctioned in order to draft them to the appropriate team.
-  <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('draftTip')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</p>
+  <p class="draftDirections" ng-show="draft.draftTip">Click on the player's name that is being auctioned<br/>to draft them to the appropriate team.
+    <button type="button" class="close" aria-label="Close" ng-click="draft.tipOff('draftTip')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </p>
 
-<div class="showTips" ng-show="draft.showDraftTips">
-  <button type="button" class="tipsButton" ng-click="draft.tipsOn()">Show Tips</button>
+  <div class="showTips" ng-show="draft.showDraftTips">
+    <button type="button" class="tipsButton" ng-click="draft.tipsOn()">Show Tips</button>
+  </div>
 </div>
 
 <div class="row">
@@ -144,7 +168,7 @@
           </tr>
         </thead>
 
-        <tbody style="background-color: #ffffff;">
+        <tbody style="background-color: #fff; color: #000">
           <tr ng-repeat="team in draft.data.currentTeams[0].team"> <!--SOMETHING AFTER THIS TO FILTER!!! -->
             <td class="qbClass" ng-if="team.qb.pos === 'QB' ">QB</td>
             <td class="rbClass" ng-if="team.rb.pos === 'RB' ">RB</td>
@@ -165,3 +189,5 @@
     </div>
   </div>
 </div>
+</body>
+</html>
