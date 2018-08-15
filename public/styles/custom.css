@@ -26,6 +26,11 @@ html, body {
 a {
   color: #fff;
 }
+/*FIXME look into adding class to selected link and making yellow instead of default blue*/
+a:hover,
+a:active {
+  color: yellow;
+}
 .selected {
   text-align: center;
   margin: 0px auto 20px;
@@ -106,7 +111,7 @@ th {
 
 #draftPlayer thead, #draftPlayer tbody, #draftPlayer tr, #draftPlayer td, #draftPlayer th { 
   display: block;
-  width: 102%;
+  width: 100%;
 }
 #draftPlayer tr:after {
   content: ' ';
@@ -151,7 +156,7 @@ th {
 }
 
 #draftPlayer tbody td, #draftPlayer thead th {
-  width: 19.2%;
+  width: 70px;
   float: left;
   padding: 10px 0 0 0;
   margin: 0 auto;
@@ -272,7 +277,7 @@ ul, input, .container {
 /*    padding:10px;*/
 }
 .whiteBackground {
-  background-color: white;
+  background-color: rgba(255,255,2552,.8);
   padding: 20px 30px;
   margin: 10px auto;
   color: #000;

@@ -125,7 +125,7 @@ body {
       <TABLE class="table table-straight">
         <THEAD ><!-- style="postion: absolute;" -->
           <TR>
-            <TH class=""> 
+            <TH class="" style="width: 170px;"> 
               <a href="#" ng-click="draft.data.sortType = 'displayname'; draft.data.sortReverse = !draft.data.sortReverse">
                 Player
                 <span ng-show="draft.data.sortType == 'displayname' && !draft.data.sortReverse" class="fa fa-caret-down"></span>
@@ -135,6 +135,8 @@ body {
             <TH class=""> <a href="#" ng-click="draft.data.sortType = 'pos'; draft.data.sortReverse = !draft.data.sortReverse">Position<span ng-show="draft.data.sortType == 'pos'" class="fa fa-caret-down"></span></a></TH>
             <TH class=""> <a href="#" ng-click="draft.data.sortType = 'team'; draft.data.sortReverse = !draft.data.sortReverse">Team<span ng-show="draft.data.sortType == 'team'" class="fa fa-caret-down"></span></a></TH>
             <TH class=""> <a href="#" ng-click="draft.data.sortType = 'byeweek'; draft.data.sortReverse = !draft.data.sortReverse">Bye<span ng-show="draft.data.sortType == 'byeweek'" class="fa fa-caret-down"></span></a></TH>
+            <TH>Min</TH>
+            <TH>Max</TH>
             <TH class=""> <a href="#" ng-click="draft.data.sortType = 'teams_8' || 'teams_10' || 'teams_12' || 'teams_14' || 'teams_16'; draft.data.sortReverse = !draft.data.sortReverse">Value<span ng-show="draft.data.sortType == 'teams_8' || 'teams_10' || 'teams_12' || 'teams_14' || 'teams_16'" class="fa fa-caret-down"></span></a></TH>
           </TR>
         </THEAD>
@@ -142,11 +144,13 @@ body {
         <TBODY>
           <TR ng-repeat="player in draft.data.players | orderBy: draft.data.sortType:draft.data.sortReverse | filter: draft.searchForPlayer" adapter="adapter" ng-class="{ qbClass: player.pos === 'QB', wrClass: player.pos === 'WR', rbClass: player.pos === 'RB', teClass: player.pos === 'TE', kClass: player.pos === 'K', defClass: player.pos === 'DEF'}" >
             <!-- Stuck RIGHT HERE ONLY READING ONE OF THE NG-CLASSES AT A TIME. At least it covers the whole row!!! -->
-            <TD class="filterable-cell" ng-click="draft.selectPlayer(player)">{{player.displayname}}</TD>
+            <TD class="filterable-cell" style="width: 170px;" ng-click="draft.selectPlayer(player)">{{player.displayname}}</TD>
             <TD class="filterable-cell">{{player.pos}}</TD>
             <TD class="filterable-cell">{{player.team}}</TD>
             <TD class="filterable-cell">{{player.byeweek}}</TD>
-            <TD class="filterable-cell">{{player.teams_8 | currency:"$":0}}{{player.teams_10 | currency:"$":0}}{{player.teams_12 | currency:"$":0}}{{player.teams_14 | currency:"$":0}}{{player.teams_16 | currency:"$":0}}</TD>
+            <TD class="filterable-cell">{{player.teams_8_min | currency:"$":0}}{{player.teams_10_min | currency:"$":0}}{{player.teams_12_min | currency:"$":0}}{{player.teams_14_min | currency:"$":0}}{{player.teams_16_min | currency:"$":0}}</TD>
+            <TD class="filterable-cell">{{player.teams_8_max | currency:"$":0}}{{player.teams_10_max | currency:"$":0}}{{player.teams_12_max | currency:"$":0}}{{player.teams_14_max | currency:"$":0}}{{player.teams_16_max | currency:"$":0}}</TD>
+            <TD class="filterable-cell" style="background-color: yellow; font-size: 13px; font-weight: bold; color: #000;">{{player.teams_8 | currency:"$":0}}{{player.teams_10 | currency:"$":0}}{{player.teams_12 | currency:"$":0}}{{player.teams_14 | currency:"$":0}}{{player.teams_16 | currency:"$":0}}</TD>
           </TR>
         </TBODY>
       </TABLE>

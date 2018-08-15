@@ -109,6 +109,13 @@ angular.module('auctionApp')
       data.sortType = teamCol;
       data.sortReverse = true;
 
+
+      // FIXME change this so it takes the input value and 
+      // divides that by 200 base to calculate custom player values...
+      // ex. 
+      // 150/200 = .75
+      // 100/200 = .5
+      // 350/200 = 1.75
       for (i = 0; i < response.data.length; i++) {
         if (data.league.auctionAmount === 100) {
           response.data[i][teamCol] *= .5;
@@ -137,6 +144,13 @@ angular.module('auctionApp')
     $http.get('/standard/'+teamCol).then(function(response) {
       data.sortType = teamCol;
       data.sortReverse = true;
+
+      // FIXME change this so it takes the input value and 
+      // divides that by 200 base to calculate custom player values...
+      // ex. 
+      // 150/200 = .75
+      // 100/200 = .5
+      // 350/200 = 1.75
       for (i = 0; i < response.data.length; i++) {
         if (data.league.auctionAmount === 100) {
           response.data[i][teamCol] *= .5;
