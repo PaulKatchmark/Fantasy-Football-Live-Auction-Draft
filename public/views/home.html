@@ -68,46 +68,47 @@ body {
 
 <div class="row">
   <div class="col-xs-6">
-    <form name="draftInfo">
-      <div class="col-xs-11" id="searchBar">
-        <div class="form-group">
-          <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-search"></i>
-            </div>
-            <input type="text" class="form-control" placeholder="Search for players" ng-model="draft.searchForPlayer" />
-          </div>
-
-          <div ng-show="draft.playerSelected" ng-model="draft.playerSelected" class="whiteBackground">
-            <h4 class="selected"><span style="font-size:18px;">{{draft.selectedP.displayname}}</span>
-              <br/><span style="font-size: 14px;">{{draft.selectedP.pos}} for {{draft.selectedP.team}}
-              <br/>estimated value: {{draft.selectedP.teams_8 | currency:"$":0}}{{draft.selectedP.teams_10 | currency:"$":0}}{{draft.selectedP.teams_12 | currency:"$":0}}{{draft.selectedP.teams_14 | currency:"$":0}}{{draft.selectedP.teams_16 | currency:"$":0}}</span>
-            </h4>
-
-            <label for="teamWon"> Team that won the bid:</label>
-            <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams" ng-required="true">  </select><br />
-
-            <!-- <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label> -->
-            <!-- <form name="form">
-              <input type="number" step="1" min="1" ng-model="draft.data.amountPaid" required />
-              <button type="button" ng-disabled="form.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
-            </form> -->
-
-            <div class="form-group" ng-class="{ 'has-error': form.amountPaid.$dirty && form.amountPaid.$error.required }">
-              <label for="teamWon">Amount paid for {{draft.selectedP.displayname}}: </label>
-              <input type="number" step="1" min="1" name="amountPaid" id="amountPaid" ng-model="draft.data.amountPaid" ng-required="true"/>
-              <span ng-show="form.amountPaid.$dirty && form.amountPaid.$error.required" class="help-block">Please enter how much was spent on this player.</span>
+    <div class="maxWidth">
+      <form name="draftInfo">
+        <div id="searchBar">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-search"></i>
+              </div>
+              <input type="text" class="form-control" placeholder="Search for players" ng-model="draft.searchForPlayer" />
             </div>
 
-            <div class="form-actions" id="centerId">
-              <button type="submit" ng-disabled="draftInfo.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
-              <!-- <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" class="btn btn-primary">Login</button> -->
-              <img ng-if="draft.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <div ng-show="draft.playerSelected" ng-model="draft.playerSelected" class="whiteBackground">
+              <h4 class="selected"><span style="font-size:18px;">{{draft.selectedP.displayname}}</span>
+                <br/><span style="font-size: 14px;">{{draft.selectedP.pos}} for {{draft.selectedP.team}}
+                <br/>estimated value: {{draft.selectedP.teams_8 | currency:"$":0}}{{draft.selectedP.teams_10 | currency:"$":0}}{{draft.selectedP.teams_12 | currency:"$":0}}{{draft.selectedP.teams_14 | currency:"$":0}}{{draft.selectedP.teams_16 | currency:"$":0}}</span>
+              </h4>
+
+              <label for="teamWon"> Team that won the bid:</label>
+              <select name="numTeams" ng-model="draft.data.teamArray" ng-options="totalTeams as totalTeams.name for totalTeams in draft.data.totalTeams" ng-required="true">  </select><br />
+
+              <!-- <label for="teamWon"> Amount paid for {{draft.selectedP.displayname}}: </label> -->
+              <!-- <form name="form">
+                <input type="number" step="1" min="1" ng-model="draft.data.amountPaid" required />
+                <button type="button" ng-disabled="form.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
+              </form> -->
+
+              <div class="form-group" ng-class="{ 'has-error': form.amountPaid.$dirty && form.amountPaid.$error.required }">
+                <label for="teamWon">Amount paid for {{draft.selectedP.displayname}}: </label>
+                <input type="number" step="1" min="1" name="amountPaid" id="amountPaid" ng-model="draft.data.amountPaid" ng-required="true"/>
+                <span ng-show="form.amountPaid.$dirty && form.amountPaid.$error.required" class="help-block">Please enter how much was spent on this player.</span>
+              </div>
+
+              <div class="form-actions" id="centerId">
+                <button type="submit" ng-disabled="draftInfo.$invalid" ng-click="draft.sendPlayer($event)" class="btn btn-default btn-primary">Send Player</button>
+                <!-- <button type="submit" ng-disabled="form.$invalid || draft.dataLoading" class="btn btn-primary">Login</button> -->
+                <img ng-if="draft.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </form>
-
+      </form>
+    </div>
 
     <!-- <div class="form-group" ng-class="{ 'has-error': form.paidAmount.$dirty && form.paidAmount.$error.required }">
       <label for="teamWon">Amount paid for {{draft.selectedP.displayname}}: </label>
@@ -121,11 +122,11 @@ body {
     </div> -->
 
 
-    <div class="col-xs-11" id="draftPlayer">
+    <div id="draftPlayer">
       <TABLE class="table table-straight">
         <THEAD ><!-- style="postion: absolute;" -->
           <TR>
-            <TH class="" style="width: 170px;"> 
+            <TH class="" style="width: 140px;"> 
               <a href="#" ng-click="draft.data.sortType = 'displayname'; draft.data.sortReverse = !draft.data.sortReverse">
                 Player
                 <span ng-show="draft.data.sortType == 'displayname' && !draft.data.sortReverse" class="fa fa-caret-down"></span>
@@ -144,7 +145,7 @@ body {
         <TBODY>
           <TR ng-repeat="player in draft.data.players | orderBy: draft.data.sortType:draft.data.sortReverse | filter: draft.searchForPlayer" adapter="adapter" ng-class="{ qbClass: player.pos === 'QB', wrClass: player.pos === 'WR', rbClass: player.pos === 'RB', teClass: player.pos === 'TE', kClass: player.pos === 'K', defClass: player.pos === 'DEF'}" >
             <!-- Stuck RIGHT HERE ONLY READING ONE OF THE NG-CLASSES AT A TIME. At least it covers the whole row!!! -->
-            <TD class="filterable-cell" style="width: 170px;" ng-click="draft.selectPlayer(player)">{{player.displayname}}</TD>
+            <TD class="filterable-cell" style="width: 140px;" ng-click="draft.selectPlayer(player)">{{player.displayname}}</TD>
             <TD class="filterable-cell">{{player.pos}}</TD>
             <TD class="filterable-cell">{{player.team}}</TD>
             <TD class="filterable-cell">{{player.byeweek}}</TD>

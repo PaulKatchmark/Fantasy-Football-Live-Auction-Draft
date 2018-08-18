@@ -63,8 +63,8 @@ a:active {
   absolute;
 }
 #searchBar {
-  padding-left: 10%;
-  width:98.5%;
+  width: 500px;
+  margin: 0 auto;
 }
 #teamTransfer {
   color: black;
@@ -75,7 +75,10 @@ a:active {
   margin: 15px auto;
   text-align: center;
 }
-
+.maxWidth {
+  width: 100%;
+  margin: 0 auto;
+}
 /*.form-group {
   width: 45%;
 
@@ -87,7 +90,7 @@ a:active {
   vertical-align: center;
   text-align: center;
   align-content: center;
-  padding-left: 10%;
+  margin: 0 auto;
   width: 100%;
 }
 #myTeamTable {
@@ -105,7 +108,8 @@ th {
   text-align: center;
 }
 #draftPlayer table {
-  width: 100%;
+  width: 500px;
+  margin: 0 auto;
 /*  box-shadow: 10px 10px 5px grey;*/
 }
 
@@ -156,7 +160,7 @@ th {
 }
 
 #draftPlayer tbody td, #draftPlayer thead th {
-  width: 70px;
+  width: 60px;
   float: left;
   padding: 10px 0 0 0;
   margin: 0 auto;
