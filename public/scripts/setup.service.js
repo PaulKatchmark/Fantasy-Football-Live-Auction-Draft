@@ -105,6 +105,8 @@ angular.module('auctionApp')
     //function to get full players list from DB with values for PPR League
   function getPPR(){
     teamCol = 'teams_' + data.league.numTeams;
+    teamCol_min = 'teams_' + data.league.numTeams + '_min';
+    teamCol_max = 'teams_' + data.league.numTeams + '_max';
     $http.get('/ppr/'+teamCol).then(function(response) {
       data.sortType = teamCol;
       data.sortReverse = true;
@@ -119,18 +121,32 @@ angular.module('auctionApp')
       for (i = 0; i < response.data.length; i++) {
         if (data.league.auctionAmount === 100) {
           response.data[i][teamCol] *= .5;
+          response.data[i][teamCol_min] *= .5;
+          response.data[i][teamCol_max] *= .5;
         } if (data.league.auctionAmount === 120) {
           response.data[i][teamCol] *= .6;
+          response.data[i][teamCol_min] *= .6;
+          response.data[i][teamCol_max] *= .6;
         } if (data.league.auctionAmount === 150) {
           response.data[i][teamCol] *= .75;
+          response.data[i][teamCol_min] *= .75;
+          response.data[i][teamCol_max] *= .75;
         } if (data.league.auctionAmount === 250) {
           response.data[i][teamCol] *= 1.25;
+          response.data[i][teamCol_min] *= 1.25;
+          response.data[i][teamCol_max] *= 1.25;
         } if (data.league.auctionAmount === 300) {
           response.data[i][teamCol] *= 1.50;
+          response.data[i][teamCol_min] *= 1.50;
+          response.data[i][teamCol_max] *= 1.50;
         } if (data.league.auctionAmount === 350) {
           response.data[i][teamCol] *= 1.75;
+          response.data[i][teamCol_min] *= 1.75;
+          response.data[i][teamCol_max] *= 1.75;
         }   if (data.league.auctionAmount === 400) {
           response.data[i][teamCol] *= 2.00;
+          response.data[i][teamCol_min] *= 2.00;
+          response.data[i][teamCol_max] *= 2.00;
         }
       }
       console.log(data.players);
@@ -141,10 +157,11 @@ angular.module('auctionApp')
 
   function getStandard() {
     teamCol = 'teams_' + data.league.numTeams;
+    teamCol_min = 'teams_' + data.league.numTeams + '_min';
+    teamCol_max = 'teams_' + data.league.numTeams + '_max';
     $http.get('/standard/'+teamCol).then(function(response) {
       data.sortType = teamCol;
       data.sortReverse = true;
-
       // FIXME change this so it takes the input value and 
       // divides that by 200 base to calculate custom player values...
       // ex. 
@@ -154,18 +171,32 @@ angular.module('auctionApp')
       for (i = 0; i < response.data.length; i++) {
         if (data.league.auctionAmount === 100) {
           response.data[i][teamCol] *= .5;
+          response.data[i][teamCol_min] *= .5;
+          response.data[i][teamCol_max] *= .5;
         } if (data.league.auctionAmount === 120) {
           response.data[i][teamCol] *= .6;
+          response.data[i][teamCol_min] *= .6;
+          response.data[i][teamCol_max] *= .6;
         } if (data.league.auctionAmount === 150) {
           response.data[i][teamCol] *= .75;
+          response.data[i][teamCol_min] *= .75;
+          response.data[i][teamCol_max] *= .75;
         } if (data.league.auctionAmount === 250) {
           response.data[i][teamCol] *= 1.25;
+          response.data[i][teamCol_min] *= 1.25;
+          response.data[i][teamCol_max] *= 1.25;
         } if (data.league.auctionAmount === 300) {
           response.data[i][teamCol] *= 1.50;
+          response.data[i][teamCol_min] *= 1.50;
+          response.data[i][teamCol_max] *= 1.50;
         } if (data.league.auctionAmount === 350) {
           response.data[i][teamCol] *= 1.75;
+          response.data[i][teamCol_min] *= 1.75;
+          response.data[i][teamCol_max] *= 1.75;
         }   if (data.league.auctionAmount === 400) {
           response.data[i][teamCol] *= 2.00;
+          response.data[i][teamCol_min] *= 2.00;
+          response.data[i][teamCol_max] *= 2.00;
         }
       }
       submit('players', response.data);
